@@ -18,14 +18,16 @@
 - This tool includes a set of different scripts and other tools to acheive its goal for live navigation in Star citizen. 
 - Its non intrusive to the game, the script monitors the windows clipboard for the actual player position, that gets triggered by the StarCitizen Chatcommand /showlocation. 
 - It than uses a ntp server to internally determine the current utc time and the offset of the system time to increase the precision of calculations
-
+- the player chosses a pre defined point of interest and starts live navigation
+- the script is than manually updated by the user (key combo) and gets multiple values presented for navigation
+- this tool can be used to navigate to points in space and around planets
 
 ## Screenshots
-![Screenshot of poi selection window](screenshots/Screenshot_Frontend_V6.1.PNG)
-![Screenshot of the main anvigation panel](screenshots/Screenshot_Frontend_V6.1.PNG)
+![Screenshot of poi selection window](screenshots/Screenshot_Frontend_V7.PNG)
+![Screenshot of the main anvigation panel](screenshots/Screenshot_Backend_V7.PNG)
 
 ## Prerequests
-[Powershell V7] is needed to properly execute this script. You can grab it from here https://aka.ms/powershell-release?tag=stable . You can install it by using the default options I recommend to add "run with powershell 7" contect menu during install.
+Powershell V7 is needed to properly execute this script. You can grab it from here https://aka.ms/powershell-release?tag=stable . You can install it by using the default options I recommend to add "run with powershell 7" contect menu during install.
 
 ## Installation
 Extract the contents into a folder on your local disk. A network drive might not work if windows has not been modified to allow administrator users to access network shares. Since by default Windows permits admin users to access network shares and this script requires admin permissions in case StarCitizen or the RSI Launcher is running with admin permissions too. This is due to windows user space, admin users can access applications run with admin right and users can only access applications with user rights. You might notice this if you voice comm overlay is not working in certain games, its because of the different user space both applications use.
