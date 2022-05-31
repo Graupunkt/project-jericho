@@ -2,3 +2,47 @@
 Logs/
 .history
 .history\functions
+!Internal/Jericho_CSharp/.gitattributes
+!Internal/Jericho_CSharp/.gitignore
+!Internal/Jericho_CSharp/Jericho.sln
+!Internal/Jericho_CSharp/README.md
+!Internal/Jericho_CSharp/Jericho/ConsoleDisplay.cs
+!Internal/Jericho_CSharp/Jericho/Constants.cs
+!Internal/Jericho_CSharp/Jericho/CoordinateData.cs
+!Internal/Jericho_CSharp/Jericho/GameData.cs
+!Internal/Jericho_CSharp/Jericho/Generic.cs
+!Internal/Jericho_CSharp/Jericho/JerichoSharp.csproj
+!Internal/Jericho_CSharp/Jericho/OutputState.cs
+!Internal/Jericho_CSharp/Jericho/Program.cs
+!Internal/Jericho_CSharp/Jericho/Vector3.cs
+!Internal/Jericho_CSharp/Jericho/data/datagroups to be integrated into csv.ps1
+!Internal/Jericho_CSharp/Jericho/data/history_global.csv
+!Internal/Jericho_CSharp/Jericho/data/history_local.csv
+!Internal/Jericho_CSharp/Jericho/data/Icon-Project-Jericho.ico
+!Internal/Jericho_CSharp/Jericho/data/saved_locations.csv
+!Internal/Jericho_CSharp/Jericho/data/Script_Project Jericho_Points of Interest in 3D Space.csv
+!Internal/Jericho_CSharp/Jericho/data/Script_Project Jericho_Points of Interest on Planets and ObjectContainers.csv
+!Internal/Jericho_CSharp/Jericho/data/Script_Project Jericho_Values for Object Containers.csv
+!Internal/Jericho_CSharp/Jericho/data/Script_Project Jericho_Values for QuantumMarkers.csv
+!Internal/Cpt_BA-jerichosharp-361af9f43da4/.gitattributes
+!Internal/Cpt_BA-jerichosharp-361af9f43da4/.gitignore
+!Internal/Cpt_BA-jerichosharp-361af9f43da4/Jericho.sln
+!Internal/Cpt_BA-jerichosharp-361af9f43da4/README.md
+!Internal/Cpt_BA-jerichosharp-361af9f43da4/Jericho/ConsoleDisplay.cs
+!Internal/Cpt_BA-jerichosharp-361af9f43da4/Jericho/Constants.cs
+!Internal/Cpt_BA-jerichosharp-361af9f43da4/Jericho/CoordinateData.cs
+!Internal/Cpt_BA-jerichosharp-361af9f43da4/Jericho/GameData.cs
+!Internal/Cpt_BA-jerichosharp-361af9f43da4/Jericho/Generic.cs
+!Internal/Cpt_BA-jerichosharp-361af9f43da4/Jericho/JerichoSharp.csproj
+!Internal/Cpt_BA-jerichosharp-361af9f43da4/Jericho/OutputState.cs
+!Internal/Cpt_BA-jerichosharp-361af9f43da4/Jericho/Program.cs
+!Internal/Cpt_BA-jerichosharp-361af9f43da4/Jericho/Vector3.cs
+!Internal/Cpt_BA-jerichosharp-361af9f43da4/Jericho/data/datagroups to be integrated into csv.ps1
+!Internal/Cpt_BA-jerichosharp-361af9f43da4/Jericho/data/history_global.csv
+!Internal/Cpt_BA-jerichosharp-361af9f43da4/Jericho/data/history_local.csv
+!Internal/Cpt_BA-jerichosharp-361af9f43da4/Jericho/data/Icon-Project-Jericho.ico
+!Internal/Cpt_BA-jerichosharp-361af9f43da4/Jericho/data/saved_locations.csv
+!Internal/Cpt_BA-jerichosharp-361af9f43da4/Jericho/data/Script_Project Jericho_Points of Interest in 3D Space.csv
+!Internal/Cpt_BA-jerichosharp-361af9f43da4/Jericho/data/Script_Project Jericho_Points of Interest on Planets and ObjectContainers.csv
+!Internal/Cpt_BA-jerichosharp-361af9f43da4/Jericho/data/Script_Project Jericho_Values for Object Containers.csv
+!Internal/Cpt_BA-jerichosharp-361af9f43da4/Jericho/data/Script_Project Jericho_Values for QuantumMarkers.csv
