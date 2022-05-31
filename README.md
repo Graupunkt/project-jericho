@@ -31,7 +31,7 @@ than open powershell and drop the scriptfile into the window and unblock the scr
 ## Screenshots
 ![Screenshot of poi selection window](screenshots/Screenshot_Frontend_V7.PNG)
 
-![Screenshot of the main anvigation panel](screenshots/Screenshot_Backend_V7.PNG)
+![Screenshot of the main anvigation panel](screenshots/Screenshot_Backend_V7.1.5.PNG)
 
 
 ## Prerequests

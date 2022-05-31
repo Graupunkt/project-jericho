@@ -1,3 +1,4 @@
-!Internal/
+!Internal\*
 Logs/
-.history/
+.history
+.history\functions
