@@ -1,9 +1,0 @@
-- GitHub Integration
-- Outsource Data into files
-- Save Position into file, with custom description
-- ask on start to update data files
-- out source fucntions into files (dot sourcing)
-- scroll bars
-- dynamic window placement 2.0
-- Register CTRL + S from within the game
-- Issue /showlocation from powershell
