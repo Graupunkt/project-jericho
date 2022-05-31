@@ -163,7 +163,7 @@ function New-DynamicFormMainframe{
 
     $Copyright = [System.Windows.Forms.ToolStripLabel]::new()
     $Copyright.Name = 'Copyright'
-    $Copyright.Text = "© [VORA] Graupunkt, [DSC] Murphy, [IFE] Xabdiben, BigCheese"
+    $Copyright.Text = "© Graupunkt, justMurphy, Xabdiben, BigCheese"
     $Copyright.Width = 200
     $Copyright.Visible = $true
 

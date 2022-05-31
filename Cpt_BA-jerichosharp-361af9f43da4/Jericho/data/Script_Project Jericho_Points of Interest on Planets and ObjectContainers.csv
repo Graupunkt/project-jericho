@@ -1,0 +1,38 @@
+System;ObjectContainer;Type;Name;Planetary X-Coord;Planetary Y-Coord;Planetary Z-Coord;
+Stanton;Daymar;Outpost;Shubin Mining SCD-1;126.025172;-149.5814689;221.253344;
+Stanton;Daymar;Outpost;Kudre Ore;146.6171542;-177.0932944;-184.862263;
+Stanton;Daymar;Outpost;Eager Flats Aid;200.5450636;-104.917274;190.0965948;
+Stanton;Daymar;Outpost;Kudre Ore Mine;81.00767024;-280.6833381;43.64869834;
+#Stanton;Daymar;Outpost;Wolf Point Aid Shelter;-4.419782845;279.0666332;95.73265906;
+#Stanton;Daymar;Outpost;Nuen Waste Management;-18.94326125;293.3409302;25.47839976;
+#Stanton;Daymar;Outpost;ArcCorp Mining Area 141;-18.16699951;180.362167;-232.7599312;
+#Stanton;Daymar;Outpost;Dunlow Ridge Aid Shelter;-51.84962316;280.93199;75.33128638;
+Stanton;Daymar;Wreck;Javelin;102.055;267.619;-70.856;
+Stanton;Yela;Easteregg;Bennyhenge;-626.638;135.733;-1.819;
+#Stanton;Yela;Outpost;NT999;-205.857;-73.781;224.297;
+#Stanton;Yela;Outpost;Kosso;-31.289;118.13;288.314;
+Stanton;Yela;Stash House;JumpTown;268.025;143.784;74.777;
+#Stanton;Yela;Outpost;ArcCorp Mining Area 157;6.023;222.356;220.313;
+#Stanton;Hurston;Custom POI;Valalol;-553.467;-77.91;-828.317;
+#Stanton;Microtech;Easteregg;A place to visit;667.834;-103.257;737.113;
+#Stanton;Yela;CustomType;S7, Race1, Checkpoint2;37.672;225.806;213.592;
+#Stanton;Yela;CustomType;S7, Race1, Checkpoint1;6.478;237.141;204.49;
+#Stanton;Microtech;CustomType;S7, Race2, Checkpoint Calhoun Pass;938.116;-347.818;31.708;
+#Stanton;Clio;CustomType;S7, Race3, Start;107.412;-46.091;-316.36;03/28/2021 14:28:33
+#Stanton;Clio;CustomType;S7, Race3, CP1;79.821;-2.218;-327.656;03/28/2021 14:49:29
+#Stanton;Clio;CustomType;S7, Race3, CP2;107.78;-3.157;-319.623;
+#Stanton;Clio;CustomType;S7, Race3, Finish;118.376;-30.453;-314.442;
+#Stanton;Daymar;Cave;Sinkhole;146.356;-177.106;-185.07;04.04.2021 12:24
+Stanton;Hurston;CustomType;Crashed Satelite Lorville;-234.97;-783.368;577.749;08/18/2021 15:17:46
+#Stanton;Magda;CustomType;HHL 2020 - Crater (old);-190.049;255.502;-122.296;10/14/2021 22:10:27 95° from HDMS Perlmann
+#Stanton;Magda;CustomType;HHL 2021 - Civilian Crater;-159.244;274;-126.472;10/18/2021 00:32:14
+Stanton;Magda;CustomType;Sketto Rock;-334.600;45.704;50.231;09.04.2022
+Stanton;MicroTech;CustomType;CitCon19 Octagon Final;636.71;-152.548;758.528;11.09.2021 02:41
+Stanton;MicroTech;CustomType;Painted Rooftop by Jax McCleary;518.273;416.401;747.889;01.01.2022 16:50
+Stanton;Yela;CustomType;OC3 in the Belt;-132.065;534.89;0;30.01.2022 20:24
+#Stanton;Hurston;Cave;Cave N80;-160.052;-65.455;985.626;x
+Stanton;MicroTech;CustomType;The River on MicroTech;808.662;417.866;415.655;03.03.2022 23:11
+Stanton;Calliope;CustomType;Puzzle Wreck;199.393;-126.182;45.983;
+Stanton;Magda;Derelict;Derelict HDMS Hahn Caterpillar 1;-171.923;-278.139;96.953;30.01.2022
+Stanton;Magda;Derelict;Derelict HDMS Hahn Caterpillar 2;-84.944;-284.415;168.126;30.01.2022
+Stanton;MicroTech;Orbital Station;Port Traessler;561.471;545.471;808.832;03.04.2022 12:52

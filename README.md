@@ -23,6 +23,10 @@
 - the script is than manually updated by the user (key combo) and gets multiple values presented for navigation
 - this tool can be used to navigate to points in space and around planets
 
+Windows 11 does not allow powershell scripts that are created by others by default, you need to run the following line to change this behavior:
+Set-ExecutionPolicy Unrestricted -Scope LocalMachine -Force
+than open powershell and drop the scriptfile into the window and unblock the script with adding this after the file
+| Unblock-File
 
 ## Screenshots
 ![Screenshot of poi selection window](screenshots/Screenshot_Frontend_V7.PNG)
@@ -31,7 +35,7 @@
 
 
 ## Prerequests
-Powershell V7 is needed to properly execute this script. You can grab it from here https://aka.ms/powershell-release?tag=stable . You can install it by using the default options I recommend to add "run with powershell 7" contect menu during install.
+Powershell V7 is needed to properly execute this script. You can grab it from here https://aka.ms/powershell-release?tag=stable . You can install it by using the default options I recommend to add "run with powershell 7" contect menu during install. Current Versions verified are 7.1.x until 7.2.3.
 
 
 ## Installation
@@ -93,6 +97,7 @@ For a better user readibility, all data files are stored in the csv so they can 
 - Murphy - who helped to understand game logics and multiple calculations and formulas
 - Xabdiben - multiple calculations, formulas, math and logics 
 - Xabdiben - for the formula to calculate the Distance between two points in 3d space
+- Xabdiben - for the formula to calcualte a course deviation in athmosphere
 - BigCheese - who created a powershell formula called "Ebenenwinkel", whichs allows to calcule a deviation in athmosphere, but only on a horizontal plane (useful for racing/athomsphere flight if the poi is below are above the horizon)
 - BigCheese - who contributed a function to trigger keyboard shortcuts
 - BigCheese - for contributed a formula to calculate the ingame compass reading (bearing)
