@@ -189,8 +189,8 @@ function New-DynamicFormMainframe{
     $SupportLink.Name = 'Support'
     $SupportLink.IsLink = $true
     #$SupportLink.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline
-    $SupportLink.Text = "https://www.guilded.gg/projectjericho"
-    $SupportLink.Tag = "https://www.guilded.gg/projectjericho"
+    $SupportLink.Text = "Meridian Discord Server"
+    $SupportLink.Tag = "https://discord.gg/WMh5YCeQVS"
     $SupportLink.Width = 50
     $SupportLink.Visible = $true
     $SupportLink.add_Click({Invoke-Expression "explorer.exe $($SupportLink.Text)"})

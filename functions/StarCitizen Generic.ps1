@@ -30,13 +30,13 @@ function Get-StarCitizenClipboardAndDate{
         #if($CurrentXPosition -ne $PreviousXPosition -or $CurrentYPosition -ne $PreviousYPosition -or $CurrentZPosition -ne $PreviousZPosition){
             $ClipboardContainsCoordinates = $true 
             $ClipboardContentSplit = $ClipboardContentRAW.split("x:").split("y:").split("z:") #GET CURRENT COORDS FROM CLIPBOARD
-            $CurrentXPosition = $ClipboardContentSplit[3]
-            $CurrentYPosition = $ClipboardContentSplit[5]
-            $CurrentZPosition = $ClipboardContentSplit[7]
+            [decimal]$CurrentXPosition = $ClipboardContentSplit[3]
+            [decimal]$CurrentYPosition = $ClipboardContentSplit[5]
+            [decimal]$CurrentZPosition = $ClipboardContentSplit[7]
             if(!$CurrentZPosition){
-                $CurrentXPosition = $ClipboardContentSplit[1]
-                $CurrentYPosition = $ClipboardContentSplit[2]
-                $CurrentZPosition = $ClipboardContentSplit[3]
+                [decimal]$CurrentXPosition = $ClipboardContentSplit[1]
+                [decimal]$CurrentYPosition = $ClipboardContentSplit[2]
+                [decimal]$CurrentZPosition = $ClipboardContentSplit[3]
             }
     }else{
         #$CurrentXPosition = $null

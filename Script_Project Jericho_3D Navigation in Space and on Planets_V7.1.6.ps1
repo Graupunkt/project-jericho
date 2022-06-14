@@ -201,8 +201,20 @@ $LogFilename = "Logs\Logfile.csv"
 while($StartNavigation) {
     #Start-Sleep -Milliseconds 1            # IF THIS LINE IS NOT PRESENT, CPU USAGE WILL CONSUME A FULL THREAD, AND SCRIPTS MIGHT GET UNRESPONSIVE 
     #Get ClipboardContents and Get Current Date/Time
-    $ClipboardContainsCoordinates, $CurrentXPosition, $CurrentYPosition, $CurrentZPosition, $DateTime = Get-StarCitizenClipboardAndDate $PCClockdrift
+
+    #$ClipboardContainsCoordinates, [string]$CurrentXPositionRAW, [string]$CurrentYPositionRAW, [string]$CurrentZPositionRAW, $DateTime = Get-StarCitizenClipboardAndDate $PCClockdrift
+    $ClipboardContainsCoordinates, [decimal]$CurrentXPosition, [decimal]$CurrentYPosition, [decimal]$CurrentZPosition, $DateTime = Get-StarCitizenClipboardAndDate $PCClockdrift
     #Write-Host $CurrentXPosition, $CurrentYPosition, $CurrentZPosition
+    #[decimal]$CurrentXPosition = $CurrentXPositionRAW+"d"
+    #[decimal]$CurrentYPosition = $CurrentYPositionRAW+"d"
+    #[decimal]$CurrentZPosition = $CurrentZPositionRAW+"d"
+
+    #[decimal]$CurrentXPosition = -18967436025.336437d
+    #[decimal]$CurrentYPosition = -2667811818.272488d
+    #[decimal]$CurrentZPosition = 5666797.140279d
+    #$DateTime = Get-Date -Year "2022" -Month "06" -Day "14" -Hour "01" -Minute "57" -Second "42" -Millisecond "583"
+    #$DateTime.ToString("yyyy-MM-dd HH:mm:ss.fff")    
+    #$CurrentXPosition
 
     ### KEY TO SAVE CURRENT COORDINATES TO TEXTFILE ###
     # CODE BY BIGCHEESE
@@ -225,12 +237,12 @@ while($StartNavigation) {
         #$CurrentDetectedOCRadius = ""
         #$CurrentDetectedOCADX = ""
 
-        $Circumference360Degrees = [Math]::PI * 2 * $CurrentDetectedOCRadius
+        [decimal]$Circumference360Degrees = [Math]::PI * 2 * $CurrentDetectedOCRadius
         #Very high or low values are presented by ps as scientific results, therefore we force the nubmer (decimal) and limit it to 7 digits after comma
         #Multiplied by 1000 to convert km into m and invert it to correct the deviation
-        $RotationSpeedAdjustment = [Math]::Round(($CurrentPlanetaryXCoord * 1000 * 360 / $Circumference360Degrees) -as [decimal],7) * -1
+        [decimal]$RotationSpeedAdjustment = [Math]::Round(($CurrentPlanetaryXCoord * 1000 * 360 / $Circumference360Degrees) -as [decimal],7) * -1
         #GET Adjustment for Rotationspeed 
-        $FinalRotationAdjustment = ([decimal]$CurrentDetectedOCADX + [decimal]$RotationSpeedAdjustment)
+        [decimal]$FinalRotationAdjustment = ([decimal]$CurrentDetectedOCADX + [decimal]$RotationSpeedAdjustment)
         #Write-Host "OMRadius $CurrentDetectedOCRadius"
         #Write-Host "Circumference $Circumference360Degrees "
         #Write-Host "Speed $RotationSpeedAdjustment"
@@ -255,9 +267,9 @@ while($StartNavigation) {
             #SET DESTINATION TO CUSTOM COORDINATES
             $SelectedDestination = @{"Custom" = "$($TextBoxX.Text);$($TextBoxY.Text);$($TextBoxZ.Text)"}
             $DestCoordData = $SelectedDestination.Value -Split ";"
-            $DestCoordDataX = $TextBoxX.Text
-            $DestCoordDataY = $TextBoxY.Text
-            $DestCoordDataZ = $TextBoxZ.Text
+            [decimal]$DestCoordDataX = $TextBoxX.Text
+            [decimal]$DestCoordDataY = $TextBoxY.Text
+            [decimal]$DestCoordDataZ = $TextBoxZ.Text
         }
         else{
             #IF COORDINATES ARE ENTERED WRONG
@@ -278,46 +290,47 @@ while($StartNavigation) {
         #Function currently prevents script from continuing
         #$ErrorActionPreference = "SilentlyContinue"
         $ElapsedUTCTimeSinceSimulationStart = Get-ElapsedUTCServerTime $DateTime
+        #$ElapsedUTCTimeSinceSimulationStart = [TimeSpan]::FromMilliseconds(77327862583.328)
         #$ElapsedUTCTimeSinceSimulationStart.TotalDays
         #GET ORBITAL COORDINATES
         $SelectedDestination = $PointsOfInterestOnPlanetsData.GetEnumerator() | Where-Object { $_.Name -eq $script:CurrentDestination }
         $PoiCoordDataPlanet = $SelectedDestination.ObjectContainer
-        $PoiCoordDataX = $SelectedDestination.'Planetary X-Coord'
-        $PoiCoordDataY = $SelectedDestination.'Planetary Y-Coord'
-        $PoiCoordDataZ = $SelectedDestination.'Planetary Z-Coord'
+        [decimal]$PoiCoordDataX = $SelectedDestination.'Planetary X-Coord'
+        [decimal]$PoiCoordDataY = $SelectedDestination.'Planetary Y-Coord'
+        [decimal]$PoiCoordDataZ = $SelectedDestination.'Planetary Z-Coord'
 
         #GET THE PLANETS COORDS IN STANTON
         #$SelectedPlanet = $ObjectContainerData.GetEnumerator() | Where-Object { $_.Key -eq $CurrentPlanet}
         $SelectedPlanet = $ObjectContainerData.GetEnumerator() | Where-Object { $_.Name -eq $PoiCoordDataPlanet}
         #$SelectedPlanet = $ObjectContainerData.GetEnumerator() | Where-Object { $_.Key -eq $script:CurrentDetectedObjectContainer}
         #$PlanetDataParsed = $SelectedPlanet.Value -Split ";"
-        $PlanetCoordDataX = $SelectedPlanet.'X-Coord'/1000
-        $PlanetCoordDataY = $SelectedPlanet.'Y-Coord'/1000
-        $PlanetCoordDataZ = $SelectedPlanet.'Z-Coord'/1000
-        $PlanetRotationSpeed = $SelectedPlanet.RotationSpeedX
-        $PlanetRotationStart = $SelectedPlanet.RotationAdjustmentX
-        $PlanetOMRadius = $SelectedPlanet.OrbitalMarkerRadius
-
+        [decimal]$PlanetCoordDataX = $SelectedPlanet.'X-Coord'/1000
+        [decimal]$PlanetCoordDataY = $SelectedPlanet.'Y-Coord'/1000
+        [decimal]$PlanetCoordDataZ = $SelectedPlanet.'Z-Coord'/1000
+        [decimal]$PlanetRotationSpeed = $SelectedPlanet.RotationSpeedX
+        [decimal]$PlanetRotationStart = $SelectedPlanet.RotationAdjustmentX
+        [int]$PlanetOMRadius = $SelectedPlanet.OrbitalMarkerRadius
+get
   
         #FORMULA TO CALCULATE THE CURRENT STANTON X, Y, Z COORDNIATES FROM ROTATING PLANET
         #GET CURRENT ROTATION FROM ANGLE
-        $LengthOfDayDecimal = [decimal]$PlanetRotationSpeed * 3600 / 86400  #CORRECT
-        $JulianDate = $ElapsedUTCTimeSinceSimulationStart.TotalDays        #CORRECT
-        $TotalCycles = $JulianDate / $LengthOfDayDecimal                   #CORRECT
-        $CurrentCycleDez = $TotalCycles%1
-        $CurrentCycleDeg = $CurrentCycleDez * 360
+        [decimal]$LengthOfDayDecimal = [decimal]$PlanetRotationSpeed * 3600 / 86400  #CORRECT
+        [decimal]$JulianDate = $ElapsedUTCTimeSinceSimulationStart.TotalDays        #CORRECT
+        [decimal]$TotalCycles = $JulianDate / $LengthOfDayDecimal                   #CORRECT
+        [decimal]$CurrentCycleDez = $TotalCycles%1
+        [decimal]$CurrentCycleDeg = $CurrentCycleDez * 360
         #if (($CurrentCycleDeg + $PlanetRotationStart) -gt 360){$CurrentCycleAngle = 360 - [decimal]$PlanetRotationStart + [decimal]$CurrentCycleDeg}
-        if (($CurrentCycleDeg + $PlanetRotationStart) -lt 360){$CurrentCycleAngle = [decimal]$PlanetRotationStart + [decimal]$CurrentCycleDeg}
+        if (($CurrentCycleDeg + $PlanetRotationStart) -lt 360){[decimal]$CurrentCycleAngle = $PlanetRotationStart + $CurrentCycleDeg}
 
         #CALCULATE THE RESULTING X Y COORDS 
         # /180 * PI = Conversion from 
-        $PoiRotationValueX = [decimal]$PoiCoordDataX * ([math]::Cos($CurrentCycleAngle/180*[System.Math]::PI)) - [decimal]$PoiCoordDataY * ([math]::Sin($CurrentCycleAngle/180*[System.Math]::PI))
-        $PoiRotationValueY = [decimal]$PoiCoordDataX * ([math]::Sin($CurrentCycleAngle/180*[System.Math]::PI)) + [decimal]$PoiCoordDataY * ([math]::Cos($CurrentCycleAngle/180*[System.Math]::PI))
+        [decimal]$PoiRotationValueX = [decimal]$PoiCoordDataX * ([math]::Cos($CurrentCycleAngle/180*[System.Math]::PI)) - [decimal]$PoiCoordDataY * ([math]::Sin($CurrentCycleAngle/180*[System.Math]::PI))
+        [decimal]$PoiRotationValueY = [decimal]$PoiCoordDataX * ([math]::Sin($CurrentCycleAngle/180*[System.Math]::PI)) + [decimal]$PoiCoordDataY * ([math]::Cos($CurrentCycleAngle/180*[System.Math]::PI))
 
         #SUBTRACT POI COORDS FROM PLANET COORDS
-        $DestCoordDataX = ([decimal]$PlanetCoordDataX + $PoiRotationValueX) * 1000
-        $DestCoordDataY = ([decimal]$PlanetCoordDataY + $PoiRotationValueY) * 1000
-        $DestCoordDataZ = ([decimal]$PlanetCoordDataZ + $PoiCoordDataZ) * 1000
+        [decimal]$DestCoordDataX = ($PlanetCoordDataX + $PoiRotationValueX) * 1000
+        [decimal]$DestCoordDataY = ($PlanetCoordDataY + $PoiRotationValueY) * 1000
+        [decimal]$DestCoordDataZ = ($PlanetCoordDataZ + $PoiCoordDataZ) * 1000
 
         $FinalPoiCoords = @{}
         $FinalPoiCoords = @{
@@ -325,9 +338,9 @@ while($StartNavigation) {
         }
         
         $FinalPlanetCoords = @{}
-        $FinalPlanetDataX = [decimal]$PlanetCoordDataX * 1000
-        $FinalPlanetDataY = [decimal]$PlanetCoordDataY * 1000
-        $FinalPlanetDataZ = [decimal]$PlanetCoordDataZ * 1000
+        [decimal]$FinalPlanetDataX = $PlanetCoordDataX * 1000
+        [decimal]$FinalPlanetDataY = $PlanetCoordDataY * 1000
+        [decimal]$FinalPlanetDataZ = $PlanetCoordDataZ * 1000
         $FinalPlanetCoords = @{
             "$CurrentPlanet" = "$FinalPlanetDataX;$FinalPlanetDataY;$FinalPlanetDataZ"
         }
@@ -342,9 +355,9 @@ while($StartNavigation) {
         #$SelectedDestination = $PointsOfInterestInSpaceData.GetEnumerator() | Where-Object { $_.Key -eq $script:CurrentDestination } #UNCOMMENT AGAIN !!!!!!!!!!!!!!!!!!!!!!!!
         $SelectedDestination = $PointsOfInterestInSpaceData.GetEnumerator() | Where-Object { $_.Name -eq $script:CurrentDestination } 
         #$DestCoordData = $SelectedDestination.Value -Split ";"
-        $DestCoordDataX = $SelectedDestination.'Stanton X-Coord'
-        $DestCoordDataY = $SelectedDestination.'Stanton Y-Coord'
-        $DestCoordDataZ = $SelectedDestination.'Stanton Z-Coord'
+        [decimal]$DestCoordDataX = $SelectedDestination.'Stanton X-Coord'
+        [decimal]$DestCoordDataY = $SelectedDestination.'Stanton Y-Coord'
+        [decimal]$DestCoordDataZ = $SelectedDestination.'Stanton Z-Coord'
         #$script:DestPlanet = $SelectedDestination.'ObjectContainer'
     }
     
@@ -387,42 +400,60 @@ while($StartNavigation) {
         ### DETERMINE THE CURRENTOBJECT CONTAINER FROM STANTON COORDS ###
         #################################################################
         $script:CurrentDetectedObjectContainer = ""
-        #DETECT CURRENT OC
+
+        #DETECT CURRENT OC 
         foreach ($ObjectContainer in $ObjectContainerData.GetEnumerator()){
-            $ObjectContainerX         = $ObjectContainer.'X-Coord'
-            $ObjectContainerY         = $ObjectContainer.'Y-Coord'
-            $ObjectContainerZ         = $ObjectContainer.'Z-Coord'
+        #foreach ($ObjectContainer in $ObjectContainerData[13]){
+            [decimal]$ObjectContainerX         = $ObjectContainer.'X-Coord'
+            [decimal]$ObjectContainerY         = $ObjectContainer.'Y-Coord'
+            [decimal]$ObjectContainerZ         = $ObjectContainer.'Z-Coord'
             $ObjectContainerRotSpeedX = $ObjectContainer.RotationSpeedX
             $ObjectContainerRotSpeedY = $ObjectContainer.RotationSpeedY
             $ObjectContainerRotSpeedZ = $ObjectContainer.RotationSpeedZ
             $ObjectContainerRotAdjustX = $ObjectContainer.RotationAdjustmentX
             $ObjectContainerRotAdjustY = $ObjectContainer.RotationAdjustmentY
             $ObjectContainerRotAdjustZ = $ObjectContainer.RotationAdjustmentZ
-            $ObjectContainerOMRadius  = $ObjectContainer.OrbitalMarkerRadius
-            $ObjectContainerBodyRadius  = $ObjectContainer.BodyRadius
-            $OMRadiusExtra = 1.5
+            [decimal]$ObjectContainerOMRadius  = $ObjectContainer.OrbitalMarkerRadius
+            [decimal]$ObjectContainerBodyRadius  = $ObjectContainer.BodyRadius
+            [decimal]$OMRadiusExtra = 1.5
 
             $WithinX = $WithinY = $WithinZ = $false
-            if([decimal]$ObjectContainerX -lt 0){if($CurrentXPosition -lt ([decimal]$ObjectContainerX - [decimal]$ObjectContainerOMRadius * $OMRadiusExtra) -AND $CurrentXPosition -gt ([decimal]$ObjectContainerX + [decimal]$ObjectContainerOMRadius * $OMRadiusExtra)){$WithinX = $true}}
-            else {if([decimal]$CurrentXPosition -gt ([decimal]$ObjectContainerX - [decimal]$ObjectContainerOMRadius * $OMRadiusExtra) -AND [decimal]$CurrentXPosition -lt ([decimal]$ObjectContainerX + [decimal]$ObjectContainerOMRadius * $OMRadiusExtra)){$WithinX = $true}}
+            if($ObjectContainerX -gt 0){
+                if($CurrentXPosition -gt ($ObjectContainerX - $ObjectContainerOMRadius * $OMRadiusExtra) -AND $CurrentXPosition -lt ($ObjectContainerX + $ObjectContainerOMRadius * $OMRadiusExtra)){$WithinX = $true}
+            }
+            else {
+                if($CurrentXPosition -lt ($ObjectContainerX - $ObjectContainerOMRadius * $OMRadiusExtra) -AND $CurrentXPosition -lt ($ObjectContainerX + $ObjectContainerOMRadius * $OMRadiusExtra)){$WithinX = $true}
+            }
 
-            if([decimal]$ObjectContainerY -lt 0){if($CurrentYPosition -lt ([decimal]$ObjectContainerY - [decimal]$ObjectContainerOMRadius * $OMRadiusExtra) -AND $CurrentYPosition -gt ([decimal]$ObjectContainerY + [decimal]$ObjectContainerOMRadius * $OMRadiusExtra)){$WithinY = $true}}
-            else {if([decimal]$CurrentYPosition -gt ([decimal]$ObjectContainerY - [decimal]$ObjectContainerOMRadius * $OMRadiusExtra) -AND [decimal]$CurrentYPosition -lt ([decimal]$ObjectContainerY + [decimal]$ObjectContainerOMRadius * $OMRadiusExtra)){$WithinY = $true}}
+            if($ObjectContainerY -gt 0){
+                if($CurrentYPosition -gt ($ObjectContainerY - $ObjectContainerOMRadius * $OMRadiusExtra) -AND $CurrentYPosition -lt ($ObjectContainerY + $ObjectContainerOMRadius * $OMRadiusExtra)){$WithinY = $true}
+            }
+            else {
+                if($CurrentYPosition -gt ($ObjectContainerY - $ObjectContainerOMRadius * $OMRadiusExtra) -AND $CurrentYPosition -lt ($ObjectContainerY + $ObjectContainerOMRadius * $OMRadiusExtra)){$WithinY = $true}
+            }
 
-            if([decimal]$ObjectContainerZ -lt 0){if($CurrentZPosition -lt ([decimal]$ObjectContainerZ - [decimal]$ObjectContainerOMRadius * $OMRadiusExtra) -AND $CurrentZPosition -gt ([decimal]$ObjectContainerZ + [decimal]$ObjectContainerOMRadius * $OMRadiusExtra)){$WithinZ = $true}}
-            else {if([decimal]$CurrentZPosition -gt ([decimal]$ObjectContainerZ - [decimal]$ObjectContainerOMRadius * $OMRadiusExtra) -AND [decimal]$CurrentZPosition -lt ([decimal]$ObjectContainerZ + [decimal]$ObjectContainerOMRadius * $OMRadiusExtra)){$WithinZ = $true}}
+            if($ObjectContainerZ -lt 0){
+                if($CurrentZPosition -lt ($ObjectContainerZ - $ObjectContainerOMRadius * $OMRadiusExtra) -AND $CurrentZPosition -gt ($ObjectContainerZ + $ObjectContainerOMRadius * $OMRadiusExtra)){$WithinZ = $true}
+            }
+            else {
+                if($CurrentZPosition -gt ($ObjectContainerZ - $ObjectContainerOMRadius * $OMRadiusExtra) -AND $CurrentZPosition -lt ($ObjectContainerZ + $ObjectContainerOMRadius * $OMRadiusExtra)){$WithinZ = $true}
+            }
+            
+            #$WithinX 
+            #$WithinY
+            #$WithinZ
 
             if($WithinX -and $WithinY -and $WithinZ){
                 $script:CurrentDetectedSystem = $ObjectContainer.System
                 $script:CurrentDetectedObjectContainer = $ObjectContainer.Name
-                $script:CurrentDetectedOCX  = $ObjectContainer."X-Coord"    #$ObjectContainerX
-                $script:CurrentDetectedOCY  = $ObjectContainer."Y-Coord"    #$ObjectContainerY
-                $script:CurrentDetectedOCZ  = $ObjectContainer."Z-Coord"    #$ObjectContainerZ
-                $script:CurrentDetectedOCRS = $ObjectContainerRotSpeedX #check
-                $script:CurrentDetectedOCADW = $ObjectContainerRotAdjustW 
-                $script:CurrentDetectedOCADX = $ObjectContainerRotAdjustX
-                $script:CurrentDetectedOCADY = $ObjectContainerRotAdjustY
-                $script:CurrentDetectedOCADZ = $ObjectContainerRotAdjustZ
+                [decimal]$script:CurrentDetectedOCX  = $ObjectContainer."X-Coord"    #$ObjectContainerX
+                [decimal]$script:CurrentDetectedOCY  = $ObjectContainer."Y-Coord"    #$ObjectContainerY
+                [decimal]$script:CurrentDetectedOCZ  = $ObjectContainer."Z-Coord"    #$ObjectContainerZ
+                [decimal]$script:CurrentDetectedOCRS = $ObjectContainerRotSpeedX #check
+                [decimal]$script:CurrentDetectedOCADW = $ObjectContainerRotAdjustW 
+                [decimal]$script:CurrentDetectedOCADX = $ObjectContainerRotAdjustX
+                [decimal]$script:CurrentDetectedOCADY = $ObjectContainerRotAdjustY
+                [decimal]$script:CurrentDetectedOCADZ = $ObjectContainerRotAdjustZ
                 $script:CurrentDetectedOCRadius = $ObjectContainerOMRadius
                 $script:CurrentDetectedBodyRadius = $ObjectContainerBodyRadius
                 $script:CurrentOCQuadW = $ObjectContainer.RotQuatW
@@ -447,73 +478,73 @@ while($StartNavigation) {
             #Write-Host "$script:CurrentDetectedObjectContainer "
         }
 
-
+        
         #GET DIFFERENCES BETWEEN PLANET CENTRE AND CURRENT POSITION
-        $PlanetDifferenceinX = ($CurrentDetectedOCX - $CurrentXPosition)    #A2
-        $PlanetDifferenceinY = ($CurrentDetectedOCY - $CurrentYPosition)    #B2
+        [decimal]$PlanetDifferenceinX = ([double]$CurrentDetectedOCX - [double]$CurrentXPosition)    #A2
+        [decimal]$PlanetDifferenceinY = ([double]$CurrentDetectedOCY - [double]$CurrentYPosition)    #B2
         #$PlanetDifferenceinZ = ($CurrentDetectedOCZ - $CurrentZPosition)    #C2
 
-        $OCLengthOfDayDecimal = [decimal]$script:CurrentDetectedOCRS * 3600 / 86400  #CORRECT
-        $OCJulianDate = $ElapsedUTCTimeSinceSimulationStart.TotalDays               #CORRECT
-        $OCTotalCycles = $OCJulianDate / $OCLengthOfDayDecimal                      #CORRECT
-        $OCCurrentCycleDez = $OCTotalCycles%1
-        $OCCurrentCycleDeg = $OCCurrentCycleDez * 360
-        $OCCurrentCycleAngle = [decimal]$script:CurrentDetectedOCADX + [decimal]$OCCurrentCycleDeg
-        $OCReversedAngle = 360 - $OCCurrentCycleAngle
-        $OCAngleRadian = $OCReversedAngle/180*[System.Math]::PI
+        [decimal]$OCLengthOfDayDecimal = [decimal]$script:CurrentDetectedOCRS * 3600 / 86400  #CORRECT
+        [double]$OCJulianDate = $ElapsedUTCTimeSinceSimulationStart.TotalDays               #CORRECT
+        [decimal]$OCTotalCycles = $OCJulianDate / $OCLengthOfDayDecimal                      #CORRECT
+        [decimal]$OCCurrentCycleDez = $OCTotalCycles%1
+        [decimal]$OCCurrentCycleDeg = $OCCurrentCycleDez * 360
+        [decimal]$OCCurrentCycleAngle = $script:CurrentDetectedOCADX + $OCCurrentCycleDeg
+        [decimal]$OCReversedAngle = 360 - $OCCurrentCycleAngle
+        [decimal]$OCAngleRadian = $OCReversedAngle/180*[System.Math]::PI
 
-        $PlanetRotationValueX1 = ([decimal]$PlanetDifferenceinX * ([math]::Cos($OCAngleRadian)) - [decimal]$PlanetDifferenceinY * ([math]::Sin($OCAngleRadian))) * -1
-        $PlanetRotationValueY1 = ([decimal]$PlanetDifferenceinX * ([math]::Sin($OCAngleRadian)) + [decimal]$PlanetDifferenceinY * ([math]::Cos($OCAngleRadian))) * -1
-        $ShipRotationValueZ1 = $CurrentZPosition / 1000
-        $PlanetRotationValueZ1 = $ShipRotationValueZ1
+        [decimal]$PlanetRotationValueX1 = ($PlanetDifferenceinX * ([math]::Cos($OCAngleRadian)) - $PlanetDifferenceinY * ([math]::Sin($OCAngleRadian))) * -1
+        [decimal]$PlanetRotationValueY1 = ($PlanetDifferenceinX * ([math]::Sin($OCAngleRadian)) + $PlanetDifferenceinY * ([math]::Cos($OCAngleRadian))) * -1
+        [decimal]$ShipRotationValueZ1 = $CurrentZPosition / 1000
+        [decimal]$PlanetRotationValueZ1 = $ShipRotationValueZ1
 
         #DISPLAY CURRENT COORDS OF STANTON, PLANETARY AND POI
         #CONVERT CURRENT RESULTS FROM M OT KM (/1000) AND ROUND COORDINATES TO 3 DIGITS AFTER COMMA
-        $CurrentPlanetaryXCoord = [math]::Round($PlanetRotationValueX1/1000, 3)
-        $CurrentPlanetaryYCoord = [math]::Round($PlanetRotationValueY1/1000, 3)
-        $CurrentPlanetaryZCoord = [math]::Round($PlanetRotationValueZ1, 3)
+        [decimal]$CurrentPlanetaryXCoord = [math]::Round($PlanetRotationValueX1/1000, 4)
+        [decimal]$CurrentPlanetaryYCoord = [math]::Round($PlanetRotationValueY1/1000, 4)
+        [decimal]$CurrentPlanetaryZCoord = [math]::Round($PlanetRotationValueZ1, 4)
 
         #CONVERT DESTINATION COORDINATES INTO 3 DIGITS AFTER COMMA, TOO
-        $CurrentDestinationXCoord = [math]::Round($PoiCoordDataX, 3)
-        $CurrentDestinationYCoord = [math]::Round($PoiCoordDataY, 3)
-        $CurrentDestinationZCoord = [math]::Round($PoiCoordDataZ, 3)
+        [decimal]$CurrentDestinationXCoord = [math]::Round($PoiCoordDataX, 4)
+        [decimal]$CurrentDestinationYCoord = [math]::Round($PoiCoordDataY, 4)
+        [decimal]$CurrentDestinationZCoord = [math]::Round($PoiCoordDataZ, 4)
 
         #Total Distance Away
         #$PreviousDistanceTotalist = $curdist
         if($script:CurrentDetectedObjectContainer -eq $PoiCoordDataPlanet){
-            $CurrentDistanceTotal = [math]::Sqrt([math]::pow($CurrentPlanetaryXCoord - $CurrentDestinationXCoord,2) + [math]::pow($CurrentPlanetaryYCoord - $CurrentDestinationYCoord,2) + [math]::pow($CurrentPlanetaryZCoord - $CurrentDestinationZCoord,2))*1000
-            $CurrentDistanceX = [math]::Sqrt([math]::pow($CurrentPlanetaryXCoord - $CurrentDestinationXCoord,2))*1000
-            $CurrentDistanceY = [math]::Sqrt([math]::pow($CurrentPlanetaryYCoord - $CurrentDestinationYCoord,2))*1000
-            $CurrentDistanceZ = [math]::Sqrt([math]::pow($CurrentPlanetaryZCoord - $CurrentDestinationZCoord,2))*1000
+            [decimal]$CurrentDistanceTotal = [math]::Sqrt([math]::pow($CurrentPlanetaryXCoord - $CurrentDestinationXCoord,2) + [math]::pow($CurrentPlanetaryYCoord - $CurrentDestinationYCoord,2) + [math]::pow($CurrentPlanetaryZCoord - $CurrentDestinationZCoord,2))*1000
+            [decimal]$CurrentDistanceX = [math]::Sqrt([math]::pow($CurrentPlanetaryXCoord - $CurrentDestinationXCoord,2))*1000
+            [decimal]$CurrentDistanceY = [math]::Sqrt([math]::pow($CurrentPlanetaryYCoord - $CurrentDestinationYCoord,2))*1000
+            [decimal]$CurrentDistanceZ = [math]::Sqrt([math]::pow($CurrentPlanetaryZCoord - $CurrentDestinationZCoord,2))*1000
         }
         else{
-            $CurrentDistanceTotal = [math]::Sqrt([math]::pow($CurrentXPosition - $DestCoordDataX,2) + [math]::pow($CurrentYPosition - $DestCoordDataY,2) + [math]::pow($CurrentZPosition - $DestCoordDataZ,2))
-            $CurrentDistanceX = [math]::Sqrt([math]::pow($CurrentXPosition - $DestCoordDataX,2))
-            $CurrentDistanceY = [math]::Sqrt([math]::pow($CurrentYPosition - $DestCoordDataY,2))
-            $CurrentDistanceZ = [math]::Sqrt([math]::pow($CurrentZPosition - $DestCoordDataZ,2))
+            [decimal]$CurrentDistanceTotal = [math]::Sqrt([math]::pow($CurrentXPosition - $DestCoordDataX,2) + [math]::pow($CurrentYPosition - $DestCoordDataY,2) + [math]::pow($CurrentZPosition - $DestCoordDataZ,2))
+            [decimal]$CurrentDistanceX = [math]::Sqrt([math]::pow($CurrentXPosition - $DestCoordDataX,2))
+            [decimal]$CurrentDistanceY = [math]::Sqrt([math]::pow($CurrentYPosition - $DestCoordDataY,2))
+            [decimal]$CurrentDistanceZ = [math]::Sqrt([math]::pow($CurrentZPosition - $DestCoordDataZ,2))
         }
 
-        $CurrentDistanceTotal = [Math]::abs($CurrentDistanceTotal)
-        $CurrentDistanceX     = [Math]::abs($CurrentDistanceX)
-        $CurrentDistanceY     = [Math]::abs($CurrentDistanceY)
-        $CurrentDistanceZ     = [Math]::abs($CurrentDistanceZ)
+        [decimal]$CurrentDistanceTotal = [Math]::abs($CurrentDistanceTotal)
+        [decimal]$CurrentDistanceX     = [Math]::abs($CurrentDistanceX)
+        [decimal]$CurrentDistanceY     = [Math]::abs($CurrentDistanceY)
+        [decimal]$CurrentDistanceZ     = [Math]::abs($CurrentDistanceZ)
 
         #GET DIFFERENCE IN DISTANCE
         #$CurrentDeltaTotal = $PreviousDistanceTotal - $CurrentDistanceTotal
-        $CurrentDeltaX     = $PreviousDistanceX - $CurrentDistanceX
-        $CurrentDeltaY     = $PreviousDistanceY - $CurrentDistanceY
-        $CurrentDeltaZ     = $PreviousDistanceZ - $CurrentDistanceZ
+        [decimal]$CurrentDeltaX     = $PreviousDistanceX - $CurrentDistanceX
+        [decimal]$CurrentDeltaY     = $PreviousDistanceY - $CurrentDistanceY
+        [decimal]$CurrentDeltaZ     = $PreviousDistanceZ - $CurrentDistanceZ
         #$CurrentDeltaTotal = [math]::Sqrt([math]::pow($PreviousDistanceX - $CurrentDistanceX,2) + [math]::pow($PreviousDistanceY - $CurrentDistanceY,2) + [math]::pow($PreviousDistanceZ - $CurrentDistanceZ,2))
         #$CurrentDeltaTotal = [math]::Sqrt([math]::pow($CurrentDeltaX ,2) + [math]::pow($CurrentDeltaY,2) + [math]::pow($CurrentDeltaZ,2))
         
-        $X2 = [math]::pow($CurrentDeltaX,2)
-        $Y2 = [math]::pow($CurrentDeltaY,2)
-        $Z2 = [math]::pow($CurrentDeltaZ,2)
+        [decimal]$X2 = [math]::pow($CurrentDeltaX,2)
+        [decimal]$Y2 = [math]::pow($CurrentDeltaY,2)
+        [decimal]$Z2 = [math]::pow($CurrentDeltaZ,2)
         if ($CurrentDeltaX -lt 0){$X2 = $X2 * -1}
         if ($CurrentDeltaY -lt 0){$Y2 = $Y2 * -1}
         if ($CurrentDeltaZ -lt 0){$Z2 = $Z2 * -1}
 
-        $CurrentDeltaTotal = [math]::Sqrt([math]::Abs($X2 + $Y2 + $Z2))
+        [decimal]$CurrentDeltaTotal = [math]::Sqrt([math]::Abs($X2 + $Y2 + $Z2))
         if (($X2 + $Y2 + $Z2) -lt 0){$CurrentDeltaTotal = $CurrentDeltaTotal * -1}
         #$CurrentDeltaTotal
 
@@ -719,28 +750,28 @@ while($StartNavigation) {
             }
 
         if ($PreviousXPosition -ne $null) {
-            $xu = (($DestCoordDataX - $PreviousXPosition) * ($CurrentXPosition - $PreviousXPosition))+(($DestCoordDataY - $PreviousYPosition) * ($CurrentYPosition - $PreviousYPosition))+(($DestCoordDataZ - $PreviousZPosition) * ($CurrentZPosition - $PreviousZPosition))
+            [decimal]$xu = (($DestCoordDataX - $PreviousXPosition) * ($CurrentXPosition - $PreviousXPosition))+(($DestCoordDataY - $PreviousYPosition) * ($CurrentYPosition - $PreviousYPosition))+(($DestCoordDataZ - $PreviousZPosition) * ($CurrentZPosition - $PreviousZPosition))
 
-            $xab_dist = CalcDistance3d $CurrentXPosition $CurrentYPosition $CurrentZPosition $PreviousXPosition $PreviousYPosition $PreviousZPosition 
+            [decimal]$xab_dist = CalcDistance3d $CurrentXPosition $CurrentYPosition $CurrentZPosition $PreviousXPosition $PreviousYPosition $PreviousZPosition 
 
             if ($xab_dist -lt 1) {
                 $xab_dist=1
             }
 
-            $xu = $xu/($xab_dist * $xab_dist)
+            [decimal]$xu2 = $xu/($xab_dist * $xab_dist)
 
-            $closestX = [decimal]$PreviousXPosition + [decimal]$xu * ($CurrentXPosition - $PreviousXPosition)
-            $closestY = [decimal]$PreviousYPosition + [decimal]$xu * ($CurrentYPosition - $PreviousYPosition)
-            $closestZ = [decimal]$PreviousZPosition + [decimal]$xu * ($CurrentZPosition - $PreviousZPosition)
+            [decimal]$closestX = $PreviousXPosition + $xu2 * ($CurrentXPosition - $PreviousXPosition)
+            [decimal]$closestY = $PreviousYPosition + $xu2 * ($CurrentYPosition - $PreviousYPosition)
+            [decimal]$closestZ = $PreviousZPosition + $xu2 * ($CurrentZPosition - $PreviousZPosition)
 
             #$c1 = CalcDistance3d $DestCoordDataX $DestCoordDataY $DestCoordDataZ $PreviousXPosition $PreviousYPosition $PreviousZPosition
-            $c2 = CalcDistance3d $DestCoordDataX $DestCoordDataY $DestCoordDataZ $CurrentXPosition $CurrentYPosition $CurrentZPosition
+            [decimal]$c2 = CalcDistance3d $DestCoordDataX $DestCoordDataY $DestCoordDataZ $CurrentXPosition $CurrentYPosition $CurrentZPosition
 
 
-            $pathError = CalcDistance3d $DestCoordDataX $DestCoordDataY $DestCoordDataZ $closestX $closestY $closestZ
+            [decimal]$pathError = CalcDistance3d $DestCoordDataX $DestCoordDataY $DestCoordDataZ $closestX $closestY $closestZ
             #Write-Host "Path Error = $pathError"
-            $perrd = [math]::atan2($pathError, $c2) * 180.0 / [math]::pi
-            $script:FinalAngle = [math]::Round($perrd,2)
+            [decimal]$perrd = [math]::atan2($pathError, $c2) * 180.0 / [math]::pi
+            [decimal]$script:FinalAngle = [math]::Round($perrd,2)
         }
 
 
@@ -765,15 +796,15 @@ while($StartNavigation) {
         #foreach ($QMEntry in $FinalCoordArray.GetEnumerator()){
         foreach ($QMEntry in $FirstCoordArray.GetEnumerator()){
             $InstQuantumMarkerCoords = $QMEntry.Value -Split ";"
-            $InstQuantumMarkerDataX  = $InstQuantumMarkerCoords[0]
-            $InstQuantumMarkerDataY  = $InstQuantumMarkerCoords[1]
-            $InstQuantumMarkerDataZ  = $InstQuantumMarkerCoords[2]
+            [decimal]$InstQuantumMarkerDataX  = $InstQuantumMarkerCoords[0]
+            [decimal]$InstQuantumMarkerDataY  = $InstQuantumMarkerCoords[1]
+            [decimal]$InstQuantumMarkerDataZ  = $InstQuantumMarkerCoords[2]
 
             $InstQMCurrent = "" | Select-Object QuantumMarker,X,Y,Z
             $InstQMCurrent.QuantumMarker = $QMEntry.Name
-            $InstQMCurrent.X = $InstQuantumMarkerDataX
-            $InstQMCurrent.Y = $InstQuantumMarkerDataY
-            $InstQMCurrent.Z = $InstQuantumMarkerDataZ
+            [decimal]$InstQMCurrent.X = $InstQuantumMarkerDataX
+            [decimal]$InstQMCurrent.Y = $InstQuantumMarkerDataY
+            [decimal]$InstQMCurrent.Z = $InstQuantumMarkerDataZ
             $AllQMResults += $InstQMCurrent
         }
 
@@ -781,17 +812,17 @@ while($StartNavigation) {
         $AllQMDistances = @()
         foreach ($QMEntry in $AllQMResults.GetEnumerator()){
             foreach ($Entry in $AllQMResults.GetEnumerator()){
-                $DistanceBetweenQM = [math]::Sqrt([math]::pow($QMEntry.X - $Entry.X,2) + [math]::pow($QMEntry.Y - $Entry.Y,2) + [math]::pow($QMEntry.Z - $Entry.Z,2))
-                $DistanceBetweenQMX = [math]::Sqrt([math]::pow($QMEntry.X - $Entry.X,2))
-                $DistanceBetweenQMY = [math]::Sqrt([math]::pow($QMEntry.Y - $Entry.Y,2))
-                $DistanceBetweenQMZ = [math]::Sqrt([math]::pow($QMEntry.Z - $Entry.Z,2))
+                [decimal]$DistanceBetweenQM = [math]::Sqrt([math]::pow($QMEntry.X - $Entry.X,2) + [math]::pow($QMEntry.Y - $Entry.Y,2) + [math]::pow($QMEntry.Z - $Entry.Z,2))
+                [decimal]$DistanceBetweenQMX = [math]::Sqrt([math]::pow($QMEntry.X - $Entry.X,2))
+                [decimal]$DistanceBetweenQMY = [math]::Sqrt([math]::pow($QMEntry.Y - $Entry.Y,2))
+                [decimal]$DistanceBetweenQMZ = [math]::Sqrt([math]::pow($QMEntry.Z - $Entry.Z,2))
                 $CurrentQMDistance = "" | Select-Object QuantumMarkerFrom,QuantumMarkerTo,Distance,DistanceX,DistanceY,DistanceZ
                 $CurrentQMDistance.QuantumMarkerFrom = $QMEntry.QuantumMarker
                 $CurrentQMDistance.QuantumMarkerTo = $Entry.QuantumMarker
                 $CurrentQMDistance.Distance = $DistanceBetweenQM
-                $CurrentQMDistance.DistanceX = $DistanceBetweenQMX
-                $CurrentQMDistance.DistanceY = $DistanceBetweenQMY
-                $CurrentQMDistance.DistanceZ = $DistanceBetweenQMZ
+                [decimal]$CurrentQMDistance.DistanceX = $DistanceBetweenQMX
+                [decimal]$CurrentQMDistance.DistanceY = $DistanceBetweenQMY
+                [decimal]$CurrentQMDistance.DistanceZ = $DistanceBetweenQMZ
                 $AllQMDistances += $CurrentQMDistance
             }
         }
@@ -805,9 +836,9 @@ while($StartNavigation) {
         if ($script:PlanetaryPoi) {
             $OM1 = $OM2 = $OM3 = $OM4 = $OM5 = $OM6 = ""
             #$PlanetOMRadius = ($HashtableOmRadius.GetEnumerator() | Where-Object {$_.Name -eq "$CurrentPlanet"}).Value
-            $PosX = [decimal]$PoiCoordDataX * 1000
-            $PosY = [decimal]$PoiCoordDataY * 1000
-            $PosZ = [decimal]$PoiCoordDataZ * 1000
+            [decimal]$PosX = [decimal]$PoiCoordDataX * 1000
+            [decimal]$PosY = [decimal]$PoiCoordDataY * 1000
+            [decimal]$PosZ = [decimal]$PoiCoordDataZ * 1000
             $OM1 = [math]::Pow(([math]::Pow("$PosX","2") + [math]::Pow("$PosY","2") + [math]::Pow($PosZ-$PlanetOMRadius,"2")),1/2)
             $OM1 = [math]::Round($OM1)
             $OM2 = [math]::Pow(([math]::Pow("$PosX","2") + [math]::Pow("$PosY","2") + [math]::Pow($PosZ-(-$PlanetOMRadius),"2")),1/2)
@@ -835,18 +866,18 @@ while($StartNavigation) {
         ### SET ANGLE AN ALIGNMENT FOR ANGLES ###
         #########################################
         #CONVERT CURRENT STANTON XYZ INTO PLANET XYZ
-        $X2 = $CurrentXPosition / 1000
-        $Y2 = $CurrentYPosition / 1000
+        [decimal]$X2 = $CurrentXPosition / 1000
+        [decimal]$Y2 = $CurrentYPosition / 1000
         
         #HARDCODED PLANET VIA DESTINATION
-        $A2 = ($PlanetCoordDataX - $X2)
-        $B2 = ($PlanetCoordDataY - $Y2)
+        [decimal]$A2 = ($PlanetCoordDataX - $X2)
+        [decimal]$B2 = ($PlanetCoordDataY - $Y2)
 
-        $ReversedAngle = 360 - $CurrentCycleAngle
-        $AngleRadian = $ReversedAngle/180*[System.Math]::PI
+        [decimal]$ReversedAngle = 360 - $CurrentCycleAngle
+        [decimal]$AngleRadian = $ReversedAngle/180*[System.Math]::PI
 
-        $ShipRotationValueX1 = ([decimal]$A2 * ([math]::Cos($AngleRadian)) - [decimal]$B2 * ([math]::Sin($AngleRadian))) * -1
-        $ShipRotationValueY1 = ([decimal]$A2 * ([math]::Sin($AngleRadian)) + [decimal]$B2 * ([math]::Cos($AngleRadian))) * -1
+        [decimal]$ShipRotationValueX1 = ($A2 * ([math]::Cos($AngleRadian)) - $B2 * ([math]::Sin($AngleRadian))) * -1
+        [decimal]$ShipRotationValueY1 = ($A2 * ([math]::Sin($AngleRadian)) + $B2 * ([math]::Cos($AngleRadian))) * -1
         #$ShipRotationValueZ1 = $CurrentZPosition / 1000
 
         ##
@@ -854,7 +885,7 @@ while($StartNavigation) {
         #$OCRotationValueY = [decimal]$script:CurrentDetectedOCX * ([math]::Sin($CurrentCycleAngle/180*[System.Math]::PI)) + [decimal]$script:CurrentDetectedOCY * ([math]::Cos($CurrentCycleAngle/180*[System.Math]::PI))
 
         #CONVERT 3D SPACE INTO 
-        if($script:3dSpacePoi)  {$PoiCoordDataPlanet = $DestinationName; $CurrentDestinationXCoord = $DestCoordDataX; $CurrentDestinationYCoord = $DestCoordDataY;$CurrentDestinationZCoord = $DestCoordDataZ} 
+        if($script:3dSpacePoi)  {$PoiCoordDataPlanet = $DestinationName; [decimal]$CurrentDestinationXCoord = $DestCoordDataX; [decimal]$CurrentDestinationYCoord = $DestCoordDataY;[decimal]$CurrentDestinationZCoord = $DestCoordDataZ} 
 
         #SHOW OM DISTANCES
         #$CurrentPlanetaryXCoord
@@ -865,7 +896,7 @@ while($StartNavigation) {
         #Calculate Orbital Marker Distances for Current Position
         #First Value is in meters
         #Final Value is rounded in kilometers
-        $OCRadius = $CurrentDetectedOCRadius/1000
+        [decimal]$OCRadius = $CurrentDetectedOCRadius/1000
         $OM1 = [math]::Pow(([math]::Pow("$CurrentPlanetaryXCoord","2") + [math]::Pow("$CurrentPlanetaryYCoord","2") + [math]::Pow($CurrentPlanetaryZCoord-$OCRadius,"2")),1/2)
         $OM2 = [math]::Pow(([math]::Pow("$CurrentPlanetaryXCoord","2") + [math]::Pow("$CurrentPlanetaryYCoord","2") + [math]::Pow($CurrentPlanetaryZCoord-(-$OCRadius),"2")),1/2)
         $OM3 = [math]::Pow(([math]::Pow("$CurrentPlanetaryXCoord","2") + [math]::Pow($CurrentPlanetaryYCoord-$OCRadius,"2") + [math]::Pow($CurrentPlanetaryZCoord,"2")),1/2)
@@ -886,7 +917,7 @@ while($StartNavigation) {
         #MicroTech / Daymar Fix
         $DestinationOCRadius = ($ObjectContainerData.GetEnumerator() | Where-Object {$_.Name -contains $SelectedDestination.ObjectContainer}).OrbitalMarkerRadius
         #$DestinationOCRadius = ($ObjectContainerData.GetEnumerator() | Where-Object {$_.Name -contains $SelectedDestination.ObjectContainer}).BodyRadius
-        $OCRadiusD = $DestinationOCRadius/1000
+        [decimal]$OCRadiusD = $DestinationOCRadius/1000
 
         $OM1D = [math]::Pow(([math]::Pow("$CurrentDestinationXCoord","2") + [math]::Pow("$CurrentDestinationYCoord","2") + [math]::Pow($CurrentDestinationZCoord-$OCRadiusD,"2")),1/2)
         $OM2D = [math]::Pow(([math]::Pow("$CurrentDestinationXCoord","2") + [math]::Pow("$CurrentDestinationYCoord","2") + [math]::Pow($CurrentDestinationZCoord-(-$OCRadiusD),"2")),1/2)
@@ -920,37 +951,37 @@ while($StartNavigation) {
         #$CurrentXPosition = -140700;$CurrentYPosition = 287920;$CurrentZPosition = -116690;$CurrentDetectedBodyRadius = 340830
         # = Lat: -20.008°  Long: 26.044°  Height: 214
         #$RadialDistance = [math]::Sqrt([decimal]$CurrentXPosition * [decimal]$CurrentXPosition + [decimal]$CurrentYPosition * [decimal]$CurrentYPosition + [decimal]$CurrentZPosition * [decimal]$CurrentZPosition)
-        $RadialDistance = [math]::Sqrt([decimal]$CurrentPlanetaryXCoord * [decimal]$CurrentPlanetaryXCoord + [decimal]$CurrentPlanetaryYCoord * [decimal]$CurrentPlanetaryYCoord + [decimal]$CurrentPlanetaryZCoord * [decimal]$CurrentPlanetaryZCoord)
-        $WgsHeight = [math]::Round($RadialDistance*1000 - [decimal]$CurrentDetectedBodyRadius, 0)
-        $WgsLatitude = [math]::Round([math]::ASin($CurrentPlanetaryZCoord / $RadialDistance) * 180 / [Math]::PI,6)
-        $WgsLongitude = [math]::Round([math]::Atan2($CurrentPlanetaryXCoord, $CurrentPlanetaryYCoord) * 180 / [Math]::PI,6) * -1
+        [decimal]$RadialDistance = [math]::Sqrt($CurrentPlanetaryXCoord * $CurrentPlanetaryXCoord + $CurrentPlanetaryYCoord * $CurrentPlanetaryYCoord + $CurrentPlanetaryZCoord * $CurrentPlanetaryZCoord)
+        $WgsHeight = [math]::Round($RadialDistance*1000 - $CurrentDetectedBodyRadius, 0)
+        [decimal]$WgsLatitude = [math]::Round([math]::ASin($CurrentPlanetaryZCoord / $RadialDistance) * 180 / [Math]::PI,6)
+        [decimal]$WgsLongitude = [math]::Round([math]::Atan2($CurrentPlanetaryXCoord, $CurrentPlanetaryYCoord) * 180 / [Math]::PI,6) * -1
 
         $WGSSpacing = 17
         $WGS     = "Player      : ".PadRight($WGSSpacing),"${VTDarkgray}Lat: ${VTDefault}$WgsLatitude°".PadRight($WGSSpacing+9),"${VTDarkgray}Long:${VTDefault}$WgsLongitude°".PadRight($WGSSpacing+14),"${VTDarkgray}Height: ${VTDefault}$WgsHeight"
     
         
         #doabigcheese Bearing Berechnung
-        $RadialDistance_Destination = [math]::Sqrt([decimal]$CurrentDestinationXCoord * [decimal]$CurrentDestinationXCoord + [decimal]$CurrentDestinationYCoord * [decimal]$CurrentDestinationYCoord + [decimal]$CurrentDestinationZCoord * [decimal]$CurrentDestinationZCoord)  
-        $WgsLatitude_Destination = [math]::Round([math]::ASin([decimal]$CurrentDestinationZCoord / [decimal]$RadialDistance_Destination) * 180 / [Math]::PI, 6)
-        $WgsLongitude_Destination = [math]::Round([math]::Atan2([decimal]$CurrentDestinationXCoord, [decimal]$CurrentDestinationYCoord) * 180 / [Math]::PI * -1, 6)
+        [decimal]$RadialDistance_Destination = [math]::Sqrt($CurrentDestinationXCoord * $CurrentDestinationXCoord + $CurrentDestinationYCoord * $CurrentDestinationYCoord + $CurrentDestinationZCoord * $CurrentDestinationZCoord)  
+        [decimal]$WgsLatitude_Destination = [math]::Round([math]::ASin($CurrentDestinationZCoord / $RadialDistance_Destination) * 180 / [Math]::PI, 6)
+        [decimal]$WgsLongitude_Destination = [math]::Round([math]::Atan2($CurrentDestinationXCoord, $CurrentDestinationYCoord) * 180 / [Math]::PI * -1, 6)
     
 
         $DestinationBodyRadius = ($ObjectContainerData.GetEnumerator() | Where-Object {$_.Name -contains $SelectedDestination.ObjectContainer}).BodyRadius
-        $WgsHeight_Destination = [math]::Round($RadialDistance_Destination * 1000 - [decimal]$DestinationBodyRadius, 0)
+        $WgsHeight_Destination = [math]::Round($RadialDistance_Destination * 1000 - $DestinationBodyRadius, 0)
 
-        $WgsLatitude_Destination_ = $WgsLatitude_Destination * [Math]::PI / 180
-        $WgsLongitude_Destination_ = $WgsLongitude_Destination * [Math]::PI / 180
+        [decimal]$WgsLatitude_Destination_ = $WgsLatitude_Destination * [Math]::PI / 180
+        [decimal]$WgsLongitude_Destination_ = $WgsLongitude_Destination * [Math]::PI / 180
 
         $WGSDest = "Destination : ".PadRight($WGSSpacing),"${VTDarkgray}Lat: ${VTDefault}$WgsLatitude_Destination°".PadRight($WGSSpacing+9),"${VTDarkgray}Long:${VTDefault}$WgsLongitude_Destination°".PadRight($WGSSpacing+14),"${VTDarkgray}Height: ${VTDefault}$WgsHeight_Destination"   
 
-        $WgsLatitude_ = $WgsLatitude * [Math]::PI / 180
-        $WgsLongitude_= $WgsLongitude * [Math]::PI / 180
+        [decimal]$WgsLatitude_ = $WgsLatitude * [Math]::PI / 180
+        [decimal]$WgsLongitude_ = $WgsLongitude * [Math]::PI / 180
 
     
-        $bearingX = [math]::Cos([decimal]$WgsLatitude_Destination_) * [math]::Sin([decimal]$WgsLongitude_Destination_ - [decimal]$WgsLongitude_)
-        $bearingY = [math]::Cos([decimal]$WgsLatitude_) * [math]::Sin([decimal]$WgsLatitude_Destination_) - [math]::Sin([decimal]$WgsLatitude_) * [math]::Cos([decimal]$WgsLatitude_Destination_) * [math]::Cos([decimal]$WgsLongitude_Destination_ - [decimal]$WgsLongitude_)
-        $bearing = [math]::Round([math]::Atan2([decimal]$bearingX, [decimal]$bearingY) * 180 / [Math]::PI,0)
-        $bearing_final = ($bearing + 360) % 360
+        [decimal]$bearingX = [math]::Cos($WgsLatitude_Destination_) * [math]::Sin($WgsLongitude_Destination_ - $WgsLongitude_)
+        [decimal]$bearingY = [math]::Cos($WgsLatitude_) * [math]::Sin($WgsLatitude_Destination_) - [math]::Sin($WgsLatitude_) * [math]::Cos($WgsLatitude_Destination_) * [math]::Cos($WgsLongitude_Destination_ - $WgsLongitude_)
+        [decimal]$bearing = [math]::Round([math]::Atan2($bearingX, $bearingY) * 180 / [Math]::PI,0)
+        [decimal]$bearing_final = ($bearing + 360) % 360
 
         $bearing_output = "Compass : ".PadRight($WGSSpacing+7),"${VTDarkgray} ${VTDefault}$bearing_final° (Bearing)"
 
@@ -1014,22 +1045,22 @@ while($StartNavigation) {
         }
 
         #Convert Meters into KM
-        $StarRelX = $StarRelXCoord / 1000 #BSX, Cell AR3 19066589.410000000
-        $StarRelY = $StarRelYCoord / 1000 #BSY, Cell AS3 3904586.165000000
-        $StarRelZ = $StarRelZCoord / 1000 #BSZ, Cell AT3 2923345.368000000
+        [decimal]$StarRelX = $StarRelXCoord / 1000 #BSX, Cell AR3 19066589.410000000
+        [decimal]$StarRelY = $StarRelYCoord / 1000 #BSY, Cell AS3 3904586.165000000
+        [decimal]$StarRelZ = $StarRelZCoord / 1000 #BSZ, Cell AT3 2923345.368000000
 
 
         #SOLAR DECLINATION OF THE STAR
         # Cell AG3 = 8.54228846
         #=DEGREES(ACOS((((SQRT(bsx^2+bsy^2+bsz^2))^2)+((SQRT(bsx^2+bsy^2))^2)-(bsz^2))/(2*(SQRT(bsx^2+bsy^2+bsz^2))*(SQRT(bsx^2+bsy^2)))))*IF(bsz<0,-1,1)
         if($StarRelZ -lt 0){$SRMultipier = -1} else {$SRMultipier = 1}
-        $Declination = ([math]::Acos((([math]::Pow(([math]::Sqrt([math]::Pow($StarRelX,2) + [math]::Pow($StarRelY,2) + [math]::Pow($StarRelZ,2))),2)) + ([math]::Pow(([math]::Sqrt([math]::Pow($StarRelX,2) + [math]::Pow($StarRelY,2))),2)) - ([math]::Pow($StarRelZ,2))) / (2 * ([math]::Sqrt([math]::Pow($StarRelX,2) + [math]::Pow($StarRelY,2) + [math]::Pow($StarRelZ,2))) * ([math]::Sqrt([math]::Pow($StarRelX,2) + [math]::Pow($StarRelY,2)))))) / [math]::pi * 180 * $SRMultipier
+        [decimal]$Declination = ([math]::Acos((([math]::Pow(([math]::Sqrt([math]::Pow($StarRelX,2) + [math]::Pow($StarRelY,2) + [math]::Pow($StarRelZ,2))),2)) + ([math]::Pow(([math]::Sqrt([math]::Pow($StarRelX,2) + [math]::Pow($StarRelY,2))),2)) - ([math]::Pow($StarRelZ,2))) / (2 * ([math]::Sqrt([math]::Pow($StarRelX,2) + [math]::Pow($StarRelY,2) + [math]::Pow($StarRelZ,2))) * ([math]::Sqrt([math]::Pow($StarRelX,2) + [math]::Pow($StarRelY,2)))))) / [math]::pi * 180 * $SRMultipier
 
 
         #DETERMINE THE APPARENT RADIUS OF THE STAR
         # Cell AP3 = 2.02667352
         # =DEGREES(MOD((ATAN2(bsx,bsy)-(PI()/2)),2*PI()))
-        $ApparentRadius = ([math]::ASin($StarRadius / ([math]::Sqrt([math]::Pow($StarRelX,2) + [math]::Pow($StarRelY,2) + [math]::Pow($StarRelZ,2))))) / [math]::pi * 180
+        [decimal]$ApparentRadius = ([math]::ASin($StarRadius / ([math]::Sqrt([math]::Pow($StarRelX,2) + [math]::Pow($StarRelY,2) + [math]::Pow($StarRelZ,2))))) / [math]::pi * 180
 
 
         #$LengthOfDayDecimal     #AD3 = 0.1033333333
@@ -1040,17 +1071,17 @@ while($StartNavigation) {
 
         # Cell AG2
         #DEGREES(MOD((ATAN2(bsx,bsy)-(PI()/2))   ,2*PI()))
-        $Meridian = (mod(([math]::atan2($StarRelY,$StarRelX) - ([math]::pi/2)), (2 * [math]::pi))) / [math]::pi * 180
+        [decimal]$Meridian = (mod(([math]::atan2($StarRelY,$StarRelX) - ([math]::pi/2)), (2 * [math]::pi))) / [math]::pi * 180
 
         #SOLAR LONGITUDE
         # Cell AG4 = -13969050
         # =IF(CurrentRotation-MOD(0-Meridian,360)>180,CurrentRotation-MOD(0-Meridian,360)-360,IF(CurrentRotation-MOD(0-Meridian,360)<-180,CurrentRotation-MOD(0-Meridian,360)+360,CurrentRotation-MOD(0-Meridian,360)))
 
         IF($Meridian - (mod((0 - $Meridian),360)) -gt 180){
-            $SolarLongitude = $Meridian - (mod((0 - $Meridian), 360)) -360
+            [decimal]$SolarLongitude = $Meridian - (mod((0 - $Meridian), 360)) -360
         } else {
-            IF(($Meridian - (mod((0 - $Meridian), 360))) -lt 180) {$SolarLongitude = $Meridian - (mod((0 - $Meridian), 360)) + 360} else 
-                                                                         {$SolarLongitude = $Meridian - (mod((0 - $Meridian), 360))}
+            IF(($Meridian - (mod((0 - $Meridian), 360))) -lt 180) {[decimal]$SolarLongitude = $Meridian - (mod((0 - $Meridian), 360)) + 360} else 
+                                                                         {[decimal]$SolarLongitude = $Meridian - (mod((0 - $Meridian), 360))}
         }
 
 
@@ -1058,39 +1089,39 @@ while($StartNavigation) {
         
         ### LOCAL ###
         if($WgsHeight -gt 0){$Locationheight = $WgsHeight}else{$Locationheight = 0}
-        $ElevationCorrection = [math]::Acos([int]$script:CurrentDetectedBodyRadius/([int]$script:CurrentDetectedBodyRadius + [int]$Locationheight)) / [math]::pi * 180
+        $ElevationCorrection = [math]::Acos($script:CurrentDetectedBodyRadius/($script:CurrentDetectedBodyRadius + $Locationheight)) / [math]::pi * 180
 
-        $CurrentRotationPosition = mod((360 - (mod($TotalCycles,1)) * 360 - $script:CurrentDetectedOCADX),360)
+        [decimal]$CurrentRotationPosition = mod((360 - (mod($TotalCycles,1)) * 360 - $script:CurrentDetectedOCADX),360)
 
         if([math]::Abs($WgsLatitude)-eq 90){$WgsLongtidue360 = 0}else{
-            $WgsLongitude360 = (mod (([math]::Atan2($CurrentPlanetaryYCoord, $CurrentPlanetaryXCoord) - ([math]::PI / 2)), (2 * [math]::PI))) / [math]::pi * 180  
+            [decimal]$WgsLongitude360 = (mod (([math]::Atan2($CurrentPlanetaryYCoord, $CurrentPlanetaryXCoord) - ([math]::PI / 2)), (2 * [math]::PI))) / [math]::pi * 180  
         }
 
         #HOUR ANGLE
         #IF(MOD(CycleHourAngle-MOD(AG44-sMeridian,360),360)>180,MOD(CycleHourAngle-MOD(AG44-sMeridian,360),360)-360,MOD(CycleHourAngle-MOD(AG44-sMeridian,360),360)
          IF(mod(($CurrentRotationPosition - (mod(($WgsLongitude360 - $Meridian), 360))),360) -gt 180){
-            $HourAngleLocal = mod(($CurrentRotationPosition - (mod(($WgsLongitude360 - $Meridian), 360))),360) - 360
+            [decimal]$HourAngleLocal = mod(($CurrentRotationPosition - (mod(($WgsLongitude360 - $Meridian), 360))),360) - 360
          }
          else{
-             $HourAngleLocal = mod(($CurrentRotationPosition - (mod(($WgsLongitude360 - $Meridian), 360))),360)
+            [decimal]$HourAngleLocal = mod(($CurrentRotationPosition - (mod(($WgsLongitude360 - $Meridian), 360))),360)
          }
 
 
          #RiseSetHourAngle
          #DEGREES(ACOS(-TAN(RADIANS($WgsLatitude_Destination)) * TAN(RADIANS($Declination)))) + $ApparentRadius + $ElevationCorrectionDest
-         $RiseSetHourAngle = [math]::Acos(([math]::tan($WgsLatitude * [math]::pi / 180) * -1) * [math]::tan($Declination * [math]::pi / 180)) / [math]::pi * 180 + $ApparentRadius + $ElevationCorrection
+         [decimal]$RiseSetHourAngle = [math]::Acos(([math]::tan($WgsLatitude * [math]::pi / 180) * -1) * [math]::tan($Declination * [math]::pi / 180)) / [math]::pi * 180 + $ApparentRadius + $ElevationCorrection
 
          #AngularRotationRate
-         $AngularRotationRate = 6 / $script:CurrentDetectedOCRS
+         [decimal]$AngularRotationRate = 6 / $script:CurrentDetectedOCRS
 
 
          #TIMES
          IF($HourAngleLocal -gt 0){
-             $LocalNoon = $HourAngleLocal/$AngularRotationRate/1440
+            [decimal]$LocalNoon = $HourAngleLocal/$AngularRotationRate/1440
              $ColorLocalNoon = $VTWhite
             }
         else{
-            $LocalNoon = (360 + $HourAngleLocal) / $AngularRotationRate /1440 
+            [decimal]$LocalNoon = (360 + $HourAngleLocal) / $AngularRotationRate /1440 
             $ColorLocalNoon = $VTRed
         }
          $LocalTime = (Get-Date)
@@ -1100,28 +1131,28 @@ while($StartNavigation) {
          $TerrainRaise = 0
          if($HourAngleDestination -gt ($RiseSetHourAngle - $TerrainRaise)){
             #
-            $LocalRise = $LocalNoon - (($RiseSetHourAngle - $TerrainRaise) / $AngularRotationRate *3 / 4300)
+            [decimal]$LocalRise = $LocalNoon - (($RiseSetHourAngle - $TerrainRaise) / $AngularRotationRate *3 / 4300)
             $ColorLocalRise = $VTWhite
          }elseif($HourAngleDestination -gt 0){
             #
-            $LocalRise = $LocalNoon - (($RiseSetHourAngle - $TerrainRaise) / $AngularRotationRate *3 / 4300) + $LengthOfDayDecimal
+            [decimal]$LocalRise = $LocalNoon - (($RiseSetHourAngle - $TerrainRaise) / $AngularRotationRate *3 / 4300) + $LengthOfDayDecimal
             $ColorLocalRise = $VTDarkGray
          }else{
             # If sunrise has already happened this cycle
-            $LocalRise = $LocalNoon - (($RiseSetHourAngle - $TerrainRaise) / $AngularRotationRate *3 / 4300)
+            [decimal]$LocalRise = $LocalNoon - (($RiseSetHourAngle - $TerrainRaise) / $AngularRotationRate *3 / 4300)
             $ColorLocalRise = $VTDarkGray
          }
          $LocalRiseTime = $Localtime.AddDays($LocalRise).ToString("HH:mm")
 
          #SUNSET
          if($HourAngleDestination -gt (($RiseSetHourAngle - $TerrainRaise) * -1)){
-            $LocalSet = $LocalNoon + (($RiseSetHourAngle + $TerrainRaise) / $AngularRotationRate *3 / 4300)
+            [decimal]$LocalSet = $LocalNoon + (($RiseSetHourAngle + $TerrainRaise) / $AngularRotationRate *3 / 4300)
             $ColorLocalSet  = $VTRed
          }elseif($HourAngleDestination -gt 0){
-            $LocalSet = $LocalNoon + (($RiseSetHourAngle + $TerrainRaise) / $AngularRotationRate *3 / 4300) - $LengthOfDayDecimal
+            [decimal]$LocalSet = $LocalNoon + (($RiseSetHourAngle + $TerrainRaise) / $AngularRotationRate *3 / 4300) - $LengthOfDayDecimal
             $ColorLocalSet  = $VTDarkGray
          }else{
-            $LocalSet = $LocalNoon + (($RiseSetHourAngle + $TerrainRaise) / $AngularRotationRate *3 / 4300)
+            [decimal]$LocalSet = $LocalNoon + (($RiseSetHourAngle + $TerrainRaise) / $AngularRotationRate *3 / 4300)
             $ColorLocalSet  = $VTDarkGray
          }
 
@@ -1153,41 +1184,41 @@ while($StartNavigation) {
         #### DESTINATION ####
         #Cell AI44 = 1,07571295561478
         if($WgsHeight_Destination -gt 0){$LocationheightD = $WgsHeight_Destination}else{$LocationheightD = 0}
-        $ElevationCorrectionDest = [math]::Acos($DestinationBodyRadius/([int]$script:DestinationBodyRadius + [int]$LocationheightD)) / [math]::pi * 180
+        [decimal]$ElevationCorrectionDest = [math]::Acos($DestinationBodyRadius/($script:DestinationBodyRadius + $LocationheightD)) / [math]::pi * 180
 
         #
-        $DestinationRotAdjX = ($ObjectContainerData.GetEnumerator() | Where-Object {$_.Name -contains $SelectedDestination.ObjectContainer}).RotationAdjustmentX
+        [decimal]$DestinationRotAdjX = ($ObjectContainerData.GetEnumerator() | Where-Object {$_.Name -contains $SelectedDestination.ObjectContainer}).RotationAdjustmentX
         $CurrentRotationPositionD = mod((360 - (mod($TotalCycles,1)) * 360 - $DestinationRotAdjX),360)
 
         if([math]::Abs($WgsLatitude_Destination)-eq 90){$WgsLongtidue360D = 0}else{
-            $WgsLongitude360D = (mod (([math]::Atan2($CurrentDestinationYCoord, $CurrentDestinationXCoord) - ([math]::PI / 2)), (2 * [math]::PI))) / [math]::pi * 180  
+            [decimal]$WgsLongitude360D = (mod (([math]::Atan2($CurrentDestinationYCoord, $CurrentDestinationXCoord) - ([math]::PI / 2)), (2 * [math]::PI))) / [math]::pi * 180  
         }
 
         #HOUR ANGLE
 
         #IF(MOD(CycleHourAngle-MOD(AG44-sMeridian,360),360)>180,MOD(CycleHourAngle-MOD(AG44-sMeridian,360),360)-360,MOD(CycleHourAngle-MOD(AG44-sMeridian,360),360)
         IF((mod(($CurrentRotationPosition - (mod(($WgsLongitude360D - $Meridian), 360))),360)) -gt 180){
-            $HourAngleDestination = (mod(($CurrentRotationPosition - (mod(($WgsLongitude360D - $Meridian), 360))),360)) - 360
+            [decimal]$HourAngleDestination = (mod(($CurrentRotationPosition - (mod(($WgsLongitude360D - $Meridian), 360))),360)) - 360
          }
          else{
-             $HourAngleDestination = mod(($CurrentRotationPosition - (mod(($WgsLongitude360D - $Meridian), 360))),360)
+            [decimal]$HourAngleDestination = mod(($CurrentRotationPosition - (mod(($WgsLongitude360D - $Meridian), 360))),360)
          }
 
          #RiseSetHourAngle
          #DEGREES(ACOS(-TAN(RADIANS($WgsLatitude_Destination)) * TAN(RADIANS($Declination)))) + $ApparentRadius + $ElevationCorrectionDest
-         $RiseSetHourAngle = [math]::Acos(([math]::tan($WgsLatitude_Destination * [math]::pi / 180) * -1) * [math]::tan($Declination * [math]::pi / 180)) / [math]::pi * 180 + $ApparentRadius + $ElevationCorrectionDest
+         [decimal]$RiseSetHourAngle = [math]::Acos(([math]::tan($WgsLatitude_Destination * [math]::pi / 180) * -1) * [math]::tan($Declination * [math]::pi / 180)) / [math]::pi * 180 + $ApparentRadius + $ElevationCorrectionDest
 
         #AngularRotationRate
-        $AngularRotationRate = 6 / $PlanetRotationSpeed
+        [decimal]$AngularRotationRate = 6 / $PlanetRotationSpeed
 
 
          #TIMES
          IF($HourAngleDestination -gt 0){
-            $noon = $HourAngleDestination/$AngularRotationRate/1440
+            [decimal]$noon = $HourAngleDestination/$AngularRotationRate/1440
             $ColorDestNoon = $VTWhite
             } 
         else{
-            $noon = (360 + $HourAngleDestination) / $AngularRotationRate /1440 
+            [decimal]$noon = (360 + $HourAngleDestination) / $AngularRotationRate /1440 
             $ColorDestNoon = $VTRed
             }
          $LocalTime = (Get-Date)
@@ -1196,29 +1227,29 @@ while($StartNavigation) {
 
          #SUNRISE
          $TerrainRaise = 0
-         $LengthOfDayDestination = [decimal]$PlanetRotationSpeed * 3600 / 86400 
+         [decimal]$LengthOfDayDestination = [decimal]$PlanetRotationSpeed * 3600 / 86400 
 
          if($HourAngleDestination -gt ($RiseSetHourAngle - $TerrainRaise)){
-            $rise = $noon - (($RiseSetHourAngle - $TerrainRaise) / $AngularRotationRate *3 / 4300)
+            [decimal]$rise = $noon - (($RiseSetHourAngle - $TerrainRaise) / $AngularRotationRate *3 / 4300)
             $ColorDestRise = $VTDarkGray
          }elseif($HourAngleDestination -gt 0){
-            $rise = $noon - (($RiseSetHourAngle - $TerrainRaise) / $AngularRotationRate *3 / 4300) + $LengthOfDayDestination
+            [decimal]$rise = $noon - (($RiseSetHourAngle - $TerrainRaise) / $AngularRotationRate *3 / 4300) + $LengthOfDayDestination
             $ColorDestRise = $VTDarkGray
          }else{
-            $rise = $noon - (($RiseSetHourAngle - $TerrainRaise) / $AngularRotationRate *3 / 4300)
+            [decimal]$rise = $noon - (($RiseSetHourAngle - $TerrainRaise) / $AngularRotationRate *3 / 4300)
             $ColorDestRise = $VTGreen
          }
          $DestRiseTime = $Localtime.AddDays($rise).ToString("HH:mm")
 
          #SUNSET
          if($HourAngleDestination -gt (($RiseSetHourAngle - $TerrainRaise) * -1)){
-            $set = $noon + (($RiseSetHourAngle + $TerrainRaise) / $AngularRotationRate *3 / 4300)
+            [decimal]$set = $noon + (($RiseSetHourAngle + $TerrainRaise) / $AngularRotationRate *3 / 4300)
             $ColorDestSet  = $VTRed
          }elseif($HourAngleDestination -gt 0){
-            $set = $noon + (($RiseSetHourAngle + $TerrainRaise) / $AngularRotationRate *3 / 4300) - $LengthOfDayDestination
+            [decimal]$set = $noon + (($RiseSetHourAngle + $TerrainRaise) / $AngularRotationRate *3 / 4300) - $LengthOfDayDestination
             $ColorDestSet  = $VTDarkGray
          }else{
-            $set = $noon + (($RiseSetHourAngle + $TerrainRaise) / $AngularRotationRate *3 / 4300)
+            [decimal]$set = $noon + (($RiseSetHourAngle + $TerrainRaise) / $AngularRotationRate *3 / 4300)
             $ColorDestSet  = $VTDarkGray
          }
          $DestSetTime = $Localtime.AddDays($set).ToString("HH:mm")
@@ -1262,20 +1293,20 @@ while($StartNavigation) {
 
         #CALCUALTE LOCAL COURSE DIAVATION
         #by Xabdiben
-        $XULocal = (($CurrentDestinationXCoord - $PreviousPlanetaryXCoord) * ($CurrentPlanetaryXCoord - $PreviousPlanetaryXCoord))+(($CurrentDestinationYCoord - $PreviousPlanetaryYCoord) * ($CurrentPlanetaryYCoord - $PreviousPlanetaryYCoord))+(($CurrentDestinationZCoord - $PreviousPlanetaryZCoord) * ($CurrentPlanetaryZCoord - $PreviousPlanetaryZCoord))
-        $xab_distLocal = CalcDistance3d $CurrentPlanetaryXCoord $CurrentPlanetaryYCoord $CurrentPlanetaryZCoord $PreviousPlanetaryXCoord $PreviousPlanetaryYCoord $PreviousPlanetaryZCoord 
+        [decimal]$XULocal = (($CurrentDestinationXCoord - $PreviousPlanetaryXCoord) * ($CurrentPlanetaryXCoord - $PreviousPlanetaryXCoord))+(($CurrentDestinationYCoord - $PreviousPlanetaryYCoord) * ($CurrentPlanetaryYCoord - $PreviousPlanetaryYCoord))+(($CurrentDestinationZCoord - $PreviousPlanetaryZCoord) * ($CurrentPlanetaryZCoord - $PreviousPlanetaryZCoord))
+        [decimal]$xab_distLocal = CalcDistance3d $CurrentPlanetaryXCoord $CurrentPlanetaryYCoord $CurrentPlanetaryZCoord $PreviousPlanetaryXCoord $PreviousPlanetaryYCoord $PreviousPlanetaryZCoord 
         if ($xab_distLocal -lt 1) {$xab_distLocal=1}
-        $XULocal = $XULocal/($xab_distLocal * $xab_distLocal)
-        $closestXLocal = [decimal]$PreviousPlanetaryXCoord + [decimal]$XULocal * ($CurrentPlanetaryXCoord - $PreviousPlanetaryXCoord)
-        $closestYLocal = [decimal]$PreviousPlanetaryYCoord + [decimal]$XULocal * ($CurrentPlanetaryYCoord - $PreviousPlanetaryYCoord)
-        $closestZLocal = [decimal]$PreviousPlanetaryZCoord + [decimal]$XULocal * ($CurrentPlanetaryZCoord - $PreviousPlanetaryZCoord)
+        [decimal]$XULocal2 = $XULocal/($xab_distLocal * $xab_distLocal)
+        [decimal]$closestXLocal = $PreviousPlanetaryXCoord + $XULocal2 * ($CurrentPlanetaryXCoord - $PreviousPlanetaryXCoord)
+        [decimal]$closestYLocal = $PreviousPlanetaryYCoord + $XULocal2 * ($CurrentPlanetaryYCoord - $PreviousPlanetaryYCoord)
+        [decimal]$closestZLocal = $PreviousPlanetaryZCoord + $XULocal2 * ($CurrentPlanetaryZCoord - $PreviousPlanetaryZCoord)
         #$c1 = CalcDistance3d $DestCoordDataX $DestCoordDataY $DestCoordDataZ $PreviousXPosition $PreviousYPosition $PreviousZPosition
-        $c2Local = CalcDistance3d $CurrentDestinationXCoord $CurrentDestinationYCoord $CurrentDestinationZCoord $CurrentPlanetaryXCoord $CurrentPlanetaryYCoord $CurrentPlanetaryZCoord
-        $pathErrorLocal = CalcDistance3d $CurrentDestinationXCoord $CurrentDestinationYCoord $CurrentDestinationZCoord $closestXLocal $closestYLocal $closestZLocal
+        [decimal]$c2Local = CalcDistance3d $CurrentDestinationXCoord $CurrentDestinationYCoord $CurrentDestinationZCoord $CurrentPlanetaryXCoord $CurrentPlanetaryYCoord $CurrentPlanetaryZCoord
+        [decimal]$pathErrorLocal = CalcDistance3d $CurrentDestinationXCoord $CurrentDestinationYCoord $CurrentDestinationZCoord $closestXLocal $closestYLocal $closestZLocal
         #Write-Host "Path Error = $pathError"
-        $perrdLocal = [math]::atan2($pathErrorLocal, $c2Local) * 180.0 / [math]::pi
+        [decimal]$perrdLocal = [math]::atan2($pathErrorLocal, $c2Local) * 180.0 / [math]::pi
         # above ok, below 0
-        $FinalAngleLocal = [math]::Round($perrdLocal,2)
+        [decimal]$FinalAngleLocal = [math]::Round($perrdLocal,2)
         
         #COLOR CODEING FOR ANGLES
         switch ($script:FinalAngle){
@@ -1322,9 +1353,9 @@ while($StartNavigation) {
 
         #DETERMINE CLOST CURRENT OM FOR ANGLE CALCULATIONS
         #$PlanetOMRadius = ($HashtableOmRadius.GetEnumerator() | Where-Object {$_.Name -eq "$CurrentPlanet"}).Value
-        $PosShipX = [decimal]$ShipRotationValueX1 * 1000
-        $PosShipY = [decimal]$ShipRotationValueY1 * 1000
-        $PosShipZ = [decimal]$ShipRotationValueZ1 * 1000
+        [decimal]$PosShipX = $ShipRotationValueX1 * 1000
+        [decimal]$PosShipY = $ShipRotationValueY1 * 1000
+        [decimal]$PosShipZ = $ShipRotationValueZ1 * 1000
         $ShipOM1 = [math]::Pow(([math]::Pow("$PosShipX","2") + [math]::Pow("$PosShipY","2") + [math]::Pow($PosShipZ-$PlanetOMRadius,"2")),1/2)
         $ShipOM1 = [math]::Round($ShipOM1)
         $ShipOM2 = [math]::Pow(([math]::Pow("$PosShipX","2") + [math]::Pow("$PosShipY","2") + [math]::Pow($PosZ-(-$PlanetOMRadius),"2")),1/2)
@@ -1345,27 +1376,27 @@ while($StartNavigation) {
         #GET CLOSEST ORBITAL MARKER
         $ShipOMClosest = ($ShipOmArray.GetEnumerator() | Sort-Object Value | Select-Object -First 1).Name
 
-        $DistanceShipToPlanetAlignment = [math]::Sqrt([math]::pow(($CurrentXPosition - $FinalPlanetDataX),2) + [math]::pow(($CurrentYPosition - $FinalPlanetDataY),2) + [math]::pow(($CurrentZPosition - $FinalPlanetDataZ),2))
-        $DistancePoiToPlanet = [math]::Sqrt([math]::pow($DestCoordDataX - ([decimal]$PlanetCoordDataX * 1000),2) + [math]::pow($DestCoordDataY - ([decimal]$PlanetCoordDataY * 1000),2) + [math]::pow($DestCoordDataZ - ([decimal]$PlanetCoordDataZ * 1000),2))
+        [decimal]$DistanceShipToPlanetAlignment = [math]::Sqrt([math]::pow(($CurrentXPosition - $FinalPlanetDataX),2) + [math]::pow(($CurrentYPosition - $FinalPlanetDataY),2) + [math]::pow(($CurrentZPosition - $FinalPlanetDataZ),2))
+        [decimal]$DistancePoiToPlanet = [math]::Sqrt([math]::pow($DestCoordDataX - ($PlanetCoordDataX * 1000),2) + [math]::pow($DestCoordDataY - ($PlanetCoordDataY * 1000),2) + [math]::pow($DestCoordDataZ - ($PlanetCoordDataZ * 1000),2))
         #$ClosestQM = $QMDistancesCurrent | Where-Object {$_.QuantumMarkerTo -NotContains $ClosestQMStart.QuantumMarkerTo} | Sort-Object -Property Distance | Select-Object -First 1 
         if($PlanetaryPoi){
 
             if($ShipOMClosest -eq "OM3" -OR $ShipOMClosest -eq "OM4"){     
-                $TriangleYB = [decimal]$PoiCoordDataY - [decimal]$ShipRotationValueY1
-                $TriangleYA = [decimal]$PoiCoordDataZ - [decimal]$ShipRotationValueZ1
-                $TriangleYC = [math]::Sqrt([math]::pow($TriangleYA,2) + [math]::pow($TriangleYB,2)) 
-                $TriangleYAlpha = [math]::ASin($TriangleYA / $TriangleYC) * 180 / [System.Math]::PI         
+                [decimal]$TriangleYB = $PoiCoordDataY - $ShipRotationValueY1
+                [decimal]$TriangleYA = $PoiCoordDataZ - $ShipRotationValueZ1
+                [decimal]$TriangleYC = [math]::Sqrt([math]::pow($TriangleYA,2) + [math]::pow($TriangleYB,2)) 
+                [decimal]$TriangleYAlpha = [math]::ASin($TriangleYA / $TriangleYC) * 180 / [System.Math]::PI         
                 #$TriangleYAlpha 
 
-                $TriangleXA = $ShipRotationValueX1 + $PoiCoordDataX                                  
-                $TriangleXB = [decimal]$PoiCoordDataY - [decimal]$ShipRotationValueY1                                                          
-                $TriangleXC = [math]::Sqrt([math]::pow($TriangleXA,2) + [math]::pow($TriangleXB,2))  
-                if($ShipOMClosest -eq "OM3"){$TriangleXAlpha = [math]::Sin($TriangleXA / $TriangleXC) * 180 / [System.Math]::PI * -1} 
-                if($ShipOMClosest -eq "OM4"){$TriangleXAlpha = [math]::Sin($TriangleXA / $TriangleXC) * 180 / [System.Math]::PI} 
+                [decimal]$TriangleXA = $ShipRotationValueX1 + $PoiCoordDataX                                  
+                [decimal]$TriangleXB = $PoiCoordDataY - $ShipRotationValueY1                                                          
+                [decimal]$TriangleXC = [math]::Sqrt([math]::pow($TriangleXA,2) + [math]::pow($TriangleXB,2))  
+                if($ShipOMClosest -eq "OM3"){[decimal]$TriangleXAlpha = [math]::Sin($TriangleXA / $TriangleXC) * 180 / [System.Math]::PI * -1} 
+                if($ShipOMClosest -eq "OM4"){[decimal]$TriangleXAlpha = [math]::Sin($TriangleXA / $TriangleXC) * 180 / [System.Math]::PI} 
                 if($TriangleXAlpha -lt 0){$TriangleXAlpha = 360 + $TriangleXAlpha}
 
-                $FinalHorizontalAngle = [Math]::Round($TriangleXAlpha)
-                $FinalVerticalAngle = [Math]::Round($TriangleYAlpha)
+                [decimal]$FinalHorizontalAngle = [Math]::Round($TriangleXAlpha)
+                [decimal]$FinalVerticalAngle = [Math]::Round($TriangleYAlpha)
 
                 Write-Host -ForegroundColor DarkGray "TURRET DIRECTIONS", "ANGLE".PadLeft(10)
                 Write-Host -ForegroundColor White "Horizontal".PadRight(15) "${VTGreen}$FinalHorizontalAngle°${VTDefault}" #.PadLeft(18)
@@ -1376,20 +1407,20 @@ while($StartNavigation) {
             }
 
             if($ShipOMClosest -eq "OM5" -OR $ShipOMClosest -eq "OM6"){       
-                if($ShipOMClosest -eq "OM6"){$TriangleYA = [decimal]$PoiCoordDataZ + [decimal]$ShipRotationValueZ1}
-                $TriangleYA = [decimal]$PoiCoordDataZ - [decimal]$ShipRotationValueZ1
-                if($ShipOMClosest -eq "OM6"){$TriangleYA = [decimal]$PoiCoordDataZ - [decimal]$ShipRotationValueZ1}
-                $TriangleYB = [decimal]$PoiCoordDataX - [decimal]$ShipRotationValueX1
-                $TriangleYC = [math]::Sqrt([math]::pow($TriangleYA,2) + [math]::pow($TriangleYB,2)) 
-                $TriangleYAlpha = [math]::ASin($TriangleYA / $TriangleYC) * 180 / [System.Math]::PI         
+                if($ShipOMClosest -eq "OM6"){[decimal]$TriangleYA = $PoiCoordDataZ + $ShipRotationValueZ1}
+                [decimal]$TriangleYA = $PoiCoordDataZ - $ShipRotationValueZ1
+                if($ShipOMClosest -eq "OM6"){[decimal]$TriangleYA = $PoiCoordDataZ - $ShipRotationValueZ1}
+                [decimal]$TriangleYB = $PoiCoordDataX - $ShipRotationValueX1
+                [decimal]$TriangleYC = [math]::Sqrt([math]::pow($TriangleYA,2) + [math]::pow($TriangleYB,2)) 
+                [decimal]$TriangleYAlpha = [math]::ASin($TriangleYA / $TriangleYC) * 180 / [System.Math]::PI         
                 #$TriangleYAlpha 
 
-                $TriangleXA = [decimal]$PoiCoordDataY - [decimal]$ShipRotationValueY1                                     
-                $TriangleXB = [decimal]$PoiCoordDataX - [decimal]$ShipRotationValueX1                                                             
-                $TriangleXC = [math]::Sqrt([math]::pow($TriangleXA,2) + [math]::pow($TriangleXB,2))        
-                $TriangleXAlpha = [math]::ASin($TriangleXA / $TriangleXC) * 180 / [System.Math]::PI
-                if($ShipOMClosest -eq "OM5"){$TriangleXAlpha = [math]::ASin($TriangleXA / $TriangleXC) * 180 / [System.Math]::PI} 
-                if($ShipOMClosest -eq "OM6"){$TriangleXAlpha = [math]::ASin($TriangleXA / $TriangleXC) * 180 / [System.Math]::PI * -1}   
+                [decimal]$TriangleXA = $PoiCoordDataY - $ShipRotationValueY1                                     
+                [decimal]$TriangleXB = $PoiCoordDataX - $ShipRotationValueX1                                                             
+                [decimal]$TriangleXC = [math]::Sqrt([math]::pow($TriangleXA,2) + [math]::pow($TriangleXB,2))        
+                [decimal]$TriangleXAlpha = [math]::ASin($TriangleXA / $TriangleXC) * 180 / [System.Math]::PI
+                if($ShipOMClosest -eq "OM5"){[decimal]$TriangleXAlpha = [math]::ASin($TriangleXA / $TriangleXC) * 180 / [System.Math]::PI} 
+                if($ShipOMClosest -eq "OM6"){[decimal]$TriangleXAlpha = [math]::ASin($TriangleXA / $TriangleXC) * 180 / [System.Math]::PI * -1}   
                 if($TriangleXAlpha -lt 0){$TriangleXAlpha = 360 + $TriangleXAlpha}
                 #$TriangleXAlpha
 
@@ -1405,17 +1436,17 @@ while($StartNavigation) {
             }
 
             if($ShipOMClosest -eq "OM2" -OR $ShipOMClosest -eq "OM1"){                                      
-                $TriangleYA = [decimal]$PoiCoordDataY - [decimal]$ShipRotationValueY1
-                $TriangleYB = [decimal]$PoiCoordDataZ - [decimal]$ShipRotationValueZ1
-                $TriangleYC = [math]::Sqrt([math]::pow($TriangleYA,2) + [math]::pow($TriangleYB,2)) 
-                $TriangleYAlpha = [math]::ASin($TriangleYA / $TriangleYC) * 180 / [System.Math]::PI         
+                [decimal]$TriangleYA = $PoiCoordDataY - $ShipRotationValueY1
+                [decimal]$TriangleYB = $PoiCoordDataZ - $ShipRotationValueZ1
+                [decimal]$TriangleYC = [math]::Sqrt([math]::pow($TriangleYA,2) + [math]::pow($TriangleYB,2)) 
+                [decimal]$TriangleYAlpha = [math]::ASin($TriangleYA / $TriangleYC) * 180 / [System.Math]::PI         
 
-                $TriangleXA = [decimal]$PoiCoordDataX - [decimal]$ShipRotationValueX1                                      
-                $TriangleXB = [decimal]$PoiCoordDataZ - [decimal]$ShipRotationValueZ1                                                           
-                $TriangleXC = [math]::Sqrt([math]::pow($TriangleXA,2) + [math]::pow($TriangleXB,2))        
-                if($ShipOMClosest -eq "OM1"){$TriangleXAlpha = [math]::ASin($TriangleXA / $TriangleXC) * 180 / [System.Math]::PI}
-                if($ShipOMClosest -eq "OM2"){$TriangleXAlpha = [math]::ASin($TriangleXA / $TriangleXC) * 180 / [System.Math]::PI * -1}
-                if($TriangleXAlpha -lt 0){$TriangleXAlpha = 360 + $TriangleXAlpha}
+                [decimal]$TriangleXA = $PoiCoordDataX - $ShipRotationValueX1                                      
+                [decimal]$TriangleXB = $PoiCoordDataZ - $ShipRotationValueZ1                                                           
+                [decimal]$TriangleXC = [math]::Sqrt([math]::pow($TriangleXA,2) + [math]::pow($TriangleXB,2))        
+                if($ShipOMClosest -eq "OM1"){[decimal]$TriangleXAlpha = [math]::ASin($TriangleXA / $TriangleXC) * 180 / [System.Math]::PI}
+                if($ShipOMClosest -eq "OM2"){[decimal]$TriangleXAlpha = [math]::ASin($TriangleXA / $TriangleXC) * 180 / [System.Math]::PI * -1}
+                if($TriangleXAlpha -lt 0){[decimal]$TriangleXAlpha = 360 + $TriangleXAlpha}
 
                 $FinalHorizontalAngle = [Math]::Round($TriangleXAlpha)
                 $FinalVerticalAngle = [Math]::Round($TriangleYAlpha)
@@ -1428,20 +1459,20 @@ while($StartNavigation) {
                 Write-Host -ForegroundColor White "Alignment","Nose: ${VTGreen}Planet Centre${VTDefault}, Wings: ${VTGreen}OM5-6${VTDefault}, Top: ${VTGreen}OM-3".padLeft(73)
             }
 
-            $XULocal = (($CurrentDestinationXCoord - $PreviousPlanetaryXCoord) * ($CurrentPlanetaryXCoord - $PreviousPlanetaryXCoord))+(($CurrentDestinationYCoord - $PreviousPlanetaryYCoord) * ($CurrentPlanetaryYCoord - $PreviousPlanetaryYCoord))+(($CurrentDestinationZCoord - $PreviousPlanetaryZCoord) * ($CurrentPlanetaryZCoord - $PreviousPlanetaryZCoord))
-            $xab_distLocal = CalcDistance3d $CurrentPlanetaryXCoord $CurrentPlanetaryYCoord $CurrentPlanetaryZCoord $PreviousPlanetaryXCoord $PreviousPlanetaryYCoord $PreviousPlanetaryZCoord 
+            [decimal]$XULocal = (($CurrentDestinationXCoord - $PreviousPlanetaryXCoord) * ($CurrentPlanetaryXCoord - $PreviousPlanetaryXCoord))+(($CurrentDestinationYCoord - $PreviousPlanetaryYCoord) * ($CurrentPlanetaryYCoord - $PreviousPlanetaryYCoord))+(($CurrentDestinationZCoord - $PreviousPlanetaryZCoord) * ($CurrentPlanetaryZCoord - $PreviousPlanetaryZCoord))
+            [decimal]$xab_distLocal = CalcDistance3d $CurrentPlanetaryXCoord $CurrentPlanetaryYCoord $CurrentPlanetaryZCoord $PreviousPlanetaryXCoord $PreviousPlanetaryYCoord $PreviousPlanetaryZCoord 
             if ($xab_distLocal -lt 1) {$xab_distLocal=1}
-            $XULocal = $XULocal/($xab_distLocal * $xab_distLocal)
-            $closestXLocal = [decimal]$PreviousPlanetaryXCoord + [decimal]$XULocal * ($CurrentPlanetaryXCoord - $PreviousPlanetaryXCoord)
-            $closestYLocal = [decimal]$PreviousPlanetaryYCoord + [decimal]$XULocal * ($CurrentPlanetaryYCoord - $PreviousPlanetaryYCoord)
-            $closestZLocal = [decimal]$PreviousPlanetaryZCoord + [decimal]$XULocal * ($CurrentPlanetaryZCoord - $PreviousPlanetaryZCoord)
+            [decimal]$XULocal2 = $XULocal/($xab_distLocal * $xab_distLocal)
+            [decimal]$closestXLocal = [decimal]$PreviousPlanetaryXCoord + [decimal]$XULocal2 * ($CurrentPlanetaryXCoord - $PreviousPlanetaryXCoord)
+            [decimal]$closestYLocal = [decimal]$PreviousPlanetaryYCoord + [decimal]$XULocal2 * ($CurrentPlanetaryYCoord - $PreviousPlanetaryYCoord)
+            [decimal]$closestZLocal = [decimal]$PreviousPlanetaryZCoord + [decimal]$XULocal2 * ($CurrentPlanetaryZCoord - $PreviousPlanetaryZCoord)
             #$c1 = CalcDistance3d $DestCoordDataX $DestCoordDataY $DestCoordDataZ $PreviousXPosition $PreviousYPosition $PreviousZPosition
-            $c2Local = CalcDistance3d $CurrentDestinationXCoord $CurrentDestinationYCoord $CurrentDestinationZCoord $CurrentPlanetaryXCoord $CurrentPlanetaryYCoord $CurrentPlanetaryZCoord
-            $pathErrorLocal = CalcDistance3d $CurrentDestinationXCoord $CurrentDestinationYCoord $CurrentDestinationZCoord $closestXLocal $closestYLocal $closestZLocal
+            [decimal]$c2Local = CalcDistance3d $CurrentDestinationXCoord $CurrentDestinationYCoord $CurrentDestinationZCoord $CurrentPlanetaryXCoord $CurrentPlanetaryYCoord $CurrentPlanetaryZCoord
+            [decimal]$pathErrorLocal = CalcDistance3d $CurrentDestinationXCoord $CurrentDestinationYCoord $CurrentDestinationZCoord $closestXLocal $closestYLocal $closestZLocal
             #Write-Host "Path Error = $pathError"
-            $perrdLocal = [math]::atan2($pathErrorLocal, $c2Local) * 180.0 / [math]::pi
+            [decimal]$perrdLocal = [math]::atan2($pathErrorLocal, $c2Local) * 180.0 / [math]::pi
             # above ok, below 0
-            $FinalAngleLocal = [math]::Round($perrdLocal,2)
+            [decimal]$FinalAngleLocal = [math]::Round($perrdLocal,2)
 
             ### CREATE CROSSHAIR OVERLAY ###
             if($script:HudCrosshair){Set-CrosshairOnScreen $FinalHorizontalAngle $FinalVerticalAngle}
@@ -1538,22 +1569,22 @@ while($StartNavigation) {
         # Calculations with z = up
         ### USE DECIMAL ISNTEAD OF DOUBLE !!!
         #Angle on X/Y Pane only, Deviation
-        $TriangleAA = [math]::Sqrt([Math]::Abs(([math]::pow($CurrentPlanetaryXCoord - $PreviousPlanetaryXCoord,2))   + ([math]::pow($CurrentPlanetaryYCoord - $PreviousPlanetaryYCoord,2)))) 
-        $TriangleAB = [math]::Sqrt([Math]::Abs(([math]::pow($CurrentPlanetaryXCoord - $CurrentDestinationXCoord,2))  + ([math]::pow($CurrentPlanetaryYCoord - $CurrentDestinationYCoord,2)))) 
-        $TriangleAC = [math]::Sqrt([Math]::Abs(([math]::pow($PreviousPlanetaryXCoord - $CurrentDestinationXCoord,2)) + ([math]::pow($PreviousPlanetaryYCoord - $CurrentDestinationYCoord,2)))) 
-        $TriangleAAlpha = [math]::Round([math]::Acos(([math]::pow($TriangleAA,2) + [math]::pow($TriangleAB,2) - [math]::pow($TriangleAC,2))/(2 * $TriangleAA * $TriangleAB)),2) 
+        [decimal]$TriangleAA = [math]::Sqrt([Math]::Abs(([math]::pow($CurrentPlanetaryXCoord - $PreviousPlanetaryXCoord,2))   + ([math]::pow($CurrentPlanetaryYCoord - $PreviousPlanetaryYCoord,2)))) 
+        [decimal]$TriangleAB = [math]::Sqrt([Math]::Abs(([math]::pow($CurrentPlanetaryXCoord - $CurrentDestinationXCoord,2))  + ([math]::pow($CurrentPlanetaryYCoord - $CurrentDestinationYCoord,2)))) 
+        [decimal]$TriangleAC = [math]::Sqrt([Math]::Abs(([math]::pow($PreviousPlanetaryXCoord - $CurrentDestinationXCoord,2)) + ([math]::pow($PreviousPlanetaryYCoord - $CurrentDestinationYCoord,2)))) 
+        [decimal]$TriangleAAlpha = [math]::Round([math]::Acos(([math]::pow($TriangleAA,2) + [math]::pow($TriangleAB,2) - [math]::pow($TriangleAC,2))/(2 * $TriangleAA * $TriangleAB)),2) 
 
         #Angle on Z Pane only, Deviation
-        $TriangleBA = [math]::Sqrt([Math]::Abs(([math]::pow($CurrentPlanetaryZCoord,2) - [math]::pow([decimal]$PreviousPlanetaryZCoord,2))))
-        $TriangleBB = [math]::Sqrt([Math]::Abs(([math]::pow($CurrentPlanetaryZCoord,2) - [math]::pow($CurrentDestinationZCoord,2))))
-        $TriangleBC = [math]::Sqrt([Math]::Abs(([math]::pow($TriangleBA,2) + [math]::pow($TriangleBB,2))))
-        $TriangleBAlpha = [math]::Round([math]::Acos(([math]::pow($TriangleBA,2) + [math]::pow($TriangleBB,2) - [math]::pow($TriangleBC,2)) / (2 * $TriangleBA * $TriangleBB)),2) 
+        [decimal]$TriangleBA = [math]::Sqrt([Math]::Abs(([math]::pow($CurrentPlanetaryZCoord,2) - [math]::pow([decimal]$PreviousPlanetaryZCoord,2))))
+        [decimal]$TriangleBB = [math]::Sqrt([Math]::Abs(([math]::pow($CurrentPlanetaryZCoord,2) - [math]::pow($CurrentDestinationZCoord,2))))
+        [decimal]$TriangleBC = [math]::Sqrt([Math]::Abs(([math]::pow($TriangleBA,2) + [math]::pow($TriangleBB,2))))
+        [decimal]$TriangleBAlpha = [math]::Round([math]::Acos(([math]::pow($TriangleBA,2) + [math]::pow($TriangleBB,2) - [math]::pow($TriangleBC,2)) / (2 * $TriangleBA * $TriangleBB)),2) 
 
         Write-Host "Up/Down = $TriangleBAlpha, Left/Right = $TriangleAAlpha"
         
-        Write-Host "x $PreviousPlanetaryXCoord $CurrentPlanetaryXCoord $CurrentDestinationXCoord"
-        Write-Host "y $PreviousPlanetaryYCoord $CurrentPlanetaryYCoord $CurrentDestinationYCoord"
-        Write-Host "z $PreviousPlanetaryZCoord $CurrentPlanetaryZCoord $CurrentDestinationZCoord"
+        #Write-Host "x $PreviousPlanetaryXCoord $CurrentPlanetaryXCoord $CurrentDestinationXCoord"
+        #Write-Host "y $PreviousPlanetaryYCoord $CurrentPlanetaryYCoord $CurrentDestinationYCoord"
+        #Write-Host "z $PreviousPlanetaryZCoord $CurrentPlanetaryZCoord $CurrentDestinationZCoord"
 
         #99.804 - 99.258                     = 0,546000000000006
         #10.804 - 10.258                     = 0,546000000000001
@@ -1564,14 +1595,14 @@ while($StartNavigation) {
         ### ORBITal DROP INSTRUCTIONS AND DiSTANCES ###
         ###############################################
         #Delta       #Player         #Destination
-        $LatDelta =  $WgsLatitude  - $WgsLatitude_Destination 
-        $LongDelta = $WgsLongitude - $WgsLongitude_Destination
+        [decimal]$LatDelta =  $WgsLatitude  - $WgsLatitude_Destination 
+        [decimal]$LongDelta = $WgsLongitude - $WgsLongitude_Destination
 
-        $CircumDestination = [Math]::Round(2 * [math]::PI * ([int]$DestinationBodyRadius + [int]$WgsHeight_Destination), 3)
+        [decimal]$CircumDestination = [Math]::Round(2 * [math]::PI * ([int]$DestinationBodyRadius + [int]$WgsHeight_Destination), 3)
 
         #Conversion of Angles into Meters
-        $LatDist  = $CircumDestination / 180 * $LatDelta 
-        $LongDist = $CircumDestination / 360 * $LongDelta
+        [decimal]$LatDist  = $CircumDestination / 180 * $LatDelta 
+        [decimal]$LongDist = $CircumDestination / 360 * $LongDelta
 
         $LatDistKM  = '{0:N0}' -f [math]::Truncate($LatDist/1000).ToString('N0')+"km" 
         $LatDistM   = ($LatDist/1000).ToString('N3').split(',')[1]+"m"
@@ -1656,7 +1687,7 @@ while($StartNavigation) {
         ### WRITE EACH UPDATE INTO A LOGFILE, CALLED SLF (StarCitizen Logging Fileformat) FILE, 
         #Key, Systemname, Global X, Global Y, Global Z, Planetname, Local X, Local Y, Local Z, Latitude, Longitude, Height, Lat2d-X, Long2D-Y, Datetime, Playername, Comment
 
-        $EpochTime = Get-Date $DateTime -UFormat %s
+        [decimal]$EpochTime = Get-Date $DateTime -UFormat %s
         $Logindex = 0
         
         if ($ScriptLoopCount -lt 1) {
@@ -1708,9 +1739,9 @@ while($StartNavigation) {
 
             ### Convert Lat into meters for scale ###
             #FIRST CALC THE CIRCUMFERENCE AND CONVERT IT INTO 1° AND MULTIPLE IT WITH THE READING
-            $Circum = ([Math]::PI * [Math]::Pow(([decimal]$CurrentDetectedBodyRadius + $WgsHeight),2))
-            $LatInMeters  = $Circum / 180 * $WgsLatitude 
-            $LongInMeters = $Circum / 360 * $WgsLongitude
+            [decimal]$Circum = ([Math]::PI * [Math]::Pow(([decimal]$CurrentDetectedBodyRadius + $WgsHeight),2))
+            [decimal]$LatInMeters  = $Circum / 180 * $WgsLatitude 
+            [decimal]$LongInMeters = $Circum / 360 * $WgsLongitude
             
             #LOG CONTENT
             $LogContent = "$Logindex,$script:CurrentDetectedSystem,$CurrentXPosition,$CurrentYPosition,$CurrentZPosition,$CurrentDetectedObjectContainer,$CurrentPlanetaryXCoord,$CurrentPlanetaryYCoord,$CurrentPlanetaryZCoord,$WgsLatitude,$WgsLongitude,$WgsHeight,$LatInMeters,$LongInMeters,$EpochTime,$($DateTime.ToString('yyyy.MM.dd_HH:mm:ss:ffff')),$PlayernameGF,$UserComment"
@@ -1730,23 +1761,23 @@ while($StartNavigation) {
         
 
         #STORE PREVIOUS DISTANCES
-        $PreviousXPosition     = $CurrentXPosition
-        $PreviousYPosition     = $CurrentYPosition
-        $PreviousZPosition     = $CurrentZPosition
-        $PreviousDistanceTotal = $CurrentDistanceTotal
-        $PreviousDistanceX     = $CurrentDistanceX
-        $PreviousDistanceY     = $CurrentDistanceY
-        $PreviousDistanceZ     = $CurrentDistanceZ
-        $PreviousTime          = $DateTime
-        $PreviousAngle         = $FinalAngle
-        $PreviousAngleLocal      = $FinalAngleLocal
+        [decimal]$PreviousXPosition     = $CurrentXPosition
+        [decimal]$PreviousYPosition     = $CurrentYPosition
+        [decimal]$PreviousZPosition     = $CurrentZPosition
+        [decimal]$PreviousDistanceTotal = $CurrentDistanceTotal
+        [decimal]$PreviousDistanceX     = $CurrentDistanceX
+        [decimal]$PreviousDistanceY     = $CurrentDistanceY
+        [decimal]$PreviousDistanceZ     = $CurrentDistanceZ
+                 $PreviousTime          = $DateTime
+        [decimal]$PreviousAngle         = $FinalAngle
+        [decimal]$PreviousAngleLocal    = $FinalAngleLocal
         #Write-Host $PreviousPlanetaryXCoord $CurrentPlanetaryXCoord $PreviousPlanetaryYCoord $CurrentPlanetaryYCoord $PreviousPlanetaryZCoord $CurrentPlanetaryZCoord
 
         if($PreviousPlanetaryXCoord -ne $CurrentPlanetaryXCoord -or $PreviousPlanetaryYCoord -ne $CurrentPlanetaryYCoord -or $PreviousPlanetaryZCoord -ne $CurrentPlanetaryZCoord -and $ClipboardContainsCoordinates){
             #write-host "delta occured"
-            $PreviousPlanetaryXCoord = $CurrentPlanetaryXCoord
-            $PreviousPlanetaryYCoord = $CurrentPlanetaryYCoord
-            $PreviousPlanetaryZCoord = $CurrentPlanetaryZCoord
+            [decimal]$PreviousPlanetaryXCoord = $CurrentPlanetaryXCoord
+            [decimal]$PreviousPlanetaryYCoord = $CurrentPlanetaryYCoord
+            [decimal]$PreviousPlanetaryZCoord = $CurrentPlanetaryZCoord
         }
         if($ShipRotationValueX1 -AND $ShipRotationValueX1 -ne $PerviousShipRotationValueX1){$PerviousShipRotationValueX1 = $ShipRotationValueX1}
         if($ShipRotationValueY1 -AND $ShipRotationValueY1 -ne $PerviousShipRotationValueY1){$PerviousShipRotationValueY1 = $ShipRotationValueY1}
@@ -1812,3 +1843,19 @@ Pause
 # Select System = Stanton, Pyro (Dropdown)
 # Select Destination Type = Space, Orbital, Custom Space 
 # Create different tabs for each type
+
+<#
+$DefaultVariables = Get-Variable -Scope GLOBAL
+$DefaultVariables += "debug"
+$DefaultVariables += "UseTestdata"
+$DefaultVariables += "ErrorActionPreference"
+$ExcludeList = $DefaultVariables.Name -join ','
+$CustoMVariables = Get-Variable -Exclude $ExcludeList
+
+foreach($variable in $CustoMVariables){
+    #$variable.Name
+    #$variable.Value
+    $variable.GetType().FullName
+    if($variable -is [String]){write-host $variable.Name}
+}
+#>
