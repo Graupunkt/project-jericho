@@ -201,13 +201,7 @@ $LogFilename = "Logs\Logfile.csv"
 while($StartNavigation) {
     #Start-Sleep -Milliseconds 1            # IF THIS LINE IS NOT PRESENT, CPU USAGE WILL CONSUME A FULL THREAD, AND SCRIPTS MIGHT GET UNRESPONSIVE 
     #Get ClipboardContents and Get Current Date/Time
-
-    #$ClipboardContainsCoordinates, [string]$CurrentXPositionRAW, [string]$CurrentYPositionRAW, [string]$CurrentZPositionRAW, $DateTime = Get-StarCitizenClipboardAndDate $PCClockdrift
     $ClipboardContainsCoordinates, [decimal]$CurrentXPosition, [decimal]$CurrentYPosition, [decimal]$CurrentZPosition, $DateTime = Get-StarCitizenClipboardAndDate $PCClockdrift
-    #Write-Host $CurrentXPosition, $CurrentYPosition, $CurrentZPosition
-    #[decimal]$CurrentXPosition = $CurrentXPositionRAW+"d"
-    #[decimal]$CurrentYPosition = $CurrentYPositionRAW+"d"
-    #[decimal]$CurrentZPosition = $CurrentZPositionRAW+"d"
 
     #[decimal]$CurrentXPosition = -18967436025.336437d
     #[decimal]$CurrentYPosition = -2667811818.272488d
@@ -233,9 +227,6 @@ while($StartNavigation) {
     #ADJUST PLANETARY ROTATION DEVIATION
     $ResetPressed = Test-KeyPress -Key "R" -ModifierKey 'Control'
     if ($ResetPressed) {
-        #$CurrentPlanetaryXCoord = ""
-        #$CurrentDetectedOCRadius = ""
-        #$CurrentDetectedOCADX = ""
 
         [decimal]$Circumference360Degrees = [Math]::PI * 2 * $CurrentDetectedOCRadius
         #Very high or low values are presented by ps as scientific results, therefore we force the nubmer (decimal) and limit it to 7 digits after comma
@@ -243,11 +234,6 @@ while($StartNavigation) {
         [decimal]$RotationSpeedAdjustment = [Math]::Round(($CurrentPlanetaryXCoord * 1000 * 360 / $Circumference360Degrees) -as [decimal],7) * -1
         #GET Adjustment for Rotationspeed 
         [decimal]$FinalRotationAdjustment = ([decimal]$CurrentDetectedOCADX + [decimal]$RotationSpeedAdjustment)
-        #Write-Host "OMRadius $CurrentDetectedOCRadius"
-        #Write-Host "Circumference $Circumference360Degrees "
-        #Write-Host "Speed $RotationSpeedAdjustment"
-        #Write-Host "Adjustment $FinalRotationAdjustment"
-        #Write-Host "X-Coord $CurrentPlanetaryXCoord"
         (Get-Content $OcCsvPath).replace($CurrentDetectedOCADX, $FinalRotationAdjustment) | Set-Content $OcCsvPath
         Write-Host "Rotation calibrated from $($CurrentDetectedOCADX)° to $($FinalRotationAdjustment)° by $RotationSpeedAdjustment, pls restart script"
         Start-Sleep -Seconds 5
@@ -887,12 +873,6 @@ get
         #CONVERT 3D SPACE INTO 
         if($script:3dSpacePoi)  {$PoiCoordDataPlanet = $DestinationName; [decimal]$CurrentDestinationXCoord = $DestCoordDataX; [decimal]$CurrentDestinationYCoord = $DestCoordDataY;[decimal]$CurrentDestinationZCoord = $DestCoordDataZ} 
 
-        #SHOW OM DISTANCES
-        #$CurrentPlanetaryXCoord
-        #$CurrentPlanetaryYCoord
-        #$CurrentPlanetaryZCoord
-
-
         #Calculate Orbital Marker Distances for Current Position
         #First Value is in meters
         #Final Value is rounded in kilometers
@@ -1091,7 +1071,8 @@ get
         if($WgsHeight -gt 0){$Locationheight = $WgsHeight}else{$Locationheight = 0}
         $ElevationCorrection = [math]::Acos($script:CurrentDetectedBodyRadius/($script:CurrentDetectedBodyRadius + $Locationheight)) / [math]::pi * 180
 
-        [decimal]$CurrentRotationPosition = mod((360 - (mod($TotalCycles,1)) * 360 - $script:CurrentDetectedOCADX),360)
+        #[decimal]$CurrentRotationPosition = mod((360 - (mod($TotalCycles,1)) * 360 - $script:CurrentDetectedOCADX),360)
+        [decimal]$CurrentRotationPosition = mod((360 - (mod($OCTotalCycles,1)) * 360 - $script:CurrentDetectedOCADX),360)
 
         if([math]::Abs($WgsLatitude)-eq 90){$WgsLongtidue360 = 0}else{
             [decimal]$WgsLongitude360 = (mod (([math]::Atan2($CurrentPlanetaryYCoord, $CurrentPlanetaryXCoord) - ([math]::PI / 2)), (2 * [math]::PI))) / [math]::pi * 180  
