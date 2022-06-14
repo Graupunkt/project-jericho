@@ -16,22 +16,26 @@
 
 
 ## General Info
-- This tool includes a set of different scripts and other tools to acheive its goal for live navigation in Star citizen. 
-- Its non intrusive to the game, the script monitors the windows clipboard for the actual player position, that gets triggered by the StarCitizen Chatcommand /showlocation. 
+- This tool includes a set of different scripts and other tools to acheive its goal for live navigation in Star Citizen. 
+- Its non intrusive to the game, the script monitors the windows clipboard for the actual players position, that gets triggered by the StarCitizen Debug Chatcommand /showlocation 
 - It than uses a ntp server to internally determine the current utc time and the offset of the system time to increase the precision of calculations
 - the player chosses a pre defined point of interest and starts live navigation
-- the script is than manually updated by the user (key combo) and gets multiple values presented for navigation
-- this tool can be used to navigate to points in space and around planets
+- the script is than manually updated by the user (key combo) and gets multiple values presented for live navigation
+- this tool can be used to navigate to points in space and on or around planets
 
-Windows 11 does not allow powershell scripts that are created by others by default, you need to run the following line to change this behavior:
+### Windows 11 
+does not allow remote powershell scripts to be executed by default, you need to run the following line to change this behavior:
 Set-ExecutionPolicy Unrestricted -Scope LocalMachine -Force
+After that you need to open the properties of each *.ps1 File (Project Jericho ps1 and all files in the FUNCTIONS folder as well)and click on ALLOW.
+
+If it is still not working we might have to unblock each PS1 File:
 than open powershell and drop the scriptfile into the window and unblock the script with adding this after the file
 | Unblock-File
 
 ## Screenshots
 ![Screenshot of poi selection window](screenshots/Screenshot_Frontend_V7.PNG)
 
-![Screenshot of the main anvigation panel](screenshots/Screenshot_Backend_V7.1.5.PNG)
+![Screenshot of the main anvigation panel](screenshots/Screenshot_Backend_V7.1.6.PNG)
 
 
 ## Prerequests
@@ -119,6 +123,10 @@ For a better user readibility, all data files are stored in the csv so they can 
 
 
 ## Changelog
+Note: many versions are pushed to github, but only tested and approved versions are released.
+
+- V7.1.6 (14.06.2022) - converted many "double" variables into the decimal datatype, since some calcualation errors occured. Due to more precision in values the precision on microtech / crusader is back down to 15m. 
+- V7.1.5 (04.06.2020) - added orbital drop instructions, increased accuracy on crusader down to 1-2m
 - V7.1.4 (09.04.2022) - Added Sketto Rock and the MicroTech River to the list of predetermined POIs, Multiple Logs where added, Several Bug Fixes
 - V7.0.9 (xx.xx.2022) - Athmpsheric Compass was added, several Bug Fixes
 - V6 (xx.xx.202x) - Course Deviation in Planets and Ground were added
