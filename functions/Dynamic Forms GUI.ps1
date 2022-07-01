@@ -27,7 +27,9 @@ function New-DynamicFormMainframe{
     foreach ($DGVariable in $AllDGVariables){
         $FinalGroupsForForm += New-Object psobject -Property @{
             Groups = $DGVariable.Name.Replace("DataGroup","")
-            Options = $DGVariable.Value
+            #Options = $DGVariable.Value
+            Options = $DGVariable.Value.Name
+            Comment = $DGVariable.Value.Comment
         }
     }
     #$FinalGroupsForForm | FT -Property Groups, Options
@@ -47,7 +49,8 @@ function New-DynamicFormMainframe{
     $OptionHeight = 24
     $OptionWidth = 220
     $OptionSpacer = 5
-    $CustomWidth = 960
+    #$CustomWidth = 960
+    $CustomWidth = 10
     $CustomHeight = 20
     $script:MainFormVerticalSpace = 150
     $script:MainFormVerticalBorder = 10
@@ -101,9 +104,12 @@ function New-DynamicFormMainframe{
         #SET OPTIONS
         $OptionCounter = 0
         foreach ($Option in $Group.Options){
+            $Detail = $Group.Comment[$OptionCounter]
+
             $OptionCounter++
-            $script:OptionBox = New-Object System.Windows.Forms.CheckBox
-            if($Group.Groups -like "*Destinations"){$script:OptionBox = New-Object System.Windows.Forms.RadioButton}
+            #$script:OptionBox = New-Object System.Windows.Forms.CheckBox
+            #if($Group.Groups -like "*Destinations"){$script:OptionBox = New-Object System.Windows.Forms.RadioButton}
+            $script:OptionBox = New-Object System.Windows.Forms.RadioButton
             #SET POSITION OF OPTION
             $Option_Drawing_Size = New-Object System.Drawing.Size
             $Option_Drawing_Size.Width = $OptionSpacer
@@ -111,11 +117,19 @@ function New-DynamicFormMainframe{
             $OptionBox.Location = $Option_Drawing_Size
             #SET SIZE OF OPTION
             $OptionBox.size = New-Object System.Drawing.Size($OptionWidth,$OptionHeight) 
+            #$OptionBox.Text = $Option
             $OptionBox.Text = $Option
             $OptionBox.Name = "Option_$($Option)"
-            if($OptionBox.Name -like "*OptionB2"){$OptionBox.ForeColor = [System.Drawing.Color]::Gray}
+
+            #colorize entries based on there values
+            if($OptionBox.Text -like "*imprecise*"){$OptionBox.ForeColor = [System.Drawing.Color]::Gray}
+            if($OptionBox.Text -like "*not found*"){$OptionBox.ForeColor = [System.Drawing.Color]::Red}
+            if($Detail -like "*New*"){$OptionBox.ForeColor = [System.Drawing.Color]::Green}
+            #if($OptionBox.Name -like "*OptionB2"){$OptionBox.ForeColor = [System.Drawing.Color]::Gray}
             $groupBox.Controls.Add($OptionBox) 
         }
+        
+
     }
 
     # DEFINE RUN BUTTON

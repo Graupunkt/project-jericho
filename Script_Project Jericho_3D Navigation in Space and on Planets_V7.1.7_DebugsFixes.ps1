@@ -106,13 +106,33 @@ $PoiSpaceCsvPath = "data\Script_Project Jericho_Points of Interest in 3D Space.c
 
 # IMPORT FILES TO ARRAY
 $ObjectContainerData =              Import-Csv -Delimiter ";" $OcCsvPath            | Where-Object {$_.System -notlike "*#*"} #| Select-Object -Skip 1
-$PointsOfInterestOnPlanetsData =    Import-Csv -Delimiter ";" $PoiPlanetsCsvPath    | Where-Object {$_.System -notlike "*#*"} | Select-Object -Skip 1
+$PointsOfInterestOnPlanetsData =    Import-Csv -Delimiter ";" $PoiPlanetsCsvPath    | Where-Object {$_.System -notlike "*#*"} #| Select-Object -Skip 1
 $PointsOfInterestInSpaceData =      Import-Csv -Delimiter ";" $PoiSpaceCsvPath      | Where-Object {$_.System -notlike "*#*"} #| Select-Object -Skip 1
 
 # FILTER FOR SPECIFIC VALUES AND SET ANOTHER ARRAY
-$DataGroupDestinations = $PointsOfInterestOnPlanetsData.Name
-$DataGroupDestinations += $PointsOfInterestInSpaceData.Name
+#$DataGroupDestinations = $PointsOfInterestOnPlanetsData.Name
+#$DataGroupDestinations += $PointsOfInterestInSpaceData.Name
 
+# POIS SORTED BY TYPE
+$DataGroupCaves        += ($PointsOfInterestOnPlanetsData | Where-Object {$_.Type -eq "Cave"})
+$DataGroupSavedbyUser  += ($PointsOfInterestOnPlanetsData | Where-Object {$_.Type -eq "CustomType"})
+$DataGroupDruglabs     += ($PointsOfInterestOnPlanetsData | Where-Object {$_.Type -eq "Druglab"})
+$DataGroupWrecks       += ($PointsOfInterestOnPlanetsData | Where-Object {$_.Type -eq "Derelict"})
+$DataGroupEastereggs   += ($PointsOfInterestOnPlanetsData | Where-Object {$_.Type -eq "Easteregg"})
+$DataGroupOutposts     += ($PointsOfInterestOnPlanetsData | Where-Object {$_.Type -eq "Outpost"})
+$DataGroupPicoballs    += ($PointsOfInterestOnPlanetsData | Where-Object {$_.Type -eq "Picoball"})
+$DataGroupRacing       += ($PointsOfInterestOnPlanetsData | Where-Object {$_.Type -eq "Racing"})
+$DataGroupWrecks       += ($PointsOfInterestOnPlanetsData | Where-Object {$_.Type -eq "Wreck"})
+
+# POIS SORTED ALPHABETICALLY
+$DataGroupOutposts     = $DataGroupOutposts       | Sort-Object -Property Name
+$DataGroupDruglabs     = $DataGroupDruglabs       | Sort-Object -Property Name
+$DataGroupWrecks       = $DataGroupWrecks         | Sort-Object -Property Name
+$DataGroupEastereggs   = $DataGroupEastereggs     | Sort-Object -Property Name
+$DataGroupRacing       = $DataGroupRacing         | Sort-Object -Property Name
+$DataGroupSavedbyUser  = $DataGroupSavedbyUser    | Sort-Object -Property Name
+$DataGroupCaves        = $DataGroupCaves          | Sort-Object -Property Name
+$DataGroupPicoballs    = $DataGroupPicoballs      | Sort-Object -Property Name
 # RUN SCRIPT WITH ADMIN PERMISSIONS
 #if(!$debug){Set-AdminPermissions}
 
@@ -218,10 +238,12 @@ while($StartNavigation) {
         #$SystemName = Read-Host -Prompt 'Input the Systemname your currently in (Stanton, Pyro, Nyx): '
         #$SystemName = "Stanton"
         $SystemName = $script:CurrentDetectedSystem
-        if($script:CurrentDetectedObjectContainer){$PoiToSave = "$SystemName;$CurrentDetectedObjectContainer;CustomType;$PoiName;$CurrentPlanetaryXCoord;$CurrentPlanetaryYCoord;$CurrentPlanetaryZCoord;$DateTime"} #IF ON A PLANET
-        else {$PoiToSave = "$SystemName;Custom POI Type;$PoiName;$CurrentXPosition;$CurrentYPosition;$CurrentZPosition;$DateTime"} #ELSE IF IN SPACE
-        $PoiToSave  >> 'Data\saved_locations.csv' #WRITE CURRENT LINES TO TEXTFILE
-        Write-Host "... saved $PoiName to Data\saved_locations.csv"
+        if($script:CurrentDetectedObjectContainer){$PoiToSave = "$SystemName;$CurrentDetectedObjectContainer;CustomType;$PoiName;$CurrentPlanetaryXCoord;$CurrentPlanetaryYCoord;$CurrentPlanetaryZCoord;none;$DateTime"} #IF ON A PLANET
+        else {$PoiToSave = "$SystemName;CustomType;$PoiName;$CurrentXPosition;$CurrentYPosition;$CurrentZPosition;$DateTime"} #ELSE IF IN SPACE
+        #$PoiToSave  >> 'Data\saved_locations.csv' #WRITE CURRENT LINES TO TEXTFILE
+        #Write-Host "... saved $PoiName to Data\saved_locations.csv"
+        $PoiToSave  >> 'data\Script_Project Jericho_Points of Interest on Planets and ObjectContainers.csv'
+        Write-Host "... added $PoiName to Data\Script_Project Jericho_Points of Interest on Planets and ObjectContainers.csv"
     }
 
     #ADJUST PLANETARY ROTATION DEVIATION
@@ -1651,6 +1673,8 @@ get
 
         [decimal]$LatDist  = $CircumDestination / 360 * $LatDelta 
         [decimal]$LongDist = $CircumDestination / 360 * $LongDelta
+
+
 
         $LatDistKM  = '{0:N0}' -f [math]::Truncate($LatDist/1000).ToString('N0')+"km" 
         $LatDistM   = ($LatDist/1000).ToString('N3').split(',')[1]+"m"
