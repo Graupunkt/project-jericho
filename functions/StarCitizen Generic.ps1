@@ -1,7 +1,7 @@
 
 function Get-ElapsedUTCServerTime{
     param ($DateTime)
-    $UTCServerTime = $DateTime.ToUniversalTime() 
+    $global:UTCServerTime = $DateTime.ToUniversalTime() 
     #SET STARTTIME SIMULATION STARCITIZEN
     $SimulationUTCStartTime = [DateTime]"01.01.2020 00:00:00"                                                    # SET STARTTIME SIMULATION UTC
     $result = New-Timespan -End $UTCServerTime -Start $SimulationUTCStartTime     # GET ELPASED TIME BETWEEN SIMULATION TIME AND CURRENT TIME

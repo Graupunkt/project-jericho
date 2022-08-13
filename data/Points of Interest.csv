@@ -1,0 +1,91 @@
+System;ObjectContainer;Type;Name;Planetary X-Coord;Planetary Y-Coord;Planetary Z-Coord;Comment;Date
+#CAVES
+Stanton;Daymar;Cave;Sinkhole;146.356;-177.106;-185.07;none;04.04.2021 12:24
+Stanton;Hurston;Cave;Cave N80;-160.052;-65.455;985.626;added with Alpha 3.4;;Last Update: Alpha 3.16.0
+Stanton;MicroTech;Cave;Sinkhole (S01);-428.145;903.758;-31.124;Next to DataCenter KH3;Added with Alpha 3.13.0
+#DRUGLABS
+Stanton;Yela;Druglab;JumpTown;268.025;143.784;74.777;none;unknown
+Stanton;Yela;Druglab;NT999;-205.857;-73.781;224.297;none;unknown
+Stanton;Daymar;Druglab;Nuen Waste Management;-18.94326125;293.3409302;25.47839976;none;unknown
+#EASTEREGGS
+Stanton;Yela;Easteregg;Bennyhenge;-626.638;135.733;-1.819;none;unknown
+Stanton;Yela;Easteregg;Abandoned Hab Entry (GrimHex);-568.897;382.947;-2.063;none
+Stanton;MicroTech;Easteregg;XMAS Campfire;520.693;419.260;743.714;below New Babbage;01/07/2022 22:10:00
+Stanton;MicroTech;Easteregg;Lakesite Chairs;524.873;425.683;737.102;none;01/07/2022 22:10:00
+Stanton;MicroTech;Easteregg;Mountainsite Chairs;506.682;421.171;754.683;none;01/07/2022 22:10:00
+Stanton;Hurston;Easteregg;Advocacy Badge;766.550;-74.234;-640.243;none;01/07/2022 22:10:00
+Stanton;MicroTech;Other;The River;808.662;417.866;415.655;discovered by Graupunkt;03.03.2022 23:10
+Stanton;Magda;Other;Sketto Rock;-334.600;45.704;50.231;none;09.04.2022
+Stanton;MicroTech;Other;Octagon Lab (missing);636.71;-152.548;758.528;from CitizenCon 2019;11.09.2021 02:41
+Stanton;MicroTech;Other;Painted Rooftop (missing);518.273;416.401;747.889;from CitizenCon 2021;01.01.2022 16:50
+Stanton;Hurston;Other;Crashed Satelite #2;-234.97;-783.368;577.749;close to Lorville;18.08.2021 15:17:46
+#PICOBALLS
+Stanton;MicroTech;Picoball;#1 Calhoun Pass Emergency Shelter;938.28;-347.38;-31.71;Picoball, found by Neil;01.07.2022
+Stanton;Daymar;Picoball;#2 Wolf Point Aid Shelter;-4.419;279.066;95.732;Picoball, found by Kingtiger11;02.02.2022
+Stanton;MicroTech;Picoball;#3 Point Wain Emergency Shelter;102.055;267.619;-70.856;Picoball, found by LTPorter;08.07.2022
+Stanton;Cellin;Picoball;#4 Ashburn Channel Aid Shelter;3.024;-257.942;-37.129;Picoball, found by Michael Japson;15.07.2022
+Stanton;Daymar;Picoball;#5 Dunlow Ridge Aid Shelter;-627.440;-458.258;611.733;Picoball, found by xxx;xx.07.2022
+Stanton;Yela;Picoball;#6 Talarine Divide Aid Shelter;-21.221;310.790;30.932;Picoball, found by 3 Groups;24.07.2022
+Stanton;Yela;Picoball;#7 Nakamura Valley Aid Shelter;102.055;267.619;-70.856;Picoball, found by 3 Groups;24.07.2022
+Stanton;Cellin;Picoball;#8 Mogote Aid Shelter);-198.664;50.790;160.875;Picoball, found by 3 Groups;24.07.2022
+Stanton;Aberdeen;Picoball;#9 Barton Flats Aid Shelter;54.341;217.120;-159.881;Picoball, found by 3 Groups;24.07.2022
+#OUTPOSTS
+Stanton;Daymar;Outpost;Kudre Ore;146.6171542;-177.0932944;-184.862263;none;unknown
+Stanton;Daymar;Outpost;Wolf Point Aid Shelter;-4.419782845;279.0666332;95.73265906;none;unknown
+Stanton;Yela;Outpost;ArcCorp Mining Area 157;6.023;222.356;220.313;none;unknown
+Stanton;Yela;Outpost;Kosso;-31.289;118.13;288.314;none;unknown
+Stanton;Daymar;Outpost;ArcCorp Mining Area 141;-18.16699951;180.362167;-232.7599312;none;unknown
+Stanton;Daymar;Outpost;Dunlow Ridge Aid Shelter;-51.84962316;280.93199;75.33128638;none;unknown
+Stanton;MicroTech;Outpost;Derelict Outpost;-154.543;-984.287;94.030;Next to Shubin;01.07.2022
+Stanton;MicroTech;Outpost;Derelict Outpost;-458.432;807.417;-371.922;Next to DataCenter KH3;01.07.2022
+Stanton;MicroTech;Outpost;Derelict Outpost;488.971;440.872;753.975;Next to New Babbage East;01.07.2022
+Stanton;MicroTech;Outpost;Derelict Outpost;559.194;386.716;733.405;Next to New Babbage East01.07.2022
+Stanton;MicroTech;Outpost;Derelict Outpost;808.976;416.818;415.672;At the River;01.07.2022
+Stanton;Crusader;Outpost;Orison - Solanki Platform;5332.839;-778.582;5254.069;Siege of Orison Event Platform #1;22.05.2022 19:26
+Stanton;Crusader;Outpost;Orison - Brushwood Platform;5339.470;-764.057;5252.584;Siege of Orison Event Platform #2;22.05.2022 22:05
+Stanton;Crusader;Outpost;Orison - Hartmoore Platform;5349.113;-751.053;5245.163;Siege of Orison Event Platform #3;03.07.2022 21:45
+Stanton;Crusader;Outpost;Orison - Admin Center Platform;5350.249;-739.781;5251.474;Siege of Orison Event Platform #4;03.07.2022 23:45
+Stanton;MicroTech;Outpost;Port Traessler;561.471;545.471;808.832;none;03.04.2022 12:52
+#Other
+Stanton;;Other;Jump Point - Hurston (missing);13370519923.824627;-585520502.58121097;223164.375;;
+Stanton;;Other;Jump Point - ArcCorp (missing);20254808079.072586;-22397856118.685158;223164.375;;
+Stanton;;Other;Naval Station - INS-Jericho;20196776944;33456387580;2895692;Close to MIC-L1;
+#RACING
+Stanton;Daymar;Racing;Daymar Rally - Start;126.025172;-149.5814689;221.253344;Shubin Mining SCD1none;
+Stanton;Daymar;Racing;Daymar Rally - Checkpoint #1;200.5450636;-104.917274;190.0965948;Eager Flats Aidnone;
+Stanton;Daymar;Racing;Daymar Rally - Finish;81.00767024;-280.6833381;43.64869834;Kudre Ore Mine;none
+Stanton;Yela;Racing;Stanton7 - Race1, CP2;37.672;225.806;213.592;none;unknown
+Stanton;Yela;Racing;Stanton7 - Race1, CP1;6.478;237.141;204.49;none;unknown
+Stanton;MicroTech;Racing;Stanton7 - Race2, CP Calhoun;938.116;-347.818;31.708;none;unknown
+Stanton;Clio;Racing;Stanton7 - Race3, Start;107.412;-46.091;-316.36;none;03/28/2021 14:28:33
+Stanton;Clio;Racing;Stanton7 - Race3, CP1;79.821;-2.218;-327.656;none;03/28/2021 14:49:29
+Stanton;Clio;Racing;Stanton7 - Race3, CP2;107.78;-3.157;-319.623;none;unknown
+Stanton;Clio;Racing;Stanton7 - Race3, Finish;118.376;-30.453;-314.442;none;unknown
+Stanton;Magda;Racing;HHL 2020 - Crater (old);-190.049;255.502;-122.296;95° from HDMS Perlmann;10/14/2021 22:10:27
+Stanton;Magda;Racing;HHL 2021 - Civilian Crater;-159.244;274;-126.472;none;10/18/2021 00:32:14
+Stanton;Clio;Racing;XGR - Snake Pit;-327.835;-78.887;-13.657;New;01.07.2022
+Stanton;Hurston;Racing;New Vega - Hill Climb Mountain;-942.808;296.24;-160.163;none;05/26/2022 22:59:36
+#WRECKS
+Stanton;Daymar;Wreck;Javelin Wreck (UEES Flyssa);102.055;267.619;-70.856;none;unknown
+Stanton;Calliope;Derelict;Caterpillar Derelict ;199.393;-126.182;45.983;none;unknown
+Stanton;Arial;Derelict;Caterpillar Derelict ;21.290;-234.274; 252.404;none;unknown
+Stanton;Aberdeen;Derelict;Caterpillar Derelict ;-160.520; 187.065; 122.157;none;unknown
+Stanton;Magda;Derelict;Caterpillar Derelict #1;-171.923;-278.139;96.953;none;unknown
+Stanton;Magda;Derelict;Caterpillar Derelict #2;-84.944;-284.415;168.126;none;unknown
+Stanton;Ita;Derelict;Caterpillar Derelict;137.997; 211.437;204.970;none;unknown
+Stanton;Lyria;Derelict;Caterpillar Derelict #1;90.196;  60.433;196.272;none;unknown
+Stanton;Lyria;Derelict;Caterpillar Derelict #2;143.507; -71.508;156.466;none;unknown
+Stanton;Wala;Derelict;Caterpillar Derelict #1;-281.801;  10.547;-22.472;none;#1
+Stanton;Wala;Derelict;Caterpillar Derelict #2;-164.031;  85.551;-213.830;none;#2
+Stanton;Cellin;Derelict;Caterpillar Derelict;112.178;-163.730;169.625;none;unknown
+Stanton;Yela;Derelict;Caterpillar Derelict;-29.543; 236.610;203.199;none;unknown
+Stanton;MicroTech;Derelict;Reclaimer Derelict (Ghost Hollow);-127.193;982.004;149.145;New;01.07.2022
+Stanton;;Wreck;XenoThreat Procyon Cloud;20196234302;33456590828;3063800.096;XenoThreat, next to MIC-l1;xx.11.2019
+#USER SAVES
+Stanton;Yela;CustomType;Landing PAD, Mining Area 157;5.204;222.371;220.321;none;05/29/2022 22:10:57
+Stanton;Crusader;CustomType;Orison - Brushwood (Orbital Drop);5375.347;-769.198;5287.881;none;22.05.2022 22:05
+Stanton;Yela;CustomType;AsteroidBase (missing);-132.065;534.890;0;none;13.05.2022 xx:xx
+Stanton;Yela;CustomType;OC3 in the Belt (Yela);-132.065;534.89;0;none;30.01.2022 20:24
+Stanton;Crusader;CustomType;Skippy #1 (Crusader);5322.095;-819.404;5257.880;none,unknown
+Stanton;Crusader;CustomType;Skippy #2 (Crusader);5329.332;-794.336;5254.738;none,unknownStanton;Yela;CustomType;GrimHex EntryCave;-568.8972;382.9465;-2.0631;none;07/04/2022 23:40:29Stanton;Yela;CustomType;Grimhex HiddenHab;-568.9471;382.9264;-2.0690;none;07/04/2022 23:43:06
+Stanton;;CustomType;HiddenRoom (HUR-L1-Station);11561414282.1912;-264291.288938;-484145.941039;07/05/2022 00:17:12

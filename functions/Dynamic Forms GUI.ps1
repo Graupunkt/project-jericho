@@ -1,5 +1,7 @@
 # Shows FrontEnd to User
 Function Show-Frontend {
+    $script:MainForm.focus()
+    $script:MainForm.topmost=$true
     $script:MainForm.ShowDialog()| Out-Null
     #$script:MainForm.Add_Shown({$Form.Activate()})
     #[void]$script:MainForm.ShowDialog() | Out-Null
@@ -122,7 +124,8 @@ function New-DynamicFormMainframe{
             $OptionBox.Name = "Option_$($Option)"
 
             #colorize entries based on there values
-            if($OptionBox.Text -like "*imprecise*"){$OptionBox.ForeColor = [System.Drawing.Color]::Gray}
+            if($OptionBox.Text -like "*roughly*"){$OptionBox.ForeColor = [System.Drawing.Color]::Gray}
+            if($OptionBox.Text -like "*missing*"){$OptionBox.ForeColor = [System.Drawing.Color]::Gray}
             if($OptionBox.Text -like "*not found*"){$OptionBox.ForeColor = [System.Drawing.Color]::Red}
             if($Detail -like "*New*"){$OptionBox.ForeColor = [System.Drawing.Color]::Green}
             #if($OptionBox.Name -like "*OptionB2"){$OptionBox.ForeColor = [System.Drawing.Color]::Gray}
@@ -456,7 +459,7 @@ function Get-CheckboxesFromFormMainframe{
     foreach ($Box in $script:MainForm.Controls){
         switch -WildCard ($Box.Name){
             #Destinations, QuantumMarkers, StatusStrip, Legend, Limits, 3rd Party Tools Autostart, Stanton Coordinates
-            "*Destinations"                {foreach ($Checkbox in $Box.Controls){if($Checkbox.Checked){$script:CurrentDestination = $Checkbox.Name.replace('Option_',"")}}}
+            "GroupBox_*"                   {foreach ($Checkbox in $Box.Controls){if($Checkbox.Checked){$script:CurrentDestination = $Checkbox.Name.replace('Option_',"")}}}
             "*QuantumMarker"               {foreach ($Checkbox in $Box.Controls){if($Checkbox.Checked){if($debug){Write-Host $Checkbox.Name};$script:CurrentQuantumMarker += $Checkbox.Name.replace('Option_',"")}}}
             "*Stanton Coordinates*"        {foreach ($Checkbox in $Box.Controls){if($Checkbox.Checked){$script:CustomCoordsProvided = $True}}}
             "*3rd Party Tools Autostart*"  {foreach ($Checkbox in $Box.Controls){if($Checkbox.Checked){if($Checkbox.Name -like "HUD Crosshair"){$script:HudCrosshair = $True}}}}
