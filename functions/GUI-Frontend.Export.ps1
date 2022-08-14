@@ -11,6 +11,7 @@
 	#----------------------------------------------
 	[System.Windows.Forms.Application]::EnableVisualStyles()
 	$formProjectJericho = New-Object 'System.Windows.Forms.Form'
+	$labelCreatedByGraupunktWi = New-Object 'System.Windows.Forms.Label'
 	$groupbox24 = New-Object 'System.Windows.Forms.GroupBox'
 	$buttonSelect = New-Object 'System.Windows.Forms.Button'
 	$textbox241 = New-Object 'System.Windows.Forms.TextBox'
@@ -25,26 +26,15 @@
 	$textbox66 = New-Object 'System.Windows.Forms.TextBox'
 	$panel1 = New-Object 'System.Windows.Forms.Panel'
 	$label1013061 = New-Object 'System.Windows.Forms.Label'
-	$labelAbout = New-Object 'System.Windows.Forms.Label'
-	$label1013044 = New-Object 'System.Windows.Forms.Label'
 	$labelSettings = New-Object 'System.Windows.Forms.Label'
-	$labelMAnual = New-Object 'System.Windows.Forms.Label'
-	$labelLocalMap = New-Object 'System.Windows.Forms.Label'
-	$labelPlanetMap = New-Object 'System.Windows.Forms.Label'
-	$labelSystemMap = New-Object 'System.Windows.Forms.Label'
-	$labelOrbitalDrop = New-Object 'System.Windows.Forms.Label'
-	$labelInformation = New-Object 'System.Windows.Forms.Label'
-	$labelNAvigation = New-Object 'System.Windows.Forms.Label'
 	$labelSupportAndUpdatesMer = New-Object 'System.Windows.Forms.Label'
 	$linklabelHttpsdiscordggWMh5YC = New-Object 'System.Windows.Forms.LinkLabel'
 	$tabcontrol1 = New-Object 'System.Windows.Forms.TabControl'
 	$tabpage1 = New-Object 'System.Windows.Forms.TabPage'
 	$labelRiseSetHourAngleD = New-Object 'System.Windows.Forms.Label'
 	$labelHourAngleDest = New-Object 'System.Windows.Forms.Label'
-	$labelDestDayCondition = New-Object 'System.Windows.Forms.Label'
 	$labelRiseSetHourAngleP = New-Object 'System.Windows.Forms.Label'
 	$labelHourAnglePlayer = New-Object 'System.Windows.Forms.Label'
-	$labelPlayerDayCondition = New-Object 'System.Windows.Forms.Label'
 	$labelPlayer = New-Object 'System.Windows.Forms.Label'
 	$groupbox27 = New-Object 'System.Windows.Forms.GroupBox'
 	$label1013051 = New-Object 'System.Windows.Forms.Label'
@@ -62,10 +52,15 @@
 	$textbox68 = New-Object 'System.Windows.Forms.TextBox'
 	$textbox69 = New-Object 'System.Windows.Forms.TextBox'
 	$groupbox23 = New-Object 'System.Windows.Forms.GroupBox'
+	$label1013090 = New-Object 'System.Windows.Forms.Label'
 	$label80 = New-Object 'System.Windows.Forms.Label'
+	$textbox245 = New-Object 'System.Windows.Forms.TextBox'
 	$label72 = New-Object 'System.Windows.Forms.Label'
+	$label1013091 = New-Object 'System.Windows.Forms.Label'
 	$label81 = New-Object 'System.Windows.Forms.Label'
+	$label1013092 = New-Object 'System.Windows.Forms.Label'
 	$label82 = New-Object 'System.Windows.Forms.Label'
+	$textbox246 = New-Object 'System.Windows.Forms.TextBox'
 	$label74 = New-Object 'System.Windows.Forms.Label'
 	$textbox59 = New-Object 'System.Windows.Forms.TextBox'
 	$label76 = New-Object 'System.Windows.Forms.Label'
@@ -78,9 +73,14 @@
 	$textbox63 = New-Object 'System.Windows.Forms.TextBox'
 	$textbox58 = New-Object 'System.Windows.Forms.TextBox'
 	$groupbox22 = New-Object 'System.Windows.Forms.GroupBox'
+	$label1013093 = New-Object 'System.Windows.Forms.Label'
 	$label79 = New-Object 'System.Windows.Forms.Label'
+	$label1013094 = New-Object 'System.Windows.Forms.Label'
 	$label78 = New-Object 'System.Windows.Forms.Label'
+	$label1013095 = New-Object 'System.Windows.Forms.Label'
+	$textbox247 = New-Object 'System.Windows.Forms.TextBox'
 	$label70 = New-Object 'System.Windows.Forms.Label'
+	$textbox248 = New-Object 'System.Windows.Forms.TextBox'
 	$textbox57 = New-Object 'System.Windows.Forms.TextBox'
 	$label68 = New-Object 'System.Windows.Forms.Label'
 	$textbox56 = New-Object 'System.Windows.Forms.TextBox'
@@ -98,6 +98,7 @@
 	$label57 = New-Object 'System.Windows.Forms.Label'
 	$textbox43 = New-Object 'System.Windows.Forms.TextBox'
 	$label58 = New-Object 'System.Windows.Forms.Label'
+	$labelCondition = New-Object 'System.Windows.Forms.Label'
 	$textbox44 = New-Object 'System.Windows.Forms.TextBox'
 	$label59 = New-Object 'System.Windows.Forms.Label'
 	$textbox45 = New-Object 'System.Windows.Forms.TextBox'
@@ -109,6 +110,7 @@
 	$groupbox20 = New-Object 'System.Windows.Forms.GroupBox'
 	$labelMin = New-Object 'System.Windows.Forms.Label'
 	$label56 = New-Object 'System.Windows.Forms.Label'
+	$labelDestDayCondition = New-Object 'System.Windows.Forms.Label'
 	$label54 = New-Object 'System.Windows.Forms.Label'
 	$textbox27 = New-Object 'System.Windows.Forms.TextBox'
 	$labelIn = New-Object 'System.Windows.Forms.Label'
@@ -400,10 +402,7 @@
 	$tabpage9 = New-Object 'System.Windows.Forms.TabPage'
 	$richtextbox1 = New-Object 'System.Windows.Forms.RichTextBox'
 	$picturebox10 = New-Object 'System.Windows.Forms.PictureBox'
-	$labelCreatedByGraupunktWi = New-Object 'System.Windows.Forms.Label'
-	$statusbar1 = New-Object 'System.Windows.Forms.StatusStrip'
 	$picturebox2 = New-Object 'System.Windows.Forms.PictureBox'
-	###$statusbarpanel1 = New-Object 'System.Windows.Forms.StatusStripPanel'
 	$tooltip = New-Object 'System.Windows.Forms.ToolTip'
 	$contextmenustrip1 = New-Object 'System.Windows.Forms.ContextMenuStrip'
 	$labelLocal = New-Object 'System.Windows.Forms.Label'
@@ -1328,34 +1327,23 @@
 	$tabpage8.SuspendLayout()
 	$tabpage5.SuspendLayout()
 	$tabpage9.SuspendLayout()
-	###$statusbarpanel1.BeginInit()
 	#
 	# formProjectJericho
 	#
+	$formProjectJericho.Controls.Add($labelCreatedByGraupunktWi)
 	$formProjectJericho.Controls.Add($groupbox24)
 	$formProjectJericho.Controls.Add($panel1)
 	$formProjectJericho.Controls.Add($label1013061)
-	$formProjectJericho.Controls.Add($labelAbout)
-	$formProjectJericho.Controls.Add($label1013044)
 	$formProjectJericho.Controls.Add($labelSettings)
-	$formProjectJericho.Controls.Add($labelMAnual)
-	$formProjectJericho.Controls.Add($labelLocalMap)
-	$formProjectJericho.Controls.Add($labelPlanetMap)
-	$formProjectJericho.Controls.Add($labelSystemMap)
-	$formProjectJericho.Controls.Add($labelOrbitalDrop)
-	$formProjectJericho.Controls.Add($labelInformation)
-	$formProjectJericho.Controls.Add($labelNAvigation)
 	$formProjectJericho.Controls.Add($labelSupportAndUpdatesMer)
 	$formProjectJericho.Controls.Add($linklabelHttpsdiscordggWMh5YC)
 	$formProjectJericho.Controls.Add($tabcontrol1)
-	$formProjectJericho.Controls.Add($labelCreatedByGraupunktWi)
-	$formProjectJericho.Controls.Add($statusbar1)
 	$formProjectJericho.Controls.Add($picturebox2)
 	$formProjectJericho.AutoScaleDimensions = New-Object System.Drawing.SizeF(7, 15)
 	$formProjectJericho.AutoScaleMode = 'Font'
 	$formProjectJericho.BackColor = [System.Drawing.Color]::FromArgb(255, 32, 32, 32)
 	$formProjectJericho.BackgroundImageLayout = 'None'
-	$formProjectJericho.ClientSize = New-Object System.Drawing.Size(1241, 685)
+	$formProjectJericho.ClientSize = New-Object System.Drawing.Size(1241, 726)
 	$formProjectJericho.Font = [System.Drawing.Font]::new('Bookman Old Style', '8.25')
 	$formProjectJericho.FormBorderStyle = 'FixedSingle'
 	$formProjectJericho.Margin = '4, 3, 4, 3'
@@ -1363,6 +1351,19 @@
 	$formProjectJericho.Name = 'formProjectJericho'
 	$formProjectJericho.Text = 'Project Jericho'
 	$formProjectJericho.add_Load($formProjectJericho_Load)
+	#
+	# labelCreatedByGraupunktWi
+	#
+	$labelCreatedByGraupunktWi.AutoSize = $True
+	$labelCreatedByGraupunktWi.BackColor = [System.Drawing.Color]::Transparent 
+	$labelCreatedByGraupunktWi.Font = [System.Drawing.Font]::new('Montserrat', '8.999999')
+	$labelCreatedByGraupunktWi.ForeColor = [System.Drawing.Color]::Transparent 
+	$labelCreatedByGraupunktWi.Location = New-Object System.Drawing.Point(3, 702)
+	$labelCreatedByGraupunktWi.Margin = '4, 0, 4, 0'
+	$labelCreatedByGraupunktWi.Name = 'labelCreatedByGraupunktWi'
+	$labelCreatedByGraupunktWi.Size = New-Object System.Drawing.Size(573, 16)
+	$labelCreatedByGraupunktWi.TabIndex = 16
+	$labelCreatedByGraupunktWi.Text = 'Ⓒ created by Graupunkt with blood and love, with help from justMurphy, Xabdiben, BigCheese'
 	#
 	# groupbox24
 	#
@@ -1380,7 +1381,7 @@
 	$groupbox24.BackColor = [System.Drawing.Color]::FromArgb(255, 32, 32, 32)
 	$groupbox24.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox24.ForeColor = [System.Drawing.Color]::DarkOrange 
-	$groupbox24.Location = New-Object System.Drawing.Point(851, 13)
+	$groupbox24.Location = New-Object System.Drawing.Point(851, 7)
 	$groupbox24.Margin = '4, 3, 4, 3'
 	$groupbox24.Name = 'groupbox24'
 	$groupbox24.Padding = '4, 3, 4, 3'
@@ -1567,30 +1568,6 @@
 	$label1013061.Text = 'X'
 	$label1013061.add_Click($label1013061_Click)
 	#
-	# labelAbout
-	#
-	$labelAbout.AutoSize = $True
-	$labelAbout.ForeColor = [System.Drawing.Color]::DarkOrange 
-	$labelAbout.Location = New-Object System.Drawing.Point(713, 118)
-	$labelAbout.Margin = '4, 0, 4, 0'
-	$labelAbout.Name = 'labelAbout'
-	$labelAbout.Size = New-Object System.Drawing.Size(38, 15)
-	$labelAbout.TabIndex = 29
-	$labelAbout.Text = 'About'
-	$labelAbout.Visible = $False
-	#
-	# label1013044
-	#
-	$label1013044.AutoSize = $True
-	$label1013044.ForeColor = [System.Drawing.Color]::DarkOrange 
-	$label1013044.Location = New-Object System.Drawing.Point(643, 118)
-	$label1013044.Margin = '4, 0, 4, 0'
-	$label1013044.Name = 'label1013044'
-	$label1013044.Size = New-Object System.Drawing.Size(52, 15)
-	$label1013044.TabIndex = 28
-	$label1013044.Text = 'Settings'
-	$label1013044.Visible = $False
-	#
 	# labelSettings
 	#
 	$labelSettings.AutoSize = $True
@@ -1602,96 +1579,13 @@
 	$labelSettings.TabIndex = 27
 	$labelSettings.Visible = $False
 	#
-	# labelMAnual
-	#
-	$labelMAnual.AutoSize = $True
-	$labelMAnual.ForeColor = [System.Drawing.Color]::DarkOrange 
-	$labelMAnual.Location = New-Object System.Drawing.Point(580, 118)
-	$labelMAnual.Margin = '4, 0, 4, 0'
-	$labelMAnual.Name = 'labelMAnual'
-	$labelMAnual.Size = New-Object System.Drawing.Size(48, 15)
-	$labelMAnual.TabIndex = 26
-	$labelMAnual.Text = 'Manual'
-	$labelMAnual.Visible = $False
-	#
-	# labelLocalMap
-	#
-	$labelLocalMap.AutoSize = $True
-	$labelLocalMap.ForeColor = [System.Drawing.Color]::DarkOrange 
-	$labelLocalMap.Location = New-Object System.Drawing.Point(498, 118)
-	$labelLocalMap.Margin = '4, 0, 4, 0'
-	$labelLocalMap.Name = 'labelLocalMap'
-	$labelLocalMap.Size = New-Object System.Drawing.Size(63, 15)
-	$labelLocalMap.TabIndex = 25
-	$labelLocalMap.Text = 'Local Map'
-	$labelLocalMap.Visible = $False
-	#
-	# labelPlanetMap
-	#
-	$labelPlanetMap.AutoSize = $True
-	$labelPlanetMap.ForeColor = [System.Drawing.Color]::DarkOrange 
-	$labelPlanetMap.Location = New-Object System.Drawing.Point(408, 118)
-	$labelPlanetMap.Margin = '4, 0, 4, 0'
-	$labelPlanetMap.Name = 'labelPlanetMap'
-	$labelPlanetMap.Size = New-Object System.Drawing.Size(70, 15)
-	$labelPlanetMap.TabIndex = 24
-	$labelPlanetMap.Text = 'Planet Map'
-	$labelPlanetMap.Visible = $False
-	#
-	# labelSystemMap
-	#
-	$labelSystemMap.AutoSize = $True
-	$labelSystemMap.ForeColor = [System.Drawing.Color]::DarkOrange 
-	$labelSystemMap.Location = New-Object System.Drawing.Point(313, 118)
-	$labelSystemMap.Margin = '4, 0, 4, 0'
-	$labelSystemMap.Name = 'labelSystemMap'
-	$labelSystemMap.Size = New-Object System.Drawing.Size(73, 15)
-	$labelSystemMap.TabIndex = 23
-	$labelSystemMap.Text = 'System Map'
-	$labelSystemMap.Visible = $False
-	#
-	# labelOrbitalDrop
-	#
-	$labelOrbitalDrop.AutoSize = $True
-	$labelOrbitalDrop.ForeColor = [System.Drawing.Color]::DarkOrange 
-	$labelOrbitalDrop.Location = New-Object System.Drawing.Point(206, 118)
-	$labelOrbitalDrop.Margin = '4, 0, 4, 0'
-	$labelOrbitalDrop.Name = 'labelOrbitalDrop'
-	$labelOrbitalDrop.Size = New-Object System.Drawing.Size(76, 15)
-	$labelOrbitalDrop.TabIndex = 22
-	$labelOrbitalDrop.Text = 'Orbital Drop'
-	$labelOrbitalDrop.Visible = $False
-	#
-	# labelInformation
-	#
-	$labelInformation.AutoSize = $True
-	$labelInformation.ForeColor = [System.Drawing.Color]::DarkOrange 
-	$labelInformation.Location = New-Object System.Drawing.Point(13, 118)
-	$labelInformation.Margin = '4, 0, 4, 0'
-	$labelInformation.Name = 'labelInformation'
-	$labelInformation.Size = New-Object System.Drawing.Size(72, 15)
-	$labelInformation.TabIndex = 21
-	$labelInformation.Text = 'Information'
-	$labelInformation.Visible = $False
-	#
-	# labelNAvigation
-	#
-	$labelNAvigation.AutoSize = $True
-	$labelNAvigation.ForeColor = [System.Drawing.Color]::DarkOrange 
-	$labelNAvigation.Location = New-Object System.Drawing.Point(118, 118)
-	$labelNAvigation.Margin = '4, 0, 4, 0'
-	$labelNAvigation.Name = 'labelNAvigation'
-	$labelNAvigation.Size = New-Object System.Drawing.Size(66, 15)
-	$labelNAvigation.TabIndex = 20
-	$labelNAvigation.Text = 'Navigation'
-	$labelNAvigation.Visible = $False
-	#
 	# labelSupportAndUpdatesMer
 	#
 	$labelSupportAndUpdatesMer.AutoSize = $True
+	$labelSupportAndUpdatesMer.BackColor = [System.Drawing.Color]::Transparent 
 	$labelSupportAndUpdatesMer.Font = [System.Drawing.Font]::new('Montserrat', '8.999999')
-	$labelSupportAndUpdatesMer.ForeColor = [System.Drawing.Color]::FromArgb(255, 224, 224, 224)
-	$labelSupportAndUpdatesMer.Location = New-Object System.Drawing.Point(620, 664)
+	$labelSupportAndUpdatesMer.ForeColor = [System.Drawing.Color]::Transparent 
+	$labelSupportAndUpdatesMer.Location = New-Object System.Drawing.Point(740, 702)
 	$labelSupportAndUpdatesMer.Margin = '4, 0, 4, 0'
 	$labelSupportAndUpdatesMer.Name = 'labelSupportAndUpdatesMer'
 	$labelSupportAndUpdatesMer.Size = New-Object System.Drawing.Size(255, 16)
@@ -1703,7 +1597,7 @@
 	$linklabelHttpsdiscordggWMh5YC.Cursor = 'Hand'
 	$linklabelHttpsdiscordggWMh5YC.Font = [System.Drawing.Font]::new('Montserrat', '8.999999')
 	$linklabelHttpsdiscordggWMh5YC.LinkColor = [System.Drawing.Color]::DarkOrange 
-	$linklabelHttpsdiscordggWMh5YC.Location = New-Object System.Drawing.Point(940, 664)
+	$linklabelHttpsdiscordggWMh5YC.Location = New-Object System.Drawing.Point(1006, 702)
 	$linklabelHttpsdiscordggWMh5YC.Margin = '4, 0, 4, 0'
 	$linklabelHttpsdiscordggWMh5YC.Name = 'linklabelHttpsdiscordggWMh5YC'
 	$linklabelHttpsdiscordggWMh5YC.Size = New-Object System.Drawing.Size(210, 19)
@@ -1733,7 +1627,7 @@
 	$tabcontrol1.Padding = New-Object System.Drawing.Point(10, 3)
 	$tabcontrol1.SelectedIndex = 0
 	$tabcontrol1.ShowToolTips = $True
-	$tabcontrol1.Size = New-Object System.Drawing.Size(1255, 532)
+	$tabcontrol1.Size = New-Object System.Drawing.Size(1255, 605)
 	$tabcontrol1.TabIndex = 2
 	$tabcontrol1.add_Click($tabcontrol1_Click)
 	#
@@ -1741,10 +1635,8 @@
 	#
 	$tabpage1.Controls.Add($labelRiseSetHourAngleD)
 	$tabpage1.Controls.Add($labelHourAngleDest)
-	$tabpage1.Controls.Add($labelDestDayCondition)
 	$tabpage1.Controls.Add($labelRiseSetHourAngleP)
 	$tabpage1.Controls.Add($labelHourAnglePlayer)
-	$tabpage1.Controls.Add($labelPlayerDayCondition)
 	$tabpage1.Controls.Add($labelPlayer)
 	$tabpage1.Controls.Add($groupbox27)
 	$tabpage1.Controls.Add($labelDestination)
@@ -1760,7 +1652,7 @@
 	$tabpage1.Controls.Add($groupbox15)
 	$tabpage1.Controls.Add($groupbox1)
 	$tabpage1.Controls.Add($picturebox7)
-	$tabpage1.BackColor = [System.Drawing.Color]::Black 
+	$tabpage1.BackColor = [System.Drawing.Color]::FromArgb(255, 32, 32, 32)
 	$tabpage1.BackgroundImageLayout = 'Stretch'
 	$tabpage1.Cursor = 'Default'
 	$tabpage1.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
@@ -1770,7 +1662,7 @@
 	$tabpage1.Name = 'tabpage1'
 	$tabpage1.Padding = '4, 3, 4, 3'
 	$tabpage1.RightToLeft = 'No'
-	$tabpage1.Size = New-Object System.Drawing.Size(1247, 504)
+	$tabpage1.Size = New-Object System.Drawing.Size(1247, 577)
 	$tabpage1.TabIndex = 0
 	$tabpage1.Text = 'Informations'
 	#
@@ -1798,18 +1690,6 @@
 	$labelHourAngleDest.TabIndex = 54
 	$labelHourAngleDest.Text = 'HourHangleDest'
 	#
-	# labelDestDayCondition
-	#
-	$labelDestDayCondition.AutoSize = $True
-	$labelDestDayCondition.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
-	$labelDestDayCondition.ForeColor = [System.Drawing.Color]::Gray 
-	$labelDestDayCondition.Location = New-Object System.Drawing.Point(609, 443)
-	$labelDestDayCondition.Margin = '4, 0, 4, 0'
-	$labelDestDayCondition.Name = 'labelDestDayCondition'
-	$labelDestDayCondition.Size = New-Object System.Drawing.Size(127, 16)
-	$labelDestDayCondition.TabIndex = 53
-	$labelDestDayCondition.Text = 'DestDayCondition'
-	#
 	# labelRiseSetHourAngleP
 	#
 	$labelRiseSetHourAngleP.AutoSize = $True
@@ -1834,22 +1714,10 @@
 	$labelHourAnglePlayer.TabIndex = 51
 	$labelHourAnglePlayer.Text = 'HourAnglePlayer'
 	#
-	# labelPlayerDayCondition
-	#
-	$labelPlayerDayCondition.AutoSize = $True
-	$labelPlayerDayCondition.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
-	$labelPlayerDayCondition.ForeColor = [System.Drawing.Color]::Gray 
-	$labelPlayerDayCondition.Location = New-Object System.Drawing.Point(609, 201)
-	$labelPlayerDayCondition.Margin = '4, 0, 4, 0'
-	$labelPlayerDayCondition.Name = 'labelPlayerDayCondition'
-	$labelPlayerDayCondition.Size = New-Object System.Drawing.Size(143, 16)
-	$labelPlayerDayCondition.TabIndex = 50
-	$labelPlayerDayCondition.Text = 'PlayerDayCondition'
-	#
 	# labelPlayer
 	#
 	$labelPlayer.AutoSize = $True
-	$labelPlayer.BackColor = [System.Drawing.Color]::Transparent 
+	$labelPlayer.BackColor = [System.Drawing.Color]::Black 
 	$labelPlayer.Font = [System.Drawing.Font]::new('Dungeon', '20.25', [System.Drawing.FontStyle]'Bold')
 	$labelPlayer.ForeColor = [System.Drawing.Color]::DarkOrange 
 	$labelPlayer.Location = New-Object System.Drawing.Point(270, 12)
@@ -1868,7 +1736,7 @@
 	$groupbox27.Controls.Add($textbox73)
 	$groupbox27.Controls.Add($textbox74)
 	$groupbox27.Controls.Add($textbox75)
-	$groupbox27.BackColor = [System.Drawing.Color]::Transparent 
+	$groupbox27.BackColor = [System.Drawing.Color]::Black 
 	$groupbox27.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox27.ForeColor = [System.Drawing.Color]::DarkOrange 
 	$groupbox27.Location = New-Object System.Drawing.Point(661, 50)
@@ -1969,11 +1837,11 @@
 	# labelDestination
 	#
 	$labelDestination.AutoSize = $True
-	$labelDestination.BackColor = [System.Drawing.Color]::Transparent 
+	$labelDestination.BackColor = [System.Drawing.Color]::Black 
 	$labelDestination.FlatStyle = 'Flat'
 	$labelDestination.Font = [System.Drawing.Font]::new('Dungeon', '20.25', [System.Drawing.FontStyle]'Bold')
 	$labelDestination.ForeColor = [System.Drawing.Color]::DarkOrange 
-	$labelDestination.Location = New-Object System.Drawing.Point(226, 247)
+	$labelDestination.Location = New-Object System.Drawing.Point(226, 266)
 	$labelDestination.Margin = '4, 0, 4, 0'
 	$labelDestination.Name = 'labelDestination'
 	$labelDestination.Size = New-Object System.Drawing.Size(189, 30)
@@ -1988,7 +1856,7 @@
 	$groupbox25.Controls.Add($textbox67)
 	$groupbox25.Controls.Add($textbox68)
 	$groupbox25.Controls.Add($textbox69)
-	$groupbox25.BackColor = [System.Drawing.Color]::Transparent 
+	$groupbox25.BackColor = [System.Drawing.Color]::Black 
 	$groupbox25.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox25.ForeColor = [System.Drawing.Color]::DarkOrange 
 	$groupbox25.Location = New-Object System.Drawing.Point(936, 50)
@@ -2091,10 +1959,15 @@ UTC = The time in which basic calculations and events take place.')
 	#
 	# groupbox23
 	#
+	$groupbox23.Controls.Add($label1013090)
 	$groupbox23.Controls.Add($label80)
+	$groupbox23.Controls.Add($textbox245)
 	$groupbox23.Controls.Add($label72)
+	$groupbox23.Controls.Add($label1013091)
 	$groupbox23.Controls.Add($label81)
+	$groupbox23.Controls.Add($label1013092)
 	$groupbox23.Controls.Add($label82)
+	$groupbox23.Controls.Add($textbox246)
 	$groupbox23.Controls.Add($label74)
 	$groupbox23.Controls.Add($textbox59)
 	$groupbox23.Controls.Add($label76)
@@ -2106,15 +1979,15 @@ UTC = The time in which basic calculations and events take place.')
 	$groupbox23.Controls.Add($textbox62)
 	$groupbox23.Controls.Add($textbox63)
 	$groupbox23.Controls.Add($textbox58)
-	$groupbox23.BackColor = [System.Drawing.Color]::Transparent 
+	$groupbox23.BackColor = [System.Drawing.Color]::Black 
 	$groupbox23.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox23.ForeColor = [System.Drawing.Color]::DarkOrange 
-	$groupbox23.Location = New-Object System.Drawing.Point(261, 382)
+	$groupbox23.Location = New-Object System.Drawing.Point(261, 401)
 	$groupbox23.Margin = '4, 3, 4, 3'
 	$groupbox23.Name = 'groupbox23'
 	$groupbox23.Padding = '4, 3, 4, 3'
 	$groupbox23.RightToLeft = 'Yes'
-	$groupbox23.Size = New-Object System.Drawing.Size(310, 84)
+	$groupbox23.Size = New-Object System.Drawing.Size(310, 105)
 	$groupbox23.TabIndex = 47
 	$groupbox23.TabStop = $False
 	$groupbox23.Text = 'LOCATIONS '
@@ -2122,6 +1995,19 @@ UTC = The time in which basic calculations and events take place.')
 POI = Point of Interest
 QT = Quantum Travel Beacon
 OM = Orbital Marker')
+	#
+	# label1013090
+	#
+	$label1013090.AutoSize = $True
+	$label1013090.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
+	$label1013090.ForeColor = [System.Drawing.Color]::Gray 
+	$label1013090.Location = New-Object System.Drawing.Point(279, 79)
+	$label1013090.Margin = '4, 0, 4, 0'
+	$label1013090.Name = 'label1013090'
+	$label1013090.RightToLeft = 'No'
+	$label1013090.Size = New-Object System.Drawing.Size(23, 16)
+	$label1013090.TabIndex = 53
+	$label1013090.Text = 'km'
 	#
 	# label80
 	#
@@ -2134,6 +2020,22 @@ OM = Orbital Marker')
 	$label80.Size = New-Object System.Drawing.Size(26, 26)
 	$label80.TabIndex = 51
 	$label80.Text = '→'
+	#
+	# textbox245
+	#
+	$textbox245.BackColor = [System.Drawing.Color]::Black 
+	$textbox245.BorderStyle = 'None'
+	$textbox245.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
+	$textbox245.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
+	$textbox245.Location = New-Object System.Drawing.Point(237, 79)
+	$textbox245.Margin = '0, 0, 0, 0'
+	$textbox245.Name = 'textbox245'
+	$textbox245.ReadOnly = $True
+	$textbox245.RightToLeft = 'No'
+	$textbox245.Size = New-Object System.Drawing.Size(39, 16)
+	$textbox245.TabIndex = 52
+	$textbox245.Text = '-'
+	$textbox245.TextAlign = 'Right'
 	#
 	# label72
 	#
@@ -2148,6 +2050,18 @@ OM = Orbital Marker')
 	$label72.TabIndex = 46
 	$label72.Text = 'km'
 	#
+	# label1013091
+	#
+	$label1013091.Font = [System.Drawing.Font]::new('Arial Narrow', '15.75')
+	$label1013091.ForeColor = [System.Drawing.Color]::Gray 
+	$label1013091.Location = New-Object System.Drawing.Point(211, 71)
+	$label1013091.Margin = '0, 0, 0, 0'
+	$label1013091.Name = 'label1013091'
+	$label1013091.RightToLeft = 'No'
+	$label1013091.Size = New-Object System.Drawing.Size(26, 26)
+	$label1013091.TabIndex = 51
+	$label1013091.Text = '→'
+	#
 	# label81
 	#
 	$label81.Font = [System.Drawing.Font]::new('Arial Narrow', '15.75')
@@ -2160,6 +2074,19 @@ OM = Orbital Marker')
 	$label81.TabIndex = 50
 	$label81.Text = '→'
 	#
+	# label1013092
+	#
+	$label1013092.AutoSize = $True
+	$label1013092.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
+	$label1013092.ForeColor = [System.Drawing.Color]::Brown 
+	$label1013092.Location = New-Object System.Drawing.Point(15, 79)
+	$label1013092.Margin = '4, 0, 4, 0'
+	$label1013092.Name = 'label1013092'
+	$label1013092.RightToLeft = 'No'
+	$label1013092.Size = New-Object System.Drawing.Size(23, 16)
+	$label1013092.TabIndex = 49
+	$label1013092.Text = 'OC'
+	#
 	# label82
 	#
 	$label82.Font = [System.Drawing.Font]::new('Arial Narrow', '15.75')
@@ -2171,6 +2098,22 @@ OM = Orbital Marker')
 	$label82.Size = New-Object System.Drawing.Size(26, 26)
 	$label82.TabIndex = 49
 	$label82.Text = '→'
+	#
+	# textbox246
+	#
+	$textbox246.BackColor = [System.Drawing.Color]::Black 
+	$textbox246.BorderStyle = 'None'
+	$textbox246.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
+	$textbox246.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
+	$textbox246.Location = New-Object System.Drawing.Point(47, 79)
+	$textbox246.Margin = '0, 0, 0, 0'
+	$textbox246.Name = 'textbox246'
+	$textbox246.ReadOnly = $True
+	$textbox246.RightToLeft = 'No'
+	$textbox246.Size = New-Object System.Drawing.Size(161, 16)
+	$textbox246.TabIndex = 50
+	$textbox246.Text = '-'
+	$textbox246.TextAlign = 'Right'
 	#
 	# label74
 	#
@@ -2335,9 +2278,14 @@ OM = Orbital Marker')
 	#
 	# groupbox22
 	#
+	$groupbox22.Controls.Add($label1013093)
 	$groupbox22.Controls.Add($label79)
+	$groupbox22.Controls.Add($label1013094)
 	$groupbox22.Controls.Add($label78)
+	$groupbox22.Controls.Add($label1013095)
+	$groupbox22.Controls.Add($textbox247)
 	$groupbox22.Controls.Add($label70)
+	$groupbox22.Controls.Add($textbox248)
 	$groupbox22.Controls.Add($textbox57)
 	$groupbox22.Controls.Add($label68)
 	$groupbox22.Controls.Add($textbox56)
@@ -2350,7 +2298,7 @@ OM = Orbital Marker')
 	$groupbox22.Controls.Add($textbox21)
 	$groupbox22.Controls.Add($textbox20)
 	$groupbox22.Controls.Add($textbox19)
-	$groupbox22.BackColor = [System.Drawing.Color]::Transparent 
+	$groupbox22.BackColor = [System.Drawing.Color]::Black 
 	$groupbox22.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox22.ForeColor = [System.Drawing.Color]::DarkOrange 
 	$groupbox22.Location = New-Object System.Drawing.Point(261, 143)
@@ -2358,7 +2306,7 @@ OM = Orbital Marker')
 	$groupbox22.Name = 'groupbox22'
 	$groupbox22.Padding = '4, 3, 4, 3'
 	$groupbox22.RightToLeft = 'Yes'
-	$groupbox22.Size = New-Object System.Drawing.Size(310, 84)
+	$groupbox22.Size = New-Object System.Drawing.Size(310, 105)
 	$groupbox22.TabIndex = 19
 	$groupbox22.TabStop = $False
 	$groupbox22.Text = 'LOCATIONS '
@@ -2367,6 +2315,19 @@ POI = Point of Interest
 QT = Quantum Travel Beacon
 OC = Object Container
 ')
+	#
+	# label1013093
+	#
+	$label1013093.AutoSize = $True
+	$label1013093.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
+	$label1013093.ForeColor = [System.Drawing.Color]::Gray 
+	$label1013093.Location = New-Object System.Drawing.Point(279, 59)
+	$label1013093.Margin = '4, 0, 4, 0'
+	$label1013093.Name = 'label1013093'
+	$label1013093.RightToLeft = 'No'
+	$label1013093.Size = New-Object System.Drawing.Size(23, 16)
+	$label1013093.TabIndex = 57
+	$label1013093.Text = 'km'
 	#
 	# label79
 	#
@@ -2380,6 +2341,18 @@ OC = Object Container
 	$label79.TabIndex = 48
 	$label79.Text = '→'
 	#
+	# label1013094
+	#
+	$label1013094.Font = [System.Drawing.Font]::new('Arial Narrow', '15.75')
+	$label1013094.ForeColor = [System.Drawing.Color]::Gray 
+	$label1013094.Location = New-Object System.Drawing.Point(211, 51)
+	$label1013094.Margin = '0, 0, 0, 0'
+	$label1013094.Name = 'label1013094'
+	$label1013094.RightToLeft = 'No'
+	$label1013094.Size = New-Object System.Drawing.Size(26, 26)
+	$label1013094.TabIndex = 58
+	$label1013094.Text = '→'
+	#
 	# label78
 	#
 	$label78.Font = [System.Drawing.Font]::new('Arial Narrow', '15.75')
@@ -2392,12 +2365,41 @@ OC = Object Container
 	$label78.TabIndex = 48
 	$label78.Text = '→'
 	#
+	# label1013095
+	#
+	$label1013095.AutoSize = $True
+	$label1013095.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
+	$label1013095.ForeColor = [System.Drawing.Color]::Brown 
+	$label1013095.Location = New-Object System.Drawing.Point(15, 59)
+	$label1013095.Margin = '4, 0, 4, 0'
+	$label1013095.Name = 'label1013095'
+	$label1013095.RightToLeft = 'No'
+	$label1013095.Size = New-Object System.Drawing.Size(23, 16)
+	$label1013095.TabIndex = 54
+	$label1013095.Text = 'OM'
+	#
+	# textbox247
+	#
+	$textbox247.BackColor = [System.Drawing.Color]::Black 
+	$textbox247.BorderStyle = 'None'
+	$textbox247.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
+	$textbox247.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
+	$textbox247.Location = New-Object System.Drawing.Point(47, 59)
+	$textbox247.Margin = '0, 0, 0, 0'
+	$textbox247.Name = 'textbox247'
+	$textbox247.ReadOnly = $True
+	$textbox247.RightToLeft = 'No'
+	$textbox247.Size = New-Object System.Drawing.Size(161, 16)
+	$textbox247.TabIndex = 55
+	$textbox247.Text = '-'
+	$textbox247.TextAlign = 'Right'
+	#
 	# label70
 	#
 	$label70.AutoSize = $True
 	$label70.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$label70.ForeColor = [System.Drawing.Color]::Gray 
-	$label70.Location = New-Object System.Drawing.Point(279, 60)
+	$label70.Location = New-Object System.Drawing.Point(279, 78)
 	$label70.Margin = '4, 0, 4, 0'
 	$label70.Name = 'label70'
 	$label70.RightToLeft = 'No'
@@ -2405,13 +2407,29 @@ OC = Object Container
 	$label70.TabIndex = 46
 	$label70.Text = 'km'
 	#
+	# textbox248
+	#
+	$textbox248.BackColor = [System.Drawing.Color]::Black 
+	$textbox248.BorderStyle = 'None'
+	$textbox248.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
+	$textbox248.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
+	$textbox248.Location = New-Object System.Drawing.Point(237, 59)
+	$textbox248.Margin = '0, 0, 0, 0'
+	$textbox248.Name = 'textbox248'
+	$textbox248.ReadOnly = $True
+	$textbox248.RightToLeft = 'No'
+	$textbox248.Size = New-Object System.Drawing.Size(39, 16)
+	$textbox248.TabIndex = 56
+	$textbox248.Text = '-'
+	$textbox248.TextAlign = 'Right'
+	#
 	# textbox57
 	#
 	$textbox57.BackColor = [System.Drawing.Color]::Black 
 	$textbox57.BorderStyle = 'None'
 	$textbox57.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox57.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
-	$textbox57.Location = New-Object System.Drawing.Point(237, 60)
+	$textbox57.Location = New-Object System.Drawing.Point(237, 78)
 	$textbox57.Margin = '0, 0, 0, 0'
 	$textbox57.Name = 'textbox57'
 	$textbox57.ReadOnly = $True
@@ -2454,7 +2472,7 @@ OC = Object Container
 	#
 	$label69.Font = [System.Drawing.Font]::new('Arial Narrow', '15.75')
 	$label69.ForeColor = [System.Drawing.Color]::Gray 
-	$label69.Location = New-Object System.Drawing.Point(211, 52)
+	$label69.Location = New-Object System.Drawing.Point(211, 70)
 	$label69.Margin = '0, 0, 0, 0'
 	$label69.Name = 'label69'
 	$label69.RightToLeft = 'No'
@@ -2496,7 +2514,7 @@ OC = Object Container
 	$labelOC.AutoSize = $True
 	$labelOC.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$labelOC.ForeColor = [System.Drawing.Color]::Gray 
-	$labelOC.Location = New-Object System.Drawing.Point(15, 60)
+	$labelOC.Location = New-Object System.Drawing.Point(15, 78)
 	$labelOC.Margin = '4, 0, 4, 0'
 	$labelOC.Name = 'labelOC'
 	$labelOC.RightToLeft = 'No'
@@ -2552,7 +2570,7 @@ OC = Object Container
 	$textbox20.BorderStyle = 'None'
 	$textbox20.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox20.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
-	$textbox20.Location = New-Object System.Drawing.Point(47, 60)
+	$textbox20.Location = New-Object System.Drawing.Point(47, 78)
 	$textbox20.Margin = '0, 0, 0, 0'
 	$textbox20.Name = 'textbox20'
 	$textbox20.ReadOnly = $True
@@ -2584,6 +2602,7 @@ OC = Object Container
 	$groupbox21.Controls.Add($label57)
 	$groupbox21.Controls.Add($textbox43)
 	$groupbox21.Controls.Add($label58)
+	$groupbox21.Controls.Add($labelCondition)
 	$groupbox21.Controls.Add($textbox44)
 	$groupbox21.Controls.Add($label59)
 	$groupbox21.Controls.Add($textbox45)
@@ -2592,15 +2611,15 @@ OC = Object Container
 	$groupbox21.Controls.Add($label61)
 	$groupbox21.Controls.Add($label62)
 	$groupbox21.Controls.Add($label63)
-	$groupbox21.BackColor = [System.Drawing.Color]::Transparent 
+	$groupbox21.BackColor = [System.Drawing.Color]::Black 
 	$groupbox21.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox21.ForeColor = [System.Drawing.Color]::DarkOrange 
-	$groupbox21.Location = New-Object System.Drawing.Point(37, 382)
+	$groupbox21.Location = New-Object System.Drawing.Point(37, 401)
 	$groupbox21.Margin = '4, 3, 4, 3'
 	$groupbox21.Name = 'groupbox21'
 	$groupbox21.Padding = '4, 3, 4, 3'
 	$groupbox21.RightToLeft = 'Yes'
-	$groupbox21.Size = New-Object System.Drawing.Size(208, 84)
+	$groupbox21.Size = New-Object System.Drawing.Size(208, 105)
 	$groupbox21.TabIndex = 38
 	$groupbox21.TabStop = $False
 	$groupbox21.Text = 'CONDITIONS '
@@ -2663,6 +2682,18 @@ OC = Object Container
 	$label58.Size = New-Object System.Drawing.Size(27, 16)
 	$label58.TabIndex = 36
 	$label58.Text = 'min'
+	#
+	# labelCondition
+	#
+	$labelCondition.AutoSize = $True
+	$labelCondition.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
+	$labelCondition.ForeColor = [System.Drawing.Color]::Brown 
+	$labelCondition.Location = New-Object System.Drawing.Point(15, 81)
+	$labelCondition.Margin = '4, 0, 4, 0'
+	$labelCondition.Name = 'labelCondition'
+	$labelCondition.Size = New-Object System.Drawing.Size(71, 16)
+	$labelCondition.TabIndex = 50
+	$labelCondition.Text = 'Condition'
 	#
 	# textbox44
 	#
@@ -2781,6 +2812,7 @@ OC = Object Container
 	#
 	$groupbox20.Controls.Add($labelMin)
 	$groupbox20.Controls.Add($label56)
+	$groupbox20.Controls.Add($labelDestDayCondition)
 	$groupbox20.Controls.Add($label54)
 	$groupbox20.Controls.Add($textbox27)
 	$groupbox20.Controls.Add($labelIn)
@@ -2791,7 +2823,7 @@ OC = Object Container
 	$groupbox20.Controls.Add($textbox39)
 	$groupbox20.Controls.Add($textbox40)
 	$groupbox20.Controls.Add($textbox41)
-	$groupbox20.BackColor = [System.Drawing.Color]::Transparent 
+	$groupbox20.BackColor = [System.Drawing.Color]::Black 
 	$groupbox20.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox20.ForeColor = [System.Drawing.Color]::DarkOrange 
 	$groupbox20.Location = New-Object System.Drawing.Point(37, 143)
@@ -2799,7 +2831,7 @@ OC = Object Container
 	$groupbox20.Name = 'groupbox20'
 	$groupbox20.Padding = '4, 3, 4, 3'
 	$groupbox20.RightToLeft = 'Yes'
-	$groupbox20.Size = New-Object System.Drawing.Size(207, 84)
+	$groupbox20.Size = New-Object System.Drawing.Size(208, 105)
 	$groupbox20.TabIndex = 13
 	$groupbox20.TabStop = $False
 	$groupbox20.Text = 'CONDITIONS '
@@ -2830,6 +2862,18 @@ OC = Object Container
 	$label56.Size = New-Object System.Drawing.Size(27, 16)
 	$label56.TabIndex = 36
 	$label56.Text = 'min'
+	#
+	# labelDestDayCondition
+	#
+	$labelDestDayCondition.AutoSize = $True
+	$labelDestDayCondition.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
+	$labelDestDayCondition.ForeColor = [System.Drawing.Color]::Gray 
+	$labelDestDayCondition.Location = New-Object System.Drawing.Point(15, 80)
+	$labelDestDayCondition.Margin = '4, 0, 4, 0'
+	$labelDestDayCondition.Name = 'labelDestDayCondition'
+	$labelDestDayCondition.Size = New-Object System.Drawing.Size(71, 16)
+	$labelDestDayCondition.TabIndex = 53
+	$labelDestDayCondition.Text = 'Condition'
 	#
 	# label54
 	#
@@ -2987,10 +3031,10 @@ OC = Object Container
 	$groupbox19.Controls.Add($label48)
 	$groupbox19.Controls.Add($label49)
 	$groupbox19.Controls.Add($label50)
-	$groupbox19.BackColor = [System.Drawing.Color]::Transparent 
+	$groupbox19.BackColor = [System.Drawing.Color]::Black 
 	$groupbox19.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox19.ForeColor = [System.Drawing.Color]::DarkOrange 
-	$groupbox19.Location = New-Object System.Drawing.Point(391, 284)
+	$groupbox19.Location = New-Object System.Drawing.Point(391, 303)
 	$groupbox19.Margin = '4, 3, 4, 3'
 	$groupbox19.Name = 'groupbox19'
 	$groupbox19.Padding = '4, 3, 4, 3'
@@ -3138,10 +3182,10 @@ OC = Object Container
 	$groupbox18.Controls.Add($textbox12)
 	$groupbox18.Controls.Add($textbox10)
 	$groupbox18.Controls.Add($textbox11)
-	$groupbox18.BackColor = [System.Drawing.Color]::Transparent 
+	$groupbox18.BackColor = [System.Drawing.Color]::Black 
 	$groupbox18.Font = [System.Drawing.Font]::new('Dungeon', '9')
 	$groupbox18.ForeColor = [System.Drawing.Color]::DarkOrange 
-	$groupbox18.Location = New-Object System.Drawing.Point(237, 284)
+	$groupbox18.Location = New-Object System.Drawing.Point(237, 303)
 	$groupbox18.Margin = '4, 3, 4, 3'
 	$groupbox18.Name = 'groupbox18'
 	$groupbox18.Padding = '4, 3, 4, 3'
@@ -3250,7 +3294,7 @@ OC = Object Container
 	$groupbox17.Controls.Add($textbox51)
 	$groupbox17.Controls.Add($textbox52)
 	$groupbox17.Controls.Add($textbox53)
-	$groupbox17.BackColor = [System.Drawing.Color]::Transparent 
+	$groupbox17.BackColor = [System.Drawing.Color]::Black 
 	$groupbox17.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox17.ForeColor = [System.Drawing.Color]::DarkOrange 
 	$groupbox17.Location = New-Object System.Drawing.Point(391, 50)
@@ -3402,10 +3446,10 @@ Values are given in degrees decimal.')
 	$groupbox16.Controls.Add($textbox5)
 	$groupbox16.Controls.Add($label44)
 	$groupbox16.Controls.Add($textbox4)
-	$groupbox16.BackColor = [System.Drawing.Color]::Transparent 
+	$groupbox16.BackColor = [System.Drawing.Color]::Black 
 	$groupbox16.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox16.ForeColor = [System.Drawing.Color]::DarkOrange 
-	$groupbox16.Location = New-Object System.Drawing.Point(37, 284)
+	$groupbox16.Location = New-Object System.Drawing.Point(37, 303)
 	$groupbox16.Margin = '4, 3, 4, 3'
 	$groupbox16.Name = 'groupbox16'
 	$groupbox16.Padding = '4, 3, 4, 3'
@@ -3511,7 +3555,7 @@ Values are given in degrees decimal.')
 	$groupbox15.Controls.Add($textbox23)
 	$groupbox15.Controls.Add($textbox7)
 	$groupbox15.Controls.Add($textbox8)
-	$groupbox15.BackColor = [System.Drawing.Color]::Transparent 
+	$groupbox15.BackColor = [System.Drawing.Color]::Black 
 	$groupbox15.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox15.ForeColor = [System.Drawing.Color]::DarkOrange 
 	$groupbox15.Location = New-Object System.Drawing.Point(237, 50)
@@ -3620,7 +3664,7 @@ Values are given in degrees decimal.')
 	$groupbox1.Controls.Add($textbox2)
 	$groupbox1.Controls.Add($textbox1)
 	$groupbox1.Controls.Add($textbox3)
-	$groupbox1.BackColor = [System.Drawing.Color]::Transparent 
+	$groupbox1.BackColor = [System.Drawing.Color]::Black 
 	$groupbox1.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox1.ForeColor = [System.Drawing.Color]::DarkOrange 
 	$groupbox1.Location = New-Object System.Drawing.Point(37, 50)
@@ -3723,11 +3767,12 @@ Values are given in degrees decimal.')
 	#
 	# picturebox7
 	#
+	$picturebox7.BackColor = [System.Drawing.Color]::Black 
 	$picturebox7.BackgroundImageLayout = 'Stretch'
 	$picturebox7.Location = New-Object System.Drawing.Point(0, 0)
 	$picturebox7.Margin = '4, 3, 4, 3'
 	$picturebox7.Name = 'picturebox7'
-	$picturebox7.Size = New-Object System.Drawing.Size(1249, 505)
+	$picturebox7.Size = New-Object System.Drawing.Size(1249, 538)
 	$picturebox7.SizeMode = 'StretchImage'
 	$picturebox7.TabIndex = 49
 	$picturebox7.TabStop = $False
@@ -3744,14 +3789,14 @@ Values are given in degrees decimal.')
 	$tabpage2.Controls.Add($groupbox33)
 	$tabpage2.Controls.Add($groupbox29)
 	$tabpage2.Controls.Add($picturebox8)
-	$tabpage2.BackColor = [System.Drawing.Color]::Black 
+	$tabpage2.BackColor = [System.Drawing.Color]::FromArgb(255, 32, 32, 32)
 	$tabpage2.BackgroundImageLayout = 'Stretch'
 	$tabpage2.Cursor = 'Default'
 	$tabpage2.Location = New-Object System.Drawing.Point(4, 24)
 	$tabpage2.Margin = '4, 3, 4, 3'
 	$tabpage2.Name = 'tabpage2'
 	$tabpage2.Padding = '4, 3, 4, 3'
-	$tabpage2.Size = New-Object System.Drawing.Size(1247, 504)
+	$tabpage2.Size = New-Object System.Drawing.Size(1247, 577)
 	$tabpage2.TabIndex = 1
 	$tabpage2.Text = 'Navigation'
 	#
@@ -3765,7 +3810,7 @@ Values are given in degrees decimal.')
 	$groupbox26.Controls.Add($textbox70)
 	$groupbox26.Controls.Add($textbox71)
 	$groupbox26.Controls.Add($textbox72)
-	$groupbox26.BackColor = [System.Drawing.Color]::Transparent 
+	$groupbox26.BackColor = [System.Drawing.Color]::Black 
 	$groupbox26.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox26.ForeColor = [System.Drawing.Color]::DarkOrange 
 	$groupbox26.Location = New-Object System.Drawing.Point(940, 24)
@@ -3906,7 +3951,7 @@ Values are given in degrees decimal.')
 	$groupbox42.Controls.Add($textbox168)
 	$groupbox42.Controls.Add($textbox169)
 	$groupbox42.Controls.Add($textbox170)
-	$groupbox42.BackColor = [System.Drawing.Color]::Transparent 
+	$groupbox42.BackColor = [System.Drawing.Color]::Black 
 	$groupbox42.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox42.ForeColor = [System.Drawing.Color]::DarkOrange 
 	$groupbox42.Location = New-Object System.Drawing.Point(282, 141)
@@ -4071,7 +4116,7 @@ Values are given in degrees decimal.')
 	$groupbox41.Controls.Add($textbox163)
 	$groupbox41.Controls.Add($textbox164)
 	$groupbox41.Controls.Add($textbox189)
-	$groupbox41.BackColor = [System.Drawing.Color]::Transparent 
+	$groupbox41.BackColor = [System.Drawing.Color]::Black 
 	$groupbox41.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox41.ForeColor = [System.Drawing.Color]::DarkOrange 
 	$groupbox41.Location = New-Object System.Drawing.Point(282, 236)
@@ -4335,9 +4380,9 @@ Values are given in degrees decimal.')
 	$groupbox32.Controls.Add($labelFinalDISTANCE)
 	$groupbox32.Controls.Add($labelCurrentDistance)
 	$groupbox32.Controls.Add($labelQuantumMarker)
-	$groupbox32.BackColor = [System.Drawing.Color]::Transparent 
+	$groupbox32.BackColor = [System.Drawing.Color]::Black 
 	$groupbox32.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
-	$groupbox32.ForeColor = [System.Drawing.Color]::DarkOrange 
+	$groupbox32.ForeColor = [System.Drawing.Color]::Brown 
 	$groupbox32.Location = New-Object System.Drawing.Point(597, 319)
 	$groupbox32.Margin = '4, 3, 4, 3'
 	$groupbox32.Name = 'groupbox32'
@@ -4633,7 +4678,7 @@ Values are given in degrees decimal.')
 	$groupbox31.Controls.Add($labelMinutes)
 	$groupbox31.Controls.Add($labelHours)
 	$groupbox31.Controls.Add($labelDays)
-	$groupbox31.BackColor = [System.Drawing.Color]::Transparent 
+	$groupbox31.BackColor = [System.Drawing.Color]::Black 
 	$groupbox31.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox31.ForeColor = [System.Drawing.Color]::DarkOrange 
 	$groupbox31.Location = New-Object System.Drawing.Point(36, 24)
@@ -4782,7 +4827,7 @@ Values are given in degrees decimal.')
 	$groupbox40.Controls.Add($textbox156)
 	$groupbox40.Controls.Add($textbox157)
 	$groupbox40.Controls.Add($textbox158)
-	$groupbox40.BackColor = [System.Drawing.Color]::Transparent 
+	$groupbox40.BackColor = [System.Drawing.Color]::Black 
 	$groupbox40.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox40.ForeColor = [System.Drawing.Color]::DarkOrange 
 	$groupbox40.Location = New-Object System.Drawing.Point(36, 141)
@@ -5082,7 +5127,7 @@ Values are given in degrees decimal.')
 	$groupbox30.Controls.Add($labelDelta)
 	$groupbox30.Controls.Add($textbox84)
 	$groupbox30.Controls.Add($labelCurrent)
-	$groupbox30.BackColor = [System.Drawing.Color]::Transparent 
+	$groupbox30.BackColor = [System.Drawing.Color]::Black 
 	$groupbox30.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox30.ForeColor = [System.Drawing.Color]::DarkOrange 
 	$groupbox30.Location = New-Object System.Drawing.Point(469, 24)
@@ -5346,7 +5391,7 @@ Values are given in degrees decimal.')
 	$groupbox33.Controls.Add($label3)
 	$groupbox33.Controls.Add($label1013055)
 	$groupbox33.Controls.Add($label1013054)
-	$groupbox33.BackColor = [System.Drawing.Color]::Transparent 
+	$groupbox33.BackColor = [System.Drawing.Color]::Black 
 	$groupbox33.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox33.ForeColor = [System.Drawing.Color]::DarkOrange 
 	$groupbox33.Location = New-Object System.Drawing.Point(36, 344)
@@ -5819,7 +5864,7 @@ Values are given in degrees decimal.')
 	$groupbox29.Controls.Add($labelOnGround)
 	$groupbox29.Controls.Add($labelInOrbit)
 	$groupbox29.Controls.Add($labelInSpace)
-	$groupbox29.BackColor = [System.Drawing.Color]::Transparent 
+	$groupbox29.BackColor = [System.Drawing.Color]::Black 
 	$groupbox29.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox29.ForeColor = [System.Drawing.Color]::DarkOrange 
 	$groupbox29.Location = New-Object System.Drawing.Point(182, 24)
@@ -6126,7 +6171,7 @@ Values are given in degrees decimal.')
 	$picturebox8.Location = New-Object System.Drawing.Point(-4, 1)
 	$picturebox8.Margin = '4, 3, 4, 3'
 	$picturebox8.Name = 'picturebox8'
-	$picturebox8.Size = New-Object System.Drawing.Size(1247, 505)
+	$picturebox8.Size = New-Object System.Drawing.Size(1247, 536)
 	$picturebox8.SizeMode = 'StretchImage'
 	$picturebox8.TabIndex = 57
 	$picturebox8.TabStop = $False
@@ -6137,13 +6182,13 @@ Values are given in degrees decimal.')
 	$tabpage3.Controls.Add($groupbox45)
 	$tabpage3.Controls.Add($groupbox44)
 	$tabpage3.Controls.Add($picturebox6)
-	$tabpage3.BackColor = [System.Drawing.Color]::Black 
+	$tabpage3.BackColor = [System.Drawing.Color]::FromArgb(255, 32, 32, 32)
 	$tabpage3.BackgroundImageLayout = 'Stretch'
 	$tabpage3.Cursor = 'Default'
 	$tabpage3.Location = New-Object System.Drawing.Point(4, 24)
 	$tabpage3.Margin = '4, 3, 4, 3'
 	$tabpage3.Name = 'tabpage3'
-	$tabpage3.Size = New-Object System.Drawing.Size(1247, 504)
+	$tabpage3.Size = New-Object System.Drawing.Size(1247, 577)
 	$tabpage3.TabIndex = 2
 	$tabpage3.Text = 'Orbital Drop'
 	#
@@ -6168,7 +6213,7 @@ Values are given in degrees decimal.')
 	$groupbox46.Controls.Add($textbox232)
 	$groupbox46.Controls.Add($labelCurrentSpeed)
 	$groupbox46.Controls.Add($labelGRAVITY)
-	$groupbox46.BackColor = [System.Drawing.Color]::Transparent 
+	$groupbox46.BackColor = [System.Drawing.Color]::Black 
 	$groupbox46.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox46.ForeColor = [System.Drawing.Color]::DarkOrange 
 	$groupbox46.Location = New-Object System.Drawing.Point(309, 134)
@@ -6197,7 +6242,7 @@ Values are given in degrees decimal.')
 	#
 	# textbox235
 	#
-	$textbox235.BackColor = [System.Drawing.Color]::FromArgb(255, 16, 16, 16)
+	$textbox235.BackColor = [System.Drawing.Color]::Black 
 	$textbox235.BorderStyle = 'None'
 	$textbox235.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox235.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
@@ -6227,7 +6272,7 @@ Values are given in degrees decimal.')
 	#
 	# textbox236
 	#
-	$textbox236.BackColor = [System.Drawing.Color]::FromArgb(255, 16, 16, 16)
+	$textbox236.BackColor = [System.Drawing.Color]::Black 
 	$textbox236.BorderStyle = 'None'
 	$textbox236.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox236.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
@@ -6270,7 +6315,7 @@ Values are given in degrees decimal.')
 	#
 	# textbox234
 	#
-	$textbox234.BackColor = [System.Drawing.Color]::FromArgb(255, 16, 16, 16)
+	$textbox234.BackColor = [System.Drawing.Color]::Black 
 	$textbox234.BorderStyle = 'None'
 	$textbox234.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox234.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
@@ -6314,7 +6359,7 @@ Values are given in degrees decimal.')
 	#
 	# textbox233
 	#
-	$textbox233.BackColor = [System.Drawing.Color]::FromArgb(255, 16, 16, 16)
+	$textbox233.BackColor = [System.Drawing.Color]::Black 
 	$textbox233.BorderStyle = 'None'
 	$textbox233.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox233.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
@@ -6330,7 +6375,7 @@ Values are given in degrees decimal.')
 	#
 	# textbox230
 	#
-	$textbox230.BackColor = [System.Drawing.Color]::FromArgb(255, 16, 16, 16)
+	$textbox230.BackColor = [System.Drawing.Color]::Black 
 	$textbox230.BorderStyle = 'None'
 	$textbox230.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox230.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
@@ -6400,7 +6445,7 @@ Values are given in degrees decimal.')
 	#
 	# textbox231
 	#
-	$textbox231.BackColor = [System.Drawing.Color]::FromArgb(255, 16, 16, 16)
+	$textbox231.BackColor = [System.Drawing.Color]::Black 
 	$textbox231.BorderStyle = 'None'
 	$textbox231.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox231.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
@@ -6416,7 +6461,7 @@ Values are given in degrees decimal.')
 	#
 	# textbox232
 	#
-	$textbox232.BackColor = [System.Drawing.Color]::FromArgb(255, 16, 16, 16)
+	$textbox232.BackColor = [System.Drawing.Color]::Black 
 	$textbox232.BorderStyle = 'None'
 	$textbox232.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox232.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
@@ -6470,7 +6515,7 @@ Values are given in degrees decimal.')
 	$groupbox45.Controls.Add($textbox226)
 	$groupbox45.Controls.Add($label1013079)
 	$groupbox45.Controls.Add($label1013080)
-	$groupbox45.BackColor = [System.Drawing.Color]::Transparent 
+	$groupbox45.BackColor = [System.Drawing.Color]::Black 
 	$groupbox45.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox45.ForeColor = [System.Drawing.Color]::DarkOrange 
 	$groupbox45.Location = New-Object System.Drawing.Point(24, 134)
@@ -6499,7 +6544,7 @@ Values are given in degrees decimal.')
 	#
 	# textbox228
 	#
-	$textbox228.BackColor = [System.Drawing.Color]::FromArgb(255, 16, 16, 16)
+	$textbox228.BackColor = [System.Drawing.Color]::Black 
 	$textbox228.BorderStyle = 'None'
 	$textbox228.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox228.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
@@ -6529,7 +6574,7 @@ Values are given in degrees decimal.')
 	#
 	# textbox227
 	#
-	$textbox227.BackColor = [System.Drawing.Color]::FromArgb(255, 16, 16, 16)
+	$textbox227.BackColor = [System.Drawing.Color]::Black 
 	$textbox227.BorderStyle = 'None'
 	$textbox227.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox227.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
@@ -6599,7 +6644,7 @@ Values are given in degrees decimal.')
 	#
 	# textbox224
 	#
-	$textbox224.BackColor = [System.Drawing.Color]::FromArgb(255, 16, 16, 16)
+	$textbox224.BackColor = [System.Drawing.Color]::Black 
 	$textbox224.BorderStyle = 'None'
 	$textbox224.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox224.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
@@ -6615,7 +6660,7 @@ Values are given in degrees decimal.')
 	#
 	# textbox226
 	#
-	$textbox226.BackColor = [System.Drawing.Color]::FromArgb(255, 16, 16, 16)
+	$textbox226.BackColor = [System.Drawing.Color]::Black 
 	$textbox226.BorderStyle = 'None'
 	$textbox226.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox226.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
@@ -6671,7 +6716,7 @@ Values are given in degrees decimal.')
 	$groupbox44.Controls.Add($labelLongitudinal)
 	$groupbox44.Controls.Add($textbox223)
 	$groupbox44.Controls.Add($labelLATERAL)
-	$groupbox44.BackColor = [System.Drawing.Color]::Transparent 
+	$groupbox44.BackColor = [System.Drawing.Color]::Black 
 	$groupbox44.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox44.ForeColor = [System.Drawing.Color]::DarkOrange 
 	$groupbox44.Location = New-Object System.Drawing.Point(24, 29)
@@ -6891,7 +6936,7 @@ Values are given in degrees decimal.')
 	$picturebox6.Location = New-Object System.Drawing.Point(-4, 0)
 	$picturebox6.Margin = '4, 3, 4, 3'
 	$picturebox6.Name = 'picturebox6'
-	$picturebox6.Size = New-Object System.Drawing.Size(1247, 505)
+	$picturebox6.Size = New-Object System.Drawing.Size(1247, 537)
 	$picturebox6.TabIndex = 1
 	$picturebox6.TabStop = $False
 	#
@@ -6904,7 +6949,7 @@ Values are given in degrees decimal.')
 	$tabpage4.Location = New-Object System.Drawing.Point(4, 24)
 	$tabpage4.Margin = '4, 3, 4, 3'
 	$tabpage4.Name = 'tabpage4'
-	$tabpage4.Size = New-Object System.Drawing.Size(1247, 504)
+	$tabpage4.Size = New-Object System.Drawing.Size(1247, 577)
 	$tabpage4.TabIndex = 3
 	$tabpage4.Text = 'System Map'
 	#
@@ -6916,7 +6961,7 @@ Values are given in degrees decimal.')
 	$picturebox5.Location = New-Object System.Drawing.Point(0, 0)
 	$picturebox5.Margin = '4, 3, 4, 3'
 	$picturebox5.Name = 'picturebox5'
-	$picturebox5.Size = New-Object System.Drawing.Size(1247, 504)
+	$picturebox5.Size = New-Object System.Drawing.Size(1247, 577)
 	$picturebox5.SizeMode = 'StretchImage'
 	$picturebox5.TabIndex = 0
 	$picturebox5.TabStop = $False
@@ -6929,7 +6974,7 @@ Values are given in degrees decimal.')
 	$tabpage6.Location = New-Object System.Drawing.Point(4, 24)
 	$tabpage6.Margin = '4, 3, 4, 3'
 	$tabpage6.Name = 'tabpage6'
-	$tabpage6.Size = New-Object System.Drawing.Size(1247, 504)
+	$tabpage6.Size = New-Object System.Drawing.Size(1247, 577)
 	$tabpage6.TabIndex = 5
 	$tabpage6.Text = 'Planet Map'
 	#
@@ -6941,7 +6986,7 @@ Values are given in degrees decimal.')
 	$picturebox4.Location = New-Object System.Drawing.Point(0, 0)
 	$picturebox4.Margin = '4, 3, 4, 3'
 	$picturebox4.Name = 'picturebox4'
-	$picturebox4.Size = New-Object System.Drawing.Size(1247, 504)
+	$picturebox4.Size = New-Object System.Drawing.Size(1247, 577)
 	$picturebox4.TabIndex = 0
 	$picturebox4.TabStop = $False
 	#
@@ -6953,7 +6998,7 @@ Values are given in degrees decimal.')
 	$tabpage7.Location = New-Object System.Drawing.Point(4, 24)
 	$tabpage7.Margin = '4, 3, 4, 3'
 	$tabpage7.Name = 'tabpage7'
-	$tabpage7.Size = New-Object System.Drawing.Size(1247, 504)
+	$tabpage7.Size = New-Object System.Drawing.Size(1247, 577)
 	$tabpage7.TabIndex = 6
 	$tabpage7.Text = 'Local Map'
 	#
@@ -6965,7 +7010,7 @@ Values are given in degrees decimal.')
 	$picturebox3.Location = New-Object System.Drawing.Point(0, 0)
 	$picturebox3.Margin = '4, 3, 4, 3'
 	$picturebox3.Name = 'picturebox3'
-	$picturebox3.Size = New-Object System.Drawing.Size(1247, 504)
+	$picturebox3.Size = New-Object System.Drawing.Size(1247, 577)
 	$picturebox3.TabIndex = 0
 	$picturebox3.TabStop = $False
 	#
@@ -6977,7 +7022,7 @@ Values are given in degrees decimal.')
 	$tabpage10.Location = New-Object System.Drawing.Point(4, 24)
 	$tabpage10.Margin = '4, 3, 4, 3'
 	$tabpage10.Name = 'tabpage10'
-	$tabpage10.Size = New-Object System.Drawing.Size(1247, 504)
+	$tabpage10.Size = New-Object System.Drawing.Size(1247, 577)
 	$tabpage10.TabIndex = 9
 	$tabpage10.Text = 'Versions'
 	#
@@ -7033,7 +7078,7 @@ Values are given in degrees decimal.')
 	$System_Windows_Forms_DataGridViewCellStyle_1.Alignment = 'MiddleCenter'
 	$datagridview1.RowsDefaultCellStyle = $System_Windows_Forms_DataGridViewCellStyle_1
 	$datagridview1.SelectionMode = 'FullRowSelect'
-	$datagridview1.Size = New-Object System.Drawing.Size(1243, 479)
+	$datagridview1.Size = New-Object System.Drawing.Size(1243, 511)
 	$datagridview1.TabIndex = 0
 	$datagridview1.add_CellContentClick($datagridview1_CellContentClick)
 	#
@@ -7054,14 +7099,14 @@ Values are given in degrees decimal.')
 	$tabpage8.Controls.Add($buttonAntiLogoffScript)
 	$tabpage8.Controls.Add($buttonShowLocationHotKey)
 	$tabpage8.Controls.Add($picturebox9)
+	$tabpage8.BackColor = [System.Drawing.Color]::FromArgb(255, 32, 32, 32)
 	$tabpage8.Cursor = 'Default'
 	$tabpage8.Location = New-Object System.Drawing.Point(4, 24)
 	$tabpage8.Margin = '4, 3, 4, 3'
 	$tabpage8.Name = 'tabpage8'
-	$tabpage8.Size = New-Object System.Drawing.Size(1247, 504)
+	$tabpage8.Size = New-Object System.Drawing.Size(1247, 577)
 	$tabpage8.TabIndex = 7
 	$tabpage8.Text = 'Settings'
-	$tabpage8.UseVisualStyleBackColor = $True
 	#
 	# buttonDebugMode
 	#
@@ -7270,7 +7315,7 @@ Chat (F12) needs to be enabled')
 	$picturebox9.Location = New-Object System.Drawing.Point(-4, 0)
 	$picturebox9.Margin = '4, 3, 4, 3'
 	$picturebox9.Name = 'picturebox9'
-	$picturebox9.Size = New-Object System.Drawing.Size(1247, 505)
+	$picturebox9.Size = New-Object System.Drawing.Size(1247, 537)
 	$picturebox9.SizeMode = 'StretchImage'
 	$picturebox9.TabIndex = 1
 	$picturebox9.TabStop = $False
@@ -7284,7 +7329,7 @@ Chat (F12) needs to be enabled')
 	$tabpage5.Location = New-Object System.Drawing.Point(4, 24)
 	$tabpage5.Margin = '4, 3, 4, 3'
 	$tabpage5.Name = 'tabpage5'
-	$tabpage5.Size = New-Object System.Drawing.Size(1247, 504)
+	$tabpage5.Size = New-Object System.Drawing.Size(1247, 577)
 	$tabpage5.TabIndex = 4
 	$tabpage5.Text = 'Manual'
 	#
@@ -7297,7 +7342,7 @@ Chat (F12) needs to be enabled')
 	$richtextbox2.Margin = '4, 3, 4, 3'
 	$richtextbox2.Name = 'richtextbox2'
 	$richtextbox2.ScrollBars = 'Vertical'
-	$richtextbox2.Size = New-Object System.Drawing.Size(1246, 503)
+	$richtextbox2.Size = New-Object System.Drawing.Size(1246, 537)
 	$richtextbox2.TabIndex = 0
 	$richtextbox2.Text = ''
 	#
@@ -7310,7 +7355,7 @@ Chat (F12) needs to be enabled')
 	$tabpage9.Location = New-Object System.Drawing.Point(4, 24)
 	$tabpage9.Margin = '4, 3, 4, 3'
 	$tabpage9.Name = 'tabpage9'
-	$tabpage9.Size = New-Object System.Drawing.Size(1247, 504)
+	$tabpage9.Size = New-Object System.Drawing.Size(1247, 577)
 	$tabpage9.TabIndex = 8
 	$tabpage9.Text = 'About'
 	$tabpage9.UseVisualStyleBackColor = $True
@@ -7325,7 +7370,7 @@ Chat (F12) needs to be enabled')
 	$richtextbox1.Font = [System.Drawing.Font]::new('Imprint MT Shadow', '14.25')
 	$richtextbox1.HideSelection = $False
 	$richtextbox1.ImeMode = 'Off'
-	$richtextbox1.Location = New-Object System.Drawing.Point(9, 0)
+	$richtextbox1.Location = New-Object System.Drawing.Point(15, 7)
 	$richtextbox1.Margin = '4, 3, 4, 3'
 	$richtextbox1.MaximumSize = New-Object System.Drawing.Size(1136, 505)
 	$richtextbox1.MinimumSize = New-Object System.Drawing.Size(1136, 505)
@@ -7345,31 +7390,10 @@ Chat (F12) needs to be enabled')
 	$picturebox10.Location = New-Object System.Drawing.Point(0, 0)
 	$picturebox10.Margin = '4, 3, 4, 3'
 	$picturebox10.Name = 'picturebox10'
-	$picturebox10.Size = New-Object System.Drawing.Size(1247, 504)
+	$picturebox10.Size = New-Object System.Drawing.Size(1247, 577)
 	$picturebox10.SizeMode = 'StretchImage'
 	$picturebox10.TabIndex = 3
 	$picturebox10.TabStop = $False
-	#
-	# labelCreatedByGraupunktWi
-	#
-	$labelCreatedByGraupunktWi.AutoSize = $True
-	$labelCreatedByGraupunktWi.Font = [System.Drawing.Font]::new('Montserrat', '8.999999')
-	$labelCreatedByGraupunktWi.ForeColor = [System.Drawing.Color]::FromArgb(255, 224, 224, 224)
-	$labelCreatedByGraupunktWi.Location = New-Object System.Drawing.Point(3, 664)
-	$labelCreatedByGraupunktWi.Margin = '4, 0, 4, 0'
-	$labelCreatedByGraupunktWi.Name = 'labelCreatedByGraupunktWi'
-	$labelCreatedByGraupunktWi.Size = New-Object System.Drawing.Size(573, 16)
-	$labelCreatedByGraupunktWi.TabIndex = 16
-	$labelCreatedByGraupunktWi.Text = 'Ⓒ created by Graupunkt with blood and love, with help from justMurphy, Xabdiben, BigCheese'
-	#
-	# statusbar1
-	#
-	$statusbar1.Location = New-Object System.Drawing.Point(0, 656)
-	$statusbar1.Margin = '0, 0, 0, 0'
-	$statusbar1.Name = 'statusbar1'
-	#[void]$statusbar1.Panels.Add($statusbarpanel1)
-	$statusbar1.Size = New-Object System.Drawing.Size(1241, 29)
-	$statusbar1.TabIndex = 0
 	#
 	# picturebox2
 	#
@@ -7384,11 +7408,6 @@ Chat (F12) needs to be enabled')
 	$picturebox2.TabStop = $False
 	$tooltip.SetToolTip($picturebox2, 'Named after the Naval Station INS-Jericho the first purpose of this tool was
 to reliably find Jericho back in the times where it had no quantum travel beacon.')
-	#
-	# statusbarpanel1
-	#
-	####$statusbarpanel1.Name = 'statusbarpanel1'
-	####$statusbarpanel1.Text = 'statusbarpanel1'
 	#
 	# tooltip
 	#
@@ -7643,7 +7662,6 @@ to reliably find Jericho back in the times where it had no quantum travel beacon
 	$Features.HeaderText = 'Features'
 	$Features.Name = 'Features'
 	$Features.ReadOnly = $True
-	####$statusbarpanel1.EndInit()
 	$tabpage9.ResumeLayout()
 	$tabpage5.ResumeLayout()
 	$tabpage8.ResumeLayout()

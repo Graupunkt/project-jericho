@@ -590,17 +590,13 @@ while($StartNavigation) {
     if($global:debug){
         $LabelHourAnglePlayer.Visible = $true
         $labelRiseSetHourAngleP.Visible = $true
-        $LabelPlayerDayCondition.Visible = $true
         $LabelHourAngleDest.Visible = $true
         $labelRiseSetHourAngleD.Visible = $true
-        $LabelDestDayCondition.Visible = $true
     }else{
         $LabelHourAnglePlayer.Visible = $false
         $labelRiseSetHourAngleP.Visible = $false
-        $LabelPlayerDayCondition.Visible = $false
         $LabelHourAngleDest.Visible = $false
         $labelRiseSetHourAngleD.Visible = $false
-        $LabelDestDayCondition.Visible = $false
     }
 
     #if($CurrentDestination -ne $null){
