@@ -18,11 +18,10 @@
 if($psISE){$script:ScriptDir = Split-Path -Path $psISE.CurrentFile.FullPath}
 if((Get-Host).Version.Major -gt "5"){$script:ScriptDir = $PSScriptRoot}else{$script:ScriptDir = $PSScriptRoot}
 if($env:TERM_PROGRAM -eq "vscode"){$script:ScriptDir = "C:\Users\marcel\Desktop\StarCitizen Tools\Projekt Jericho (3D Navigation)"}
+Set-Location $script:ScriptDir
 
 #Debugging
-Set-StrictMode -Version Latest
-Set-Location $script:ScriptDir
-if(Test-Path -Path "$script:ScriptDir\debug.log" -PathType Leaf){Remove-Item -Path "$script:ScriptDir\debug.log"}
+if(Test-Path -Path "$script:ScriptDir\debug.log" -PathType Leaf){Remove-Item -Path "$script:ScriptDir\debug.log" -ErrorAction SilentlyContinue}
 Start-Transcript -Path "$script:ScriptDir\debug.log" -Append  | Out-Null #timestamps each command -IncludeInvocationHeader
 
 # Output Loading Text to User
@@ -133,7 +132,7 @@ $PreviousXPosition = 1
 $PreviousYPosition = 1
 $PreviousZPosition = 1
 $ScriptLoopCount = 0
-$ErrorActionPreference = 'SilentlyContinue'
+$ErrorActionPreference = 'Continue'
 $LogFileContentData = [hashtable]::Synchronized(@{})
 $LogFileContentData.Playername = "Player"
 $debug = $false
@@ -543,9 +542,9 @@ $TotalCount = $Matches.Matches.Count
 #CLEAR OLD VARIABLES
 #$SelectedDestination = @{}
 #Make PowerShell Disappear
-#$windowcode = '[DllImport("user32.dll")] public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);'
-#$asyncwindow = Add-Type -MemberDefinition $windowcode -name Win32ShowWindowAsync -namespace Win32Functions -PassThru
-#$null = $asyncwindow::ShowWindowAsync((Get-Process -PID $pid).MainWindowHandle, 0)
+$windowcode = '[DllImport("user32.dll")] public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);'
+$asyncwindow = Add-Type -MemberDefinition $windowcode -name Win32ShowWindowAsync -namespace Win32Functions -PassThru
+$null = $asyncwindow::ShowWindowAsync((Get-Process -PID $pid).MainWindowHandle, 0)
 
 
 #Render HUD
@@ -604,7 +603,7 @@ while($StartNavigation) {
         $LabelDestDayCondition.Visible = $false
     }
 
-    if($CurrentDestination -ne $null){
+    #if($CurrentDestination -ne $null){
         #Get Current Destination, if changed
         #DETERMINE CLOSEST QT MARKER
         $SelectedDestination = $PointsOfInterestOnPlanetsData.GetEnumerator() | Where-Object { $_.Name -eq $CurrentDestination}
@@ -620,7 +619,6 @@ while($StartNavigation) {
             #$ClosestQTBeacon = $QTMarker | Sort-Object DistanceContainerToDestination | Where-Object {$_.QTMarker -eq "TRUE"} | Select-Object -First 1
             #$QTMarker | Sort-Object DistanceContainerToDestination | Select-Object -Property Name, DistanceContainerToDestination
         }
-
 
         #Start-Sleep -Milliseconds 1            # IF THIS LINE IS NOT PRESENT, CPU USAGE WILL CONSUME A FULL THREAD, AND SCRIPTS MIGHT GET UNRESPONSIVE 
         #Get ClipboardContents and Get Current Date/Time
@@ -831,9 +829,11 @@ while($StartNavigation) {
             # Degrees Function = / pi * 180
             # ATAN2 X and Y are switched in Google Sheets
             # Mod Function = Special function to deal with negativ values and use a simple
+            
             function mod ([array]$x) {
                 return (($x[0] % $x[1]) + $x[1]) % $x[1]
             }
+
 
             #CALCULATIONS
             #CONVERT SYSTEM COORDINATES FROM STANTON STAR TOWARDS PLANET RELATIVE COORDINATES (ECEF - earth centered / earth fixed), THINK OF PLANET CENTRE HAS SYSTEM COORDINATES OF 0,0,0
@@ -875,8 +875,8 @@ while($StartNavigation) {
 
             # Cell AG2
             #DEGREES(MOD((ATAN2(bsx,bsy)-(PI()/2))   ,2*PI()))
-            [decimal]$Meridian = (mod(([math]::atan2($StarRelY,$StarRelX) - ([math]::pi/2)), (2 * [math]::pi))) / [math]::pi * 180
-
+            [decimal]$Meridian = (mod(([math]::atan2($StarRelY ,$StarRelX) - ([math]::pi/2)), (2 * [math]::pi))) / [math]::pi * 180
+     
             #SOLAR LONGITUDE
             # Cell AG4 = -13969050
             # =IF(CurrentRotation-MOD(0-Meridian,360)>180,CurrentRotation-MOD(0-Meridian,360)-360,IF(CurrentRotation-MOD(0-Meridian,360)<-180,CurrentRotation-MOD(0-Meridian,360)+360,CurrentRotation-MOD(0-Meridian,360)))
@@ -2899,7 +2899,7 @@ while($StartNavigation) {
         if(!$formProjectJericho.IsHandleCreated){
             exit
         }
-    }
+    #}
 }
 
 
