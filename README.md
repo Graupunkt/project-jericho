@@ -42,17 +42,17 @@ than open powershell and drop the scriptfile into the window and unblock the scr
 
 ![main application - Navigation tab](screenshots/MainApplication_Navigation_V7.3.0.JPG)
 
-![main application - Orbital Drop tab](screenshots/MainApplication_Orbital Drop_V7.3.0.JPG)
+![main application - Orbital Drop tab](screenshots/MainApplication_OrbitalDrop_V7.3.0.JPG)
 
-![main application - System Map tab](screenshots/MainApplication_System Map_V7.3.0.JPG)
+![main application - System Map tab](screenshots/MainApplication_SystemMap_V7.3.0.JPG)
 
-![main application - Planet Map tab](screenshots/MainApplication_Planet Map_V7.3.0.JPG)
+![main application - Planet Map tab](screenshots/MainApplication_PlanetMap_V7.3.0.JPG)
 
-![main application - Local Map tab](screenshots/MainApplication_Local Map_V7.3.0.JPG)
+![main application - Local Map tab](screenshots/MainApplication_LocalMap_V7.3.0.JPG)
 
 ![main application - settings tab](screenshots/MainApplication_Settings_V7.3.0.JPG)
 
-![main application - version history](screenshots/MainApplication_Version History_V7.3.0.JPG)
+![main application - version history](screenshots/MainApplication_VersionHistory_V7.3.0.JPG)
 
 ![main application - quickinfos](screenshots/MainApplication_QuickInfos_V7.3.0.JPG)
 
@@ -60,7 +60,7 @@ than open powershell and drop the scriptfile into the window and unblock the scr
 
 ![POI Save Screen](screenshots/Hotkeys_PoiSaveScreen_V7.3.0.JPG)
 
-![ingame overlay - destination marker](screenshots/Screenshot HUD Overlay Example.PNG)
+![ingame overlay - destination marker](screenshots/ScreenshotHUDOverlayExample.PNG)
 
 ## Prerequests
 Powershell V7 is needed to properly execute this script. You can grab it from here https://aka.ms/powershell-release?tag=stable . You can install it by using the default options I recommend to add "run with powershell 7" contect menu during install. Current Versions verified are 7.1.x until 7.2.3.
