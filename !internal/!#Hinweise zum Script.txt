@@ -1,0 +1,4 @@
+STRG + S 	gedrückt halten zum abspeichern der aktuellen Position
+STRG + R	Aktuellen ObjectContainer kalibrieren
+ALT-GR		um /showlocation auszulösen
+ 

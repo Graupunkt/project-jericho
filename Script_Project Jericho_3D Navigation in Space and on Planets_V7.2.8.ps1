@@ -21,8 +21,11 @@ if($env:TERM_PROGRAM -eq "vscode"){$script:ScriptDir = "C:\Users\marcel\Desktop\
 Set-Location $script:ScriptDir
 
 #Debugging
+#Logfile Backend Process / This Script
 if(Test-Path -Path "$script:ScriptDir\debug.log" -PathType Leaf){Remove-Item -Path "$script:ScriptDir\debug.log" -ErrorAction SilentlyContinue}
 Start-Transcript -Path "$script:ScriptDir\debug.log" -Append  | Out-Null #timestamps each command -IncludeInvocationHeader
+#Logfile for Runspace 
+
 
 # Output Loading Text to User
 $Esc = [char]27
@@ -125,16 +128,18 @@ $script:3dSpacePoi  = $false
 $Powershellv5Legacy = $false   
 $FinalInstructions = @()
 $PreviousTime = 0
-$CurrentXPosition = 0
-$CurrentYPosition = 0
-$CurrentZPosition = 0
-$PreviousXPosition = 1
-$PreviousYPosition = 1
-$PreviousZPosition = 1
+$CurrentXPosition = 1
+$CurrentYPosition = 1
+$CurrentZPosition = 1
+$PreviousXPosition = 2
+$PreviousYPosition = 2
+$PreviousZPosition = 2
 $ScriptLoopCount = 0
 $ErrorActionPreference = 'Continue'
 $LogFileContentData = [hashtable]::Synchronized(@{})
 $LogFileContentData.Playername = "Player"
+$RunSpaceSyncData = [hashtable]::Synchronized(@{})
+$RunSpaceSyncData.SaveHotkey = $false
 $debug = $false
 #Set-StrictMode -Version 2.0    #Display all errors while directly running script
 #Path
@@ -145,6 +150,10 @@ $CurrentDestination = $null
 #Limits
 $LimitSpotsSystem = 5   #System Tab, Limits of Spot History for System Map
 $LimitSpotsPlanet = 100 #Planet Tab, Limits of Spot History for Planet Map
+#RunSpacePool
+$RunSpacePool = [RunspaceFactory]::CreateRunspacePool(1, [int]$env:NUMBER_OF_PROCESSORS+1)
+$RunSpacePool.ApartmentState = "MTA"
+$RunSpacePool.Open()
 
 
 
@@ -238,6 +247,7 @@ $global:DateTime = Get-Date #needed in functions
 . '.\functions\Calculations Space.ps1'
 . '.\functions\GUI-Frontend.Export.ps1' 
 . '.\functions\GUI-IngameOverlay.ps1' 
+. '.\functions\GUI-SavePOI.Export.ps1' 
 . '.\functions\Generic.ps1'
 . '.\functions\Hotkeys and game interactions.ps1'
 . '.\functions\StarCitizen Generic.ps1'
@@ -245,11 +255,14 @@ $global:DateTime = Get-Date #needed in functions
 . '.\functions\Window settings and controls.ps1'
 . '.\functions\GUI Frontend Modifications.ps1' 
 
+
 Write-Host "$($OrangeForeColor)- parsing Logfile in background (1min to update server details)"
 $RunspaceLogfile = [RunspaceFactory]::CreateRunspace()
+$RunspaceLogfile.Name = "GameLog"
 $RunspaceLogfile.Open()
 $RunspaceLogfile.SessionStateProxy.SetVariable("LogFileContentData", $LogFileContentData)
 $powershell = [powershell]::Create()
+$powershell.RunspacePool = $RunSpacePool
 $powershell.runspace = $RunspaceLogfile
 $powershell.AddScript({
     #ADD HEADING TO LOGFILE
@@ -312,10 +325,11 @@ if((Get-Host).Version.Major -eq "5"){
 ### INITIATE INGAME OVERLAY
 #Add Form to a non blocking Runspace
 $RunspaceOverlay = [System.Management.Automation.Runspaces.RunspaceFactory]::CreateRunspace()
+$RunspaceOverlay.Name = "Ingame HUD"
 $RunspaceOverlay.Open()
 $RunspaceOverlay.SessionStateProxy.SetVariable("formIngameOverlay", $formIngameOverlay)
 $OverlayData = [hashtable]::Synchronized(@{text=""})
-$RunspaceOverlay.SessionStateProxy.SetVariable("OverlayData", $OverlayData)
+#$RunspaceOverlay.SessionStateProxy.SetVariable("OverlayData", $OverlayData)
 $pOverlay = $RunspaceOverlay.CreatePipeline({ 
     [void] $formIngameOverlay.ShowDialog()
 })
@@ -325,10 +339,11 @@ $pOverlay.Input.Close()
 #############################
 #CREATE RUNSPACE FOR FRONTEND GUI
 $rs = [Management.Automation.Runspaces.RunspaceFactory]::CreateRunspace()
+$rs.Name = "Main Application GUI"
 $rs.Open()
 $rs.SessionStateProxy.SetVariable("formProjectJericho", $formProjectJericho)
 $data = [hashtable]::Synchronized(@{text=""})
-$rs.SessionStateProxy.SetVariable("data", $data)
+#$rs.SessionStateProxy.SetVariable("data", $data)
 $p = $rs.CreatePipeline({ [void] $formProjectJericho.ShowDialog()})
 $p.Input.Close()
 #########################
@@ -450,6 +465,7 @@ Write-Host "$($OrangeForeColor)- PreLoading POI Selection"
 . '.\functions\GUI Poi Selection.ps1' | Out-Null
 
 $RunspacePoiSelection = [System.Management.Automation.Runspaces.RunspaceFactory]::CreateRunspace()
+$RunspacePoiSelection.Name = "PoiSelection"
 $RunspacePoiSelection.Open()
 $RunspacePoiSelection.SessionStateProxy.SetVariable("PoiSelectionForm", $PoiSelectionForm)
 $PoiSelectionData = [hashtable]::Synchronized(@{text=""})
@@ -542,9 +558,9 @@ $TotalCount = $Matches.Matches.Count
 #CLEAR OLD VARIABLES
 #$SelectedDestination = @{}
 #Make PowerShell Disappear
-$windowcode = '[DllImport("user32.dll")] public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);'
-$asyncwindow = Add-Type -MemberDefinition $windowcode -name Win32ShowWindowAsync -namespace Win32Functions -PassThru
-$null = $asyncwindow::ShowWindowAsync((Get-Process -PID $pid).MainWindowHandle, 0)
+#$windowcode = '[DllImport("user32.dll")] public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);'
+#$asyncwindow = Add-Type -MemberDefinition $windowcode -name Win32ShowWindowAsync -namespace Win32Functions -PassThru
+#$null = $asyncwindow::ShowWindowAsync((Get-Process -PID $pid).MainWindowHandle, 0)
 
 
 #Render HUD
@@ -552,11 +568,22 @@ $p.InvokeAsync() # Form Pops up
 #Render Main App
 $pOverlay.InvokeAsync()
 
-#IDEA 
-# REGISTER FINAL ENTER SEND TO STARCITIZEN AND GRAB TIMESTAMP
-# RUN MULTIPLE SCRIPTS AT THE SAME TIME TO CHECK TIME DIAVATION ?!
-#Write-Host "$($OrangeForeColor)- Main Loop started"
-#CHECK CLIPBOARD FOR NEW VALUES 
+#Register Hotkey Detection
+$RunspaceHotkey = [runspacefactory]::CreateRunspace()
+$RunspaceHotkey.Name = "HotKeyDetection"
+$RunspaceHotkey.ApartmentState = "STA"
+$RunspaceHotkey.ThreadOptions = "ReuseThread"
+$RunspaceHotkey.Open()
+$RunspaceHotkey.SessionStateProxy.SetVariable("RunSpaceSyncData", $RunSpaceSyncData)
+$RunspaceHotkey.SessionStateProxy.SetVariable("ScriptDir",$script:ScriptDir)
+$PSinstanceHotkey = [powershell]::Create().AddScript($RunspaceHotKeyCode)
+$PSinstanceHotkey.RunspacePool = $RunSpacePool
+$PSinstanceHotkey.Runspace = $RunspaceHotkey
+$JobHotkey = $PSinstanceHotkey.BeginInvoke()
+
+
+Write-Host "$($OrangeForeColor)- Main Loop started"
+#MAIN LOOP 
 while($StartNavigation) {
     $MeasureTime.Stop()
     #Write-Host "$($OrangeForeColor)- LoopDuration = $($MeasureTime.Elapsed)"
@@ -567,8 +594,19 @@ while($StartNavigation) {
         #Write-Host "$($OrangeForeColor)- Exit Button Pressed"
         Stop-Transcript
         start-process cmd -WindowStyle Minimized -argumentlist '/c timeout /t 3 & taskkill /F /IM pwsh.exe'
+        #End MainForm
         $formProjectJericho.Close()
+        #End HUD
         $rs.Close()
+
+        #End Hotkeys
+        #$PowerShell.EndInvoke($JobHotkey) | Out-Null
+        $PSinstanceHotkey.RunSpace.Dispose()
+        $PSinstanceHotkey.Dispose()
+
+        #End Runspacepool
+        $RunspacePool.Close() 
+        $RunspacePool.Dispose()
         exit
     }
 
@@ -603,7 +641,7 @@ while($StartNavigation) {
         #Get Current Destination, if changed
         #DETERMINE CLOSEST QT MARKER
         $SelectedDestination = $PointsOfInterestOnPlanetsData.GetEnumerator() | Where-Object { $_.Name -eq $CurrentDestination}
-        if($SelectedDestination.ObjectContainer){$script:PlanetaryPoi = $true}else{$script:3dSpacePoi = $true}
+        if($SelectedDestination.ObjectContainer -ne $null){$script:PlanetaryPoi = $true}else{$script:3dSpacePoi = $true}
 
         if($script:3dSpacePoi){
             $QTMarker = $DBContainer
@@ -617,6 +655,7 @@ while($StartNavigation) {
         }
 
         #Start-Sleep -Milliseconds 1            # IF THIS LINE IS NOT PRESENT, CPU USAGE WILL CONSUME A FULL THREAD, AND SCRIPTS MIGHT GET UNRESPONSIVE 
+        
         #Get ClipboardContents and Get Current Date/Time
         $ClipboardContainsCoordinates, [decimal]$global:CurrentXPosition, [decimal]$global:CurrentYPosition, [decimal]$global:CurrentZPosition, $global:DateTime = Get-StarCitizenClipboardAndDate $PCClockdrift
 
@@ -628,25 +667,21 @@ while($StartNavigation) {
         #$CurrentXPosition
 
         ### KEY TO SAVE CURRENT COORDINATES TO TEXTFILE ###
-        # CODE BY BIGCHEESE
-        $pressed = Test-KeyPress -Key "S" -ModifierKey 'Control'
-        if ($pressed) {
-            $PoiName = Read-Host -Prompt 'Input the name of the POI: '
-            #$SystemName = Read-Host -Prompt 'Input the Systemname your currently in (Stanton, Pyro, Nyx): '
-            #$SystemName = "Stanton"
-            $SystemName = $script:CurrentDetectedSystem
-            if($script:CurrentDetectedObjectContainer){$PoiToSave = "$SystemName;$CurrentDetectedObjectContainer;CustomType;$PoiName;$CurrentPlanetaryXCoord;$CurrentPlanetaryYCoord;$CurrentPlanetaryZCoord;none;$DateTime"} #IF ON A PLANET
-            else {$PoiToSave = "$SystemName;CustomType;$PoiName;$CurrentXPosition;$CurrentYPosition;$CurrentZPosition;$DateTime"} #ELSE IF IN SPACE
-            #$PoiToSave  >> 'Data\saved_locations.csv' #WRITE CURRENT LINES TO TEXTFILE
-            #Write-Host "... saved $PoiName to Data\saved_locations.csv"
-            $PoiToSave  >> 'data\Script_Project Jericho_Points of Interest on Planets and ObjectContainers.csv'
-            if($console){Write-Host "... added $PoiName to Data\Script_Project Jericho_Points of Interest on Planets and ObjectContainers.csv"}
+        #Triggered by CTRL + S, opens a UI to save the current location
+        if($RunSpaceSyncData.SaveHotkey -eq $true){
+            $PoiName = ""
+            msg * "Save POI Key Combo registered"
+            #$SystemName = $script:CurrentDetectedSystem
+            #if($script:CurrentDetectedObjectContainer){$PoiToSave = "$SystemName;$CurrentDetectedObjectContainer;CustomType;$PoiName;$CurrentPlanetaryXCoord;$CurrentPlanetaryYCoord;$CurrentPlanetaryZCoord;none;$DateTime"} #IF ON A PLANET
+            #else {$PoiToSave = "$SystemName;CustomType;$PoiName;$CurrentXPosition;$CurrentYPosition;$CurrentZPosition;$DateTime"} #ELSE IF IN SPACE
+            #$PoiToSave  >> 'data\Script_Project Jericho_Points of Interest on Planets and ObjectContainers.csv'
+            #if($console){Write-Host "... added $PoiName to Data\Script_Project Jericho_Points of Interest on Planets and ObjectContainers.csv"}
+            $RunSpaceSyncData.SaveHotkey = $false
         }
 
-        #ADJUST PLANETARY ROTATION DEVIATION
-        $ResetPressed = Test-KeyPress -Key "R" -ModifierKey 'Control'
-        if ($ResetPressed) {
-
+        #Triggered by CTRL + R to Calibrate the current planets rotation, while player is located at OM-3
+        if ($RunSpaceSyncData.RecalibrateHotkey -eq $true) {
+            msg * "Recalibrate Key Combo registered"
             [decimal]$Circumference360Degrees = [Math]::PI * 2 * $CurrentDetectedOCRadius
             #Very high or low values are presented by ps as scientific results, therefore we force the nubmer (decimal) and limit it to 7 digits after comma
             #Multiplied by 1000 to convert km into m and invert it to correct the deviation
@@ -659,8 +694,8 @@ while($StartNavigation) {
             #Exit
         }
 
-        $pressed = Test-KeyPress -Key "T" -ModifierKey 'Control'
-        if ($pressed) {
+        if ($RunSpaceSyncData.CommentLogfileHotkey -eq $true) {
+            msg * "Comment Logfile Key Combo registered"
             $UserCommentPrev = Read-Host -Prompt 'Comment the previous updated position: '
             (Get-Content $LogFilename -raw) -replace ("(?s)(.*)no comment","`$1$UserCommentPrev") | Out-File $LogFilename
 
@@ -689,7 +724,7 @@ while($StartNavigation) {
         #################################################
         ### POI ON ROTATING OBJECT CONTAINER, PLANETS ###
         #################################################
-        if($script:PlanetaryPoi){
+        if($script:PlanetaryPoi -ne $null){
             #Write-Host "$($OrangeForeColor)- Calculations - Universe Simulation ($('{0:f2}' -f$MeasureTime.Elapsed.TotalSeconds))"
             #GET UTC SERVER TIME, ROUND MILLISECONDS IN 166ms steps (6 to 1 second conversion)
             #Function currently prevents script from continuing

@@ -16,6 +16,7 @@
 
 
 ## General Info
+- Work in Progress, the rework is currently in process, there is no public build planned in the upcoming weeks. For alpha builds and please support visit our discord server https://discord.gg/WMh5YCeQVS
 - This tool includes a set of different scripts and other tools to acheive its goal for live navigation in Star Citizen. 
 - Its non intrusive to the game, the script monitors the windows clipboard for the actual players position, that gets triggered by the StarCitizen Debug Chatcommand /showlocation 
 - It than uses a ntp server to internally determine the current utc time and the offset of the system time to increase the precision of calculations
@@ -33,10 +34,33 @@ than open powershell and drop the scriptfile into the window and unblock the scr
 | Unblock-File
 
 ## Screenshots
-![Screenshot of poi selection window](screenshots/Screenshot_Frontend_V7.1.7.PNG)
+![main application and ingame hud](screenshots/Generic_Overview_V7.3.0.jpg)
 
-![Screenshot of the main anvigation panel](screenshots/Screenshot_Backend_V7.1.6.PNG)
+![ingame overlay](screenshots/IngameOverlay_Overview_V7.3.0.jpg)
 
+![main application - Informations tab](screenshots/MainApplication_Informations_V7.3.0.JPG)
+
+![main application - Navigation tab](screenshots/MainApplication_Navigation_V7.3.0.JPG)
+
+![main application - Orbital Drop tab](screenshots/MainApplication_Orbital Drop_V7.3.0.JPG)
+
+![main application - System Map tab](screenshots/MainApplication_System Map_V7.3.0.JPG)
+
+![main application - Planet Map tab](screenshots/MainApplication_Planet Map_V7.3.0.JPG)
+
+![main application - Local Map tab](screenshots/MainApplication_Local Map_V7.3.0.JPG)
+
+![main application - settings tab](screenshots/MainApplication_Settings_V7.3.0.JPG)
+
+![main application - version history](screenshots/MainApplication_Version History_V7.3.0.JPG)
+
+![main application - quickinfos](screenshots/MainApplication_QuickInfos_V7.3.0.JPG)
+
+![POI Selection Screen](screenshots/PoiSelectionScreen_Overview_V7.3.0.JPG)
+
+![POI Save Screen](screenshots/Hotkeys_PoiSaveScreen_V7.3.0.JPG)
+
+![ingame overlay - destination marker](screenshots/Screenshot HUD Overlay Example.PNG)
 
 ## Prerequests
 Powershell V7 is needed to properly execute this script. You can grab it from here https://aka.ms/powershell-release?tag=stable . You can install it by using the default options I recommend to add "run with powershell 7" contect menu during install. Current Versions verified are 7.1.x until 7.2.3.

@@ -1,0 +1,379 @@
+
+Name                           Value
+----                           -----
+?                              False
+^                              Pause
+$                              Pause
+3dSpacePoi                     True
+A2                             -274,877762271091
+AllQMDistances                 {@{QuantumMarkerFrom=Hurston Hurt Locker Crater; QuantumMarkerT…
+AllQMDistancesSorted           {@{QuantumMarkerFrom=Hurston Hurt Locker Crater; QuantumMarkerT…
+AllQMResults                   {@{QuantumMarker=Hurston Hurt Locker Crater; X=12792496310.0553…
+AlphaPurple                    NaN
+AngleGroundVehicles            1
+AngleGroundVehiclesRAW         1,11992562491702
+AngleRadian                    2,16449879101512E-07
+args                           {}
+B2                             161,179601308992
+BetaPurple                     NaN
+c2                             624324,13332396
+c2Local                        12792711743,3651
+CDETcolor                      [93m[m
+CDTcolor                       [91m[m
+ClipboardContainsCoordinates   True
+ClosestQMStart                 @{QuantumMarkerFrom=Hurston Hurt Locker Crater; QuantumMarkerTo…
+ClosestQMX                     @{QuantumMarkerFrom=Hurston Hurt Locker Crater; QuantumMarkerTo…
+ClosestQMY                     @{QuantumMarkerFrom=Hurston Hurt Locker Crater; QuantumMarkerTo…
+ClosestQMZ                     @{QuantumMarkerFrom=Hurston Hurt Locker Crater; QuantumMarkerTo…
+closestX                       12793014340,9924
+closestXLocal                  8670353469,34379
+closestY                       -74543500,165916
+closestYLocal                  5941341291,0771
+closestZ                       -121860,739225627
+closestZLocal                  -121,861
+color                          Cyan
+ConfirmPreference              High
+CoordinatesSubmitted           True
+CurrentCycleAngle              359,999987598335
+CurrentCycleDeg                320,3297350703
+CurrentCycleDez                0,889804819639721
+CurrentDeltaTotal              17541,7907240924
+CurrentDeltaX                  -14828,0788154602
+CurrentDeltaY                  22969,2477709949
+CurrentDeltaZ                  -0,00139399999170564
+CurrentDestination             Hurston Hurt Locker Crater
+CurrentDestinationXCoord       12792496310,0553
+CurrentDestinationYCoord       -74209078,9588639
+CurrentDestinationZCoord       -122296
+CurrentDetectedBodyRadius      340830
+CurrentDetectedObjectContainer Magda
+CurrentDetectedOCAD            242.7516634
+CurrentDetectedOCRadius        494840
+CurrentDetectedOCRS            1.9400001
+CurrentDetectedOCX             12792686359
+CurrentDetectedOCY             -74464581
+CurrentDetectedOCZ             0
+CurrentDistanceTotal           624324,13332396
+CurrentDistanceX               464926,706968307
+CurrentDistanceY               416681,642445073
+CurrentDistanceZ               435,255781999993
+CurrentETA                     324,682795509174
+CurrentPlanetaryXCoord         -190,181
+CurrentPlanetaryYCoord         255,671
+CurrentPlanetaryZCoord         -121,861
+CurrentQMDistance              @{QuantumMarkerFrom=; QuantumMarkerTo=; Distance=0; DistanceX=0…
+CurrentQuantumMarker           {}
+CurrentXPosition               12792961236.762270 
+CurrentYPosition               -74625760.601309 
+CurrentZPosition               -121860.744218
+CustomCoordsProvided           False
+DataGroupDestinations          {Shubin Mining SCD-1, Wolf Point Aid Shelter, Javelin, Bennyhen…
+DateTime                       So. 17.10.2021 21:00:25
+DateTimeNTP                    So. 17.10.2021 20:59:49
+DateTimePC                     So. 17.10.2021 20:59:48
+DebugPreference                SilentlyContinue
+DestCoordDataX                 12792496310,0553
+DestCoordDataY                 -74209078,9588639
+DestCoordDataZ                 -122296
+Destination                    {Destination :, Hurston Hurt Locker Crater, 12792496310,055302,…
+DestinationName                Hurston Hurt Locker Crater
+DistanceBetweenQM              0
+DistanceBetweenQMX             0
+DistanceBetweenQMY             0
+DistanceBetweenQMZ             0
+DistanceDKM                    17km
+DistanceDM                     542m
+DistanceGreen                  1000
+DistanceGroundVehicles         0,235209999999997
+DistanceGroundVehiclesRAW      0,484984535835935
+DistanceGVColor                [92m[m
+DistancePoiToPlanet            341110,254934748
+DistanceShipToPlanetAlignment  341154,934084269
+DistanceTKM                    624km
+DistanceTM                     324m
+DistanceYellow                 100000
+ElapsedUTCTimeSinceSimulation… 655.19:00:25.3175007
+EnabledExperimentalFeatures    {}
+Entry                          @{QuantumMarker=; X=12792686359; Y=-74464581; Z=0}
+Error                          {Unable to find type [Win32.WindowLayer]., The term '.\function…
+ErrorActionPreference          Continue
+ErrorView                      ConciseView
+EscapeCharacter                [m
+ExecutionContext               System.Management.Automation.EngineIntrinsics
+FAcolor                        [91m[m
+FALcolor                       [91m[m
+false                          False
+FinalAngle                     44,64
+FinalAngleLocal                29,68
+FinalCoordArray                {}
+FinalHorizontalAngle           42
+FinalInstructions              {@{Step=1.; Type=Start; Direction=from; QuantumMarker=Hurston H…
+FinalOM1                       694,16
+FinalOM1D                      12792711551,71
+FinalOM2                       490,56
+FinalOM2D                      12792711551,7
+FinalOM3                       328,97
+FinalOM3D                      12792711554,58
+FinalOM4                       783,76
+FinalOM4D                      12792711548,83
+FinalOM5                       741,26
+FinalOM5D                      12792711056,87
+FinalOM6                       415,97
+FinalOM6D                      12792712046,54
+FinalPlanetCoords              {}
+FinalPlanetDataX               12792686359
+FinalPlanetDataY               -74464581
+FinalPlanetDataZ               0
+FinalPoiCoords                 {Hurston Hurt Locker Crater}
+FinalVerticalAngle             -0
+FirstCoordArray                {Hurston Hurt Locker Crater, }
+FirstStep                      {Step, Type, Direction, QuantumMarker…}
+foreach                        
+FormatEnumerationLimit         4
+GammaPurple                    NaN
+GroundVehicleAlpha             NaN
+GroundVehicleBeta              NaN
+GroundVehicleGamma             NaN
+HOME                           C:\Users\marcel
+Host                           System.Management.Automation.Internal.Host.InternalHost
+HudCrosshair                   True
+InformationPreference          SilentlyContinue
+input                          System.Collections.ArrayList+ArrayListEnumeratorSimple
+InstQMCurrent                  @{QuantumMarker=; X=12792686359; Y=-74464581; Z=0}
+InstQuantumMarkerCoords        {12792686359, -74464581, 0}
+InstQuantumMarkerDataX         12792686359
+InstQuantumMarkerDataY         -74464581
+InstQuantumMarkerDataZ         0
+IsCoreCLR                      True
+IsLinux                        False
+IsMacOS                        False
+IsWindows                      True
+JulianDate                     655,791959693295
+LastUpdate                     09sec
+LastUpdateRaw1                 00:00:09.1226934
+Legend                         {COORDINATES :  ,     X (+OM5/-OM6),     Y (+OM3/-OM4),     Z (…
+LengthOfDayDecimal             0,0808333375
+ListOfToolsToStart             {}
+Local                          {Planet/Moon :, Magda     , -190,181,           255,671…}
+MainForm                       System.Windows.Forms.Form, Text: Project Jericho
+MainForm_Drawing_Size          {Width=1240, Height=490}
+MainFormHeight                 420
+MainFormHorizontalBorder       10
+MainFormVerticalBorder         10
+MainFormVerticalSpace          150
+MainFormWidth                  1240
+Matches                        {0}
+max                            16
+MaximumHistoryCount            4096
+MaxX                           2790
+Milliseconds                   5
+MyInvocation                   System.Management.Automation.InvocationInfo
+NestedPromptLevel              0
+NTPServer                      {ptbtime1.ptb.de, ptbtime2.ptb.de, ptbtime3.ptb.de}
+null                           
+ObjectContainer                @{System (Version 2021.02.17)=Stanton; Type=Lagrange; Name=HUR-…
+ObjectContainerBodyRadius      BodyRadius
+ObjectContainerData            {@{System (Version 2021.02.17)=Stanton; Type=Planet; Name=Arial…
+ObjectContainerOMRadius        0
+ObjectContainerRotAdjust       0
+ObjectContainerRotSpeed        0
+ObjectContainerX               6425227776
+ObjectContainerY               11128823808
+ObjectContainerZ               0
+OCAngleRadian                  -3,54249978758598
+OcCsvPath                      data\Script_Project Jericho_Values for Object Containers.csv
+OCCurrentCycleAngle            562,970286754667
+OCCurrentCycleDeg              320,218623354667
+OCCurrentCycleDez              0,889496175985187
+OCJulianDate                   655,791934744598
+OCLengthOfDayDecimal           0,0808333375
+OCRadius                       494,84
+OCRadiusD                      494,84
+OCReversedAngle                -202,970286754667
+OCTotalCycles                  8112,88949617599
+OM1                            694,158912932046
+OM1D                           12792711551,7101
+OM2                            490,560707194329
+OM2D                           12792711551,7006
+OM3                            328,969187984224
+OM3D                           12792711554,5758
+OM4                            783,763789162908
+OM4D                           12792711548,8348
+OM5                            741,263471380453
+OM5D                           12792711056,8736
+OM6                            415,974602401397
+OM6D                           12792712046,537
+OmArray                        {OM2, OM1, OM6, OM4…}
+OMGSDistanceToDestination      329177
+OMGSStart                      OM3
+OMRadiusExtra                  1,5
+OptionBox                      System.Windows.Forms.RadioButton, Checked: False
+OrbitalMarkers                 OM Distance : [90mOM1:[97m694.16[90m, OM2:[97m490.56[90m, …[m
+OrbitalMarkersD                Destination : [90mOM1:[97m12792711551.71[90m, OM2:[97m12792…[m
+OutputEncoding                 System.Text.UTF8Encoding
+pathError                      616598,560623004
+pathErrorLocal                 7292386980,17292
+PCClockdrift                   00:00:00.6187030
+perrd                          44,6433001075807
+perrdLocal                     29,6849699477288
+PerviousShipRotationValueX1    274,87779715839
+PerviousShipRotationValueY1    -161,179541811729
+PerviousShipRotationValueZ1    -121,860744218
+PID                            23924
+PlanetaryPoi                   True
+PlanetCoordDataX               12792686,359
+PlanetCoordDataY               -74464,581
+PlanetCoordDataZ               0
+PlanetDifferenceinX            -274877,762269974
+PlanetDifferenceinY            161179,601309001
+PlanetOMRadius                 494840
+PlanetRotationSpeed            1.9400001
+PlanetRotationStart            242.7516634
+PlanetRotationValueX1          -190181,041932774
+PlanetRotationValueY1          255671,311175191
+PlanetRotationValueZ1          -121,860744218
+PoiCoordDataPlanet             Magda
+PoiCoordDataX                  -190.049
+PoiCoordDataY                  255.502
+PoiCoordDataZ                  -122.296
+PointsOfInterestInSpaceData    {@{System=Stanton; POI Type=Station; Name=INS-Jericho; Stanton …
+PointsOfInterestOnPlanetsData  {@{System=Stanton; ObjectContainer=Daymar; Type=Outpost; Name=S…
+PoiPlanetsCsvPath              data\Script_Project Jericho_Points of Interest on Planets and O…
+PoiRotationValueX              -190,048944696619
+PoiRotationValueY              255,502041136077
+PoiSpaceCsvPath                data\Script_Project Jericho_Points of Interest in 3D Space.csv
+PosShipX                       274877,79715839
+PosShipY                       -161179,541811729
+PosShipZ                       -121860,744218
+PosX                           -190049
+PosY                           255502
+PosZ                           -122296
+Powershellv5Legacy             False
+pressed                        
+Previous_AngleGroundVehicles   93
+Previous_DistanceGroundVehicl… 610,968765999999
+PreviousAngle                  44,64
+PreviousAngleLocal             29,68
+PreviousDistanceTotal          624324,13332396
+PreviousDistanceX              464926,706968307
+PreviousDistanceY              416681,642445073
+PreviousDistanceZ              435,255781999993
+PreviousPlanetaryXCoord        -190,181
+PreviousPlanetaryYCoord        255,671
+PreviousPlanetaryZCoord        -121,861
+PreviousTime                   So. 17.10.2021 21:00:23
+PreviousXPosition              12792961236.762270 
+PreviousYPosition              -74625760.601309 
+PreviousZPosition              -121860.744218
+PROFILE                        C:\Users\marcel\Documents\PowerShell\Microsoft.PowerShell_profi…
+ProgressPreference             Continue
+PSBoundParameters              {}
+PSCommandPath                  
+PSCulture                      de-DE
+PSDefaultParameterValues       {}
+PSEdition                      Core
+PSEmailServer                  
+PSHOME                         C:\Program Files\PowerShell\7
+PSScriptRoot                   
+PSSessionApplicationName       wsman
+PSSessionConfigurationName     http://schemas.microsoft.com/powershell/Microsoft.PowerShell
+PSSessionOption                System.Management.Automation.Remoting.PSSessionOption
+PSUICulture                    de-DE
+PSVersionTable                 {PSVersion, PSEdition, GitCommitId, OS…}
+PWD                            C:\Users\marcel\Desktop\StarCitizen Tools\Projekt Jericho (3D N…
+QMDistanceGreen                100000
+QMDistancesCurrent             @{QuantumMarkerFrom=Hurston Hurt Locker Crater; QuantumMarkerTo…
+QMDistanceYellow               1000000
+QMEntry                        @{QuantumMarker=; X=12792686359; Y=-74464581; Z=0}
+RadialDistance                 12793178894,4069
+ResetPressed                   
+Results                        {}
+ReversedAngle                  1,24016645486336E-05
+ScreenResolution               {Screen[Bounds={X=0,Y=0,Width=3440,Height=1440} WorkingArea={X=…
+ScriptDir                      C:\Users\marcel\Desktop\StarCitizen Tools\Projekt Jericho (3D N…
+ScriptLoopCount                2
+SecondStep                     {Step, Type, Direction, QuantumMarker…}
+SelectedDestination            @{System=Stanton; ObjectContainer=Magda; Type=CustomType; Name=…
+SelectedPlanet                 @{System (Version 2021.02.17)=Stanton; Type=Planet; Name=Magda;…
+Selection                      
+ShellId                        Microsoft.PowerShell
+ShipOM1                        694159
+ShipOM2                        490230
+ShipOM3                        721644
+ShipOM4                        449152
+ShipOM5                        298684
+ShipOM6                        795798
+ShipOmArray                    {OM2, OM1, OM6, OM4…}
+ShipOMClosest                  OM5
+ShipRotationValueX1            274,87779715839
+ShipRotationValueY1            -161,179541811729
+ShipRotationValueZ1            -121,860744218
+SpacingLeftColumns             15
+SpacingRightColumns            17
+SpacingToLeft2                 20
+StackTrace                        at System.Management.Automation.Internal.PipelineProcessor.S…
+Stanton                        {Stanton     :  ,   12792961236,762,     -74625760,601,       -…
+StartingPoint                  {Step, Type, Direction, QuantumMarker…}
+StartNavigation                True
+switch                         
+TendecyStatus                  closer
+TendencyColor                  [92m[m
+text1                          Please issue 
+text2                          /showlocation 
+text3                          command in chat to display results
+Total                          @{Type=Total; Distance=624324,13332396; Delta=17541,7907240924}
+TotalCycles                    8112,88980481964
+TriangleGroundA                NaN
+TriangleGroundB                122,420564635411
+TriangleGroundC                NaN
+TriangleXA                     416,681541811729
+TriangleXAlpha                 41,8676622671014
+TriangleXB                     -464,92679715839
+TriangleXC                     624,323981601347
+TriangleYA                     -0,435255781999999
+TriangleYAlpha                 -0,0536392227423384
+TriangleYB                     -464,92679715839
+TriangleYC                     464,927000897512
+true                           True
+ts                             00:05:24.6827955
+VerbosePreference              SilentlyContinue
+VTBlue                         [94m[m
+VTDarkGray                     [90m[m
+VTDefault                      [97m[m
+VTFontBlue                     94
+VTFontDarkGray                 90
+VTFontDefault                  97
+VTFontGray                     38
+VTFontGreen                    92
+VTFontRed                      91
+VTFontWhite                    97
+VTFontYellow                   93
+VTGray                         [38m[m
+VTGreen                        [92m[m
+VTRed                          [91m[m
+VTWhite                        [97m[m
+VTYellow                       [93m[m
+WaitCount                      0
+WarningPreference              Continue
+WGS                            {Planet/Moon :       , [90mLat: [97m-0.001°  , [90mLong: [9…[m
+WgsHeight                      12792838064
+WgsLatitude                    -0,001
+WgsLongitude                   -90,334
+WGSSpacing                     20
+WhatIfPreference               False
+WindowSizeX                    95
+WindowSizeY                    36
+WithinX                        False
+WithinY                        False
+WithinZ                        False
+X                              @{Type=X-Axis; Distance=464926,706968307; Delta=-14828,07881546…
+X2                             12792961,2367623
+xab_dist                       27339,6829631006
+xab_distLocal                  24,7263854616885
+xu                             4,58132909763143
+XULocal                        -425079846,993567
+Y                              @{Type=Y-Axis; Distance=416681,642445073; Delta=22969,247770994…
+Y2                             -74625,760601309
+Z                              @{Type=Z-Axis; Distance=435,255781999993; Delta=-0,001393999991…
+Z2                             -1,94323597687533E-06
+

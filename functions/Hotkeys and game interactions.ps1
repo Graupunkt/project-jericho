@@ -1,56 +1,97 @@
-#REGISTERS KEYPRESS IN POWERSHELL WINDOW
-function Test-KeyPress{
-    param
-    (
-        # submit the key you want to detect
-        [Parameter(Mandatory)]
-        [ConsoleKey]
-        $Key,
+#9..20 | ForEach-Object { '{0} = {1}' -f $_, [System.Windows.Forms.Keys]$_ }
 
-        [System.ConsoleModifiers]
-        $ModifierKey = 0
-    )
+$RunspaceHotKeyCode = {
+    if(Test-Path -Path "$ScriptDir\debug-runspace-hotkey.log" -PathType Leaf){Remove-Item -Path "$ScriptDir\debug-runspace-hotkey.log" -ErrorAction SilentlyContinue}
+    Start-Transcript -Path "$ScriptDir\debug-runspace-hotkey.log" -Append  | Out-Null
+    
+$Signature = @'
+[DllImport("user32.dll", CharSet=CharSet.Auto, ExactSpelling=true)] 
+public static extern short GetAsyncKeyState(int virtualKeyCode); 
+'@
+    
 
-    # reading keys is a blocking function. To "unblock" it,
-    # let's first check if a key press is available at all:
-    if ([Console]::KeyAvailable)
-    {
-        # since a key was pressed, ReadKey() now is NOT blocking
-        # anymore because there is already a pressed key waiting
-        # to be picked up
-        # submit $true as an argument to consume the key. Else,
-        # the pressed key would be echoed in the console window
-        # note that ReadKey() returns a ConsoleKeyInfo object
-        # the pressed key can be found in its property "Key":
-        # write-host "1"
-         $pressedKey = [Console]::ReadKey($true)
+#$API = Add-Type -MemberDefinition $signatures -Name 'Win32' -Namespace API -PassThru
+[System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms")
+Add-Type -MemberDefinition $Signature -Name Keyboard -Namespace PsOneApi 
 
-        # if the pressed key is the key we are after...
-        $isPressedKey = $key -eq $pressedKey.Key
-        if ($isPressedKey)
-        {
+    $global:arrayofkeys = [System.Collections.ArrayList]@()
+    $loop = 0
+    while ($true) {
+        #check keypresses every 50ms
+        Start-Sleep -Milliseconds 50
 
-            # if you want an EXACT match of modifier keys,
-            # check for equality (-eq)
-            $pressedKey.Modifiers -eq $ModifierKey
-            [Console]::Beep(1800, 200)
-            # if you want to ensure that AT LEAST the specified
-            # modifier keys were pressed, but you don't care
-            # whether other modifier keys are also pressed, use
-            # "binary and" (-band). If all bits are set, the result
-            # is equal to the tested bit mask:
-            # ($pressedKey.Modifiers -band $ModifierKey) -eq $ModifierKey
-        }
-        else
-        {
-            # else emit a short beep to let the user know that
-            # a key was pressed that was not expected
-            # Beep() takes the frequency in Hz and the beep
-            # duration in milliseconds:
-            #
+        #collect all keypress within a specific timeframe, in this case 1sec (20 * 50ms)
+        if($loop%50 -eq 0){$global:arrayofkeys = [System.Collections.ArrayList]@()}
 
-            # return $false
-            $false
+        # scan all ASCII codes above 8
+        for ($ascii = 9; $ascii -le 254; $ascii++) {
+        # get current key state
+        #$state = $API::GetAsyncKeyState($ascii)
+        $state = [PsOneApi.Keyboard]::GetAsyncKeyState($ascii)
+
+        #$state = -32767
+        # is key pressed?
+        if ($state -eq -32767) {
+                #convert keycode to name
+                $virtualKeyName = [System.Windows.Forms.Keys]$ascii
+                #add name to array
+                write-host "$virtualKeyName keypress detected"
+                If ($global:arrayofkeys -notcontains $virtualKeyName){$global:arrayofkeys.add($virtualKeyName) | Out-Null}
         }
     }
+    #Save Poi
+    if($global:arrayofkeys -like "ControlKey*" -AND $global:arrayofkeys -like "*S"){
+        #msg * "CTRL + S"
+        $RunSpaceSyncData.SaveHotkey = $true
+        $global:arrayofkeys = [System.Collections.ArrayList]@()
+        Write-Host "CTRL+S detected, $($RunSpaceSyncData.SaveHotkey)"
+    }
+    #Recalibrate Planet
+    if($global:arrayofkeys -like "ControlKey*" -AND $global:arrayofkeys -like "*R"){
+        #msg * "CTRL + R"
+        $RunSpaceSyncData.RecalibrateHotkey = $true
+        $global:arrayofkeys = [System.Collections.ArrayList]@()
+        Write-Host "CTRL+R detected, $($RunSpaceSyncData.RecalibrateHotkey)"
+    }
+    #Add Comment to Logfile
+    if($global:arrayofkeys -like "ControlKey*" -AND $global:arrayofkeys -like "*K"){
+        #msg * "CTRL + K"
+        $RunSpaceSyncData.CommentLogfileHotkey = $true
+        $global:arrayofkeys = [System.Collections.ArrayList]@()
+        Write-Host "CTRL+K detected, $($RunSpaceSyncData.CommentLogfileHotkey)"
+    }    
+    $loop++
+    }
 }
+
+
+
+
+
+
+
+<#
+function Run-RunspaceHotkeys {
+    $RunspaceHotkey = [runspacefactory]::CreateRunspace()
+    $RunspaceHotkey.ApartmentState = "STA"
+    $RunspaceHotkey.ThreadOptions = "ReuseThread"
+    $RunspaceHotkey.Open()
+    $RunspaceLogfile.SessionStateProxy.SetVariable("SavePoiHotkey", $SavePoiHotkey)
+    $PSinstanceHotkey = [powershell]::Create().AddScript($RunspaceHotKeyCode)
+    $PSinstanceHotkey.Runspace = $RunspaceHotkey
+    $JobHotkey = $PSinstanceHotkey.BeginInvoke()
+    }
+
+
+Run-RunspaceHotkeys
+$PowerShell.EndInvoke($JobHotkey) | Out-Null
+$PSinstanceHotkey.RunSpace.Dispose()
+$PSinstanceHotkey.Dispose()
+$RunspaceHotkey.Dispose()
+
+Debug-Runspace -iD 2
+$runspaces = Get-Runspace
+$runspaces | ForEach { 
+    $_.Dispose()
+}
+#>

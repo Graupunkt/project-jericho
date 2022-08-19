@@ -2,8 +2,8 @@
 	#----------------------------------------------
 	#region Import the Assemblies
 	#----------------------------------------------
-	[void][reflection.assembly]::Load('System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a')
 	[void][reflection.assembly]::Load('System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089')
+	[void][reflection.assembly]::Load('System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a')
 	#endregion Import Assemblies
 
 	#----------------------------------------------
@@ -254,6 +254,9 @@
 	$textbox157 = New-Object 'System.Windows.Forms.TextBox'
 	$textbox158 = New-Object 'System.Windows.Forms.TextBox'
 	$groupbox30 = New-Object 'System.Windows.Forms.GroupBox'
+	$labelM7s = New-Object 'System.Windows.Forms.Label'
+	$textbox249 = New-Object 'System.Windows.Forms.TextBox'
+	$labelSPEED = New-Object 'System.Windows.Forms.Label'
 	$label1013088 = New-Object 'System.Windows.Forms.Label'
 	$label1013089 = New-Object 'System.Windows.Forms.Label'
 	$textbox243 = New-Object 'System.Windows.Forms.TextBox'
@@ -382,6 +385,7 @@
 	$datagridview2 = New-Object 'System.Windows.Forms.DataGridView'
 	$datagridview1 = New-Object 'System.Windows.Forms.DataGridView'
 	$tabpage8 = New-Object 'System.Windows.Forms.TabPage'
+	$buttonClearJerichoProcesse = New-Object 'System.Windows.Forms.Button'
 	$buttonDebugMode = New-Object 'System.Windows.Forms.Button'
 	$textbox242 = New-Object 'System.Windows.Forms.TextBox'
 	$labelLimits = New-Object 'System.Windows.Forms.Label'
@@ -1223,7 +1227,7 @@
 	}
 	
 	$buttonDebugMode_Click={
-		if ($buttonDebugMode.ForeColor -eq [System.Drawing.Color]::FromArgb(50, 250, 50))
+		if ($global:debug -eq $true)
 		{
 			$global:debug = $false
 			$buttonDebugMode.ForeColor = [System.Drawing.Color]::FromArgb(250, 50, 50)
@@ -1252,6 +1256,13 @@
 		
 	}
 	
+	$buttonClearJerichoProcesse_Click={
+		#TODO: Place custom script here
+		$buttonClearJerichoProcesse.ForeColor = [System.Drawing.Color]::FromArgb(50, 250, 50)
+		Start-Process pwsh.exe -argumentlist '-Command {Get-Runspace | ForEach {$_.Dispose()}'
+		start-process cmd -WindowStyle Minimized -argumentlist '/c timeout /t 3 & taskkill /F /IM pwsh.exe'
+	}
+	
 	# --End User Generated Script--
 	#----------------------------------------------
 	#region Generated Events
@@ -1272,6 +1283,7 @@
 			$label1013061.remove_Click($label1013061_Click)
 			$datagridview2.remove_CellContentClick($datagridview2_CellContentClick)
 			$datagridview1.remove_CellContentClick($datagridview1_CellContentClick)
+			$buttonClearJerichoProcesse.remove_Click($buttonClearJerichoProcesse_Click)
 			$buttonDebugMode.remove_Click($buttonDebugMode_Click)
 			$buttonAutoRunToggle.remove_Click($buttonAutoRunToggle_Click)
 			$buttonToggleIngameOverlay.remove_Click($buttonToggleIngameOverlay_Click)
@@ -1738,7 +1750,7 @@
 	$groupbox27.Controls.Add($textbox75)
 	$groupbox27.BackColor = [System.Drawing.Color]::Black 
 	$groupbox27.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
-	$groupbox27.ForeColor = [System.Drawing.Color]::DarkOrange 
+	$groupbox27.ForeColor = [System.Drawing.Color]::Brown 
 	$groupbox27.Location = New-Object System.Drawing.Point(661, 50)
 	$groupbox27.Margin = '4, 3, 4, 3'
 	$groupbox27.Name = 'groupbox27'
@@ -2013,7 +2025,7 @@ OM = Orbital Marker')
 	#
 	$label80.Font = [System.Drawing.Font]::new('Arial Narrow', '15.75')
 	$label80.ForeColor = [System.Drawing.Color]::Gray 
-	$label80.Location = New-Object System.Drawing.Point(211, 14)
+	$label80.Location = New-Object System.Drawing.Point(194, 14)
 	$label80.Margin = '0, 0, 0, 0'
 	$label80.Name = 'label80'
 	$label80.RightToLeft = 'No'
@@ -2027,12 +2039,12 @@ OM = Orbital Marker')
 	$textbox245.BorderStyle = 'None'
 	$textbox245.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox245.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
-	$textbox245.Location = New-Object System.Drawing.Point(237, 79)
+	$textbox245.Location = New-Object System.Drawing.Point(220, 79)
 	$textbox245.Margin = '0, 0, 0, 0'
 	$textbox245.Name = 'textbox245'
 	$textbox245.ReadOnly = $True
 	$textbox245.RightToLeft = 'No'
-	$textbox245.Size = New-Object System.Drawing.Size(39, 16)
+	$textbox245.Size = New-Object System.Drawing.Size(56, 16)
 	$textbox245.TabIndex = 52
 	$textbox245.Text = '-'
 	$textbox245.TextAlign = 'Right'
@@ -2054,7 +2066,7 @@ OM = Orbital Marker')
 	#
 	$label1013091.Font = [System.Drawing.Font]::new('Arial Narrow', '15.75')
 	$label1013091.ForeColor = [System.Drawing.Color]::Gray 
-	$label1013091.Location = New-Object System.Drawing.Point(211, 71)
+	$label1013091.Location = New-Object System.Drawing.Point(194, 71)
 	$label1013091.Margin = '0, 0, 0, 0'
 	$label1013091.Name = 'label1013091'
 	$label1013091.RightToLeft = 'No'
@@ -2066,7 +2078,7 @@ OM = Orbital Marker')
 	#
 	$label81.Font = [System.Drawing.Font]::new('Arial Narrow', '15.75')
 	$label81.ForeColor = [System.Drawing.Color]::Gray 
-	$label81.Location = New-Object System.Drawing.Point(211, 33)
+	$label81.Location = New-Object System.Drawing.Point(194, 33)
 	$label81.Margin = '0, 0, 0, 0'
 	$label81.Name = 'label81'
 	$label81.RightToLeft = 'No'
@@ -2091,7 +2103,7 @@ OM = Orbital Marker')
 	#
 	$label82.Font = [System.Drawing.Font]::new('Arial Narrow', '15.75')
 	$label82.ForeColor = [System.Drawing.Color]::Gray 
-	$label82.Location = New-Object System.Drawing.Point(211, 52)
+	$label82.Location = New-Object System.Drawing.Point(194, 52)
 	$label82.Margin = '0, 0, 0, 0'
 	$label82.Name = 'label82'
 	$label82.RightToLeft = 'No'
@@ -2105,12 +2117,12 @@ OM = Orbital Marker')
 	$textbox246.BorderStyle = 'None'
 	$textbox246.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox246.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
-	$textbox246.Location = New-Object System.Drawing.Point(47, 79)
+	$textbox246.Location = New-Object System.Drawing.Point(44, 79)
 	$textbox246.Margin = '0, 0, 0, 0'
 	$textbox246.Name = 'textbox246'
 	$textbox246.ReadOnly = $True
 	$textbox246.RightToLeft = 'No'
-	$textbox246.Size = New-Object System.Drawing.Size(161, 16)
+	$textbox246.Size = New-Object System.Drawing.Size(147, 16)
 	$textbox246.TabIndex = 50
 	$textbox246.Text = '-'
 	$textbox246.TextAlign = 'Right'
@@ -2134,12 +2146,12 @@ OM = Orbital Marker')
 	$textbox59.BorderStyle = 'None'
 	$textbox59.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox59.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
-	$textbox59.Location = New-Object System.Drawing.Point(237, 40)
+	$textbox59.Location = New-Object System.Drawing.Point(220, 40)
 	$textbox59.Margin = '0, 0, 0, 0'
 	$textbox59.Name = 'textbox59'
 	$textbox59.ReadOnly = $True
 	$textbox59.RightToLeft = 'No'
-	$textbox59.Size = New-Object System.Drawing.Size(39, 16)
+	$textbox59.Size = New-Object System.Drawing.Size(56, 16)
 	$textbox59.TabIndex = 42
 	$textbox59.Text = '-'
 	$textbox59.TextAlign = 'Right'
@@ -2163,12 +2175,12 @@ OM = Orbital Marker')
 	$textbox60.BorderStyle = 'None'
 	$textbox60.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox60.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
-	$textbox60.Location = New-Object System.Drawing.Point(237, 20)
+	$textbox60.Location = New-Object System.Drawing.Point(220, 20)
 	$textbox60.Margin = '0, 0, 0, 0'
 	$textbox60.Name = 'textbox60'
 	$textbox60.ReadOnly = $True
 	$textbox60.RightToLeft = 'No'
-	$textbox60.Size = New-Object System.Drawing.Size(39, 16)
+	$textbox60.Size = New-Object System.Drawing.Size(56, 16)
 	$textbox60.TabIndex = 39
 	$textbox60.Text = '-'
 	$textbox60.TextAlign = 'Right'
@@ -2218,12 +2230,12 @@ OM = Orbital Marker')
 	$textbox61.BorderStyle = 'None'
 	$textbox61.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox61.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
-	$textbox61.Location = New-Object System.Drawing.Point(47, 20)
+	$textbox61.Location = New-Object System.Drawing.Point(44, 20)
 	$textbox61.Margin = '0, 0, 0, 0'
 	$textbox61.Name = 'textbox61'
 	$textbox61.ReadOnly = $True
 	$textbox61.RightToLeft = 'No'
-	$textbox61.Size = New-Object System.Drawing.Size(161, 16)
+	$textbox61.Size = New-Object System.Drawing.Size(147, 16)
 	$textbox61.TabIndex = 24
 	$textbox61.Text = '-'
 	$textbox61.TextAlign = 'Right'
@@ -2234,12 +2246,12 @@ OM = Orbital Marker')
 	$textbox62.BorderStyle = 'None'
 	$textbox62.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox62.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
-	$textbox62.Location = New-Object System.Drawing.Point(47, 60)
+	$textbox62.Location = New-Object System.Drawing.Point(44, 60)
 	$textbox62.Margin = '0, 0, 0, 0'
 	$textbox62.Name = 'textbox62'
 	$textbox62.ReadOnly = $True
 	$textbox62.RightToLeft = 'No'
-	$textbox62.Size = New-Object System.Drawing.Size(161, 16)
+	$textbox62.Size = New-Object System.Drawing.Size(147, 16)
 	$textbox62.TabIndex = 26
 	$textbox62.Text = '-'
 	$textbox62.TextAlign = 'Right'
@@ -2250,12 +2262,12 @@ OM = Orbital Marker')
 	$textbox63.BorderStyle = 'None'
 	$textbox63.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox63.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
-	$textbox63.Location = New-Object System.Drawing.Point(47, 40)
+	$textbox63.Location = New-Object System.Drawing.Point(44, 40)
 	$textbox63.Margin = '0, 0, 0, 0'
 	$textbox63.Name = 'textbox63'
 	$textbox63.ReadOnly = $True
 	$textbox63.RightToLeft = 'No'
-	$textbox63.Size = New-Object System.Drawing.Size(161, 16)
+	$textbox63.Size = New-Object System.Drawing.Size(147, 16)
 	$textbox63.TabIndex = 25
 	$textbox63.Text = '-'
 	$textbox63.TextAlign = 'Right'
@@ -2266,12 +2278,12 @@ OM = Orbital Marker')
 	$textbox58.BorderStyle = 'None'
 	$textbox58.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox58.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
-	$textbox58.Location = New-Object System.Drawing.Point(237, 60)
+	$textbox58.Location = New-Object System.Drawing.Point(220, 60)
 	$textbox58.Margin = '0, 0, 0, 0'
 	$textbox58.Name = 'textbox58'
 	$textbox58.ReadOnly = $True
 	$textbox58.RightToLeft = 'No'
-	$textbox58.Size = New-Object System.Drawing.Size(39, 16)
+	$textbox58.Size = New-Object System.Drawing.Size(56, 16)
 	$textbox58.TabIndex = 45
 	$textbox58.Text = '-'
 	$textbox58.TextAlign = 'Right'
@@ -2333,7 +2345,7 @@ OC = Object Container
 	#
 	$label79.Font = [System.Drawing.Font]::new('Arial Narrow', '15.75')
 	$label79.ForeColor = [System.Drawing.Color]::Gray 
-	$label79.Location = New-Object System.Drawing.Point(211, 14)
+	$label79.Location = New-Object System.Drawing.Point(194, 14)
 	$label79.Margin = '0, 0, 0, 0'
 	$label79.Name = 'label79'
 	$label79.RightToLeft = 'No'
@@ -2345,7 +2357,7 @@ OC = Object Container
 	#
 	$label1013094.Font = [System.Drawing.Font]::new('Arial Narrow', '15.75')
 	$label1013094.ForeColor = [System.Drawing.Color]::Gray 
-	$label1013094.Location = New-Object System.Drawing.Point(211, 51)
+	$label1013094.Location = New-Object System.Drawing.Point(194, 51)
 	$label1013094.Margin = '0, 0, 0, 0'
 	$label1013094.Name = 'label1013094'
 	$label1013094.RightToLeft = 'No'
@@ -2357,7 +2369,7 @@ OC = Object Container
 	#
 	$label78.Font = [System.Drawing.Font]::new('Arial Narrow', '15.75')
 	$label78.ForeColor = [System.Drawing.Color]::Gray 
-	$label78.Location = New-Object System.Drawing.Point(211, 33)
+	$label78.Location = New-Object System.Drawing.Point(194, 33)
 	$label78.Margin = '0, 0, 0, 0'
 	$label78.Name = 'label78'
 	$label78.RightToLeft = 'No'
@@ -2369,7 +2381,7 @@ OC = Object Container
 	#
 	$label1013095.AutoSize = $True
 	$label1013095.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
-	$label1013095.ForeColor = [System.Drawing.Color]::Brown 
+	$label1013095.ForeColor = [System.Drawing.Color]::Gray 
 	$label1013095.Location = New-Object System.Drawing.Point(15, 59)
 	$label1013095.Margin = '4, 0, 4, 0'
 	$label1013095.Name = 'label1013095'
@@ -2384,12 +2396,12 @@ OC = Object Container
 	$textbox247.BorderStyle = 'None'
 	$textbox247.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox247.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
-	$textbox247.Location = New-Object System.Drawing.Point(47, 59)
+	$textbox247.Location = New-Object System.Drawing.Point(44, 59)
 	$textbox247.Margin = '0, 0, 0, 0'
 	$textbox247.Name = 'textbox247'
 	$textbox247.ReadOnly = $True
 	$textbox247.RightToLeft = 'No'
-	$textbox247.Size = New-Object System.Drawing.Size(161, 16)
+	$textbox247.Size = New-Object System.Drawing.Size(147, 16)
 	$textbox247.TabIndex = 55
 	$textbox247.Text = '-'
 	$textbox247.TextAlign = 'Right'
@@ -2413,12 +2425,12 @@ OC = Object Container
 	$textbox248.BorderStyle = 'None'
 	$textbox248.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox248.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
-	$textbox248.Location = New-Object System.Drawing.Point(237, 59)
+	$textbox248.Location = New-Object System.Drawing.Point(220, 59)
 	$textbox248.Margin = '0, 0, 0, 0'
 	$textbox248.Name = 'textbox248'
 	$textbox248.ReadOnly = $True
 	$textbox248.RightToLeft = 'No'
-	$textbox248.Size = New-Object System.Drawing.Size(39, 16)
+	$textbox248.Size = New-Object System.Drawing.Size(56, 16)
 	$textbox248.TabIndex = 56
 	$textbox248.Text = '-'
 	$textbox248.TextAlign = 'Right'
@@ -2429,12 +2441,12 @@ OC = Object Container
 	$textbox57.BorderStyle = 'None'
 	$textbox57.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox57.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
-	$textbox57.Location = New-Object System.Drawing.Point(237, 78)
+	$textbox57.Location = New-Object System.Drawing.Point(220, 78)
 	$textbox57.Margin = '0, 0, 0, 0'
 	$textbox57.Name = 'textbox57'
 	$textbox57.ReadOnly = $True
 	$textbox57.RightToLeft = 'No'
-	$textbox57.Size = New-Object System.Drawing.Size(39, 16)
+	$textbox57.Size = New-Object System.Drawing.Size(56, 16)
 	$textbox57.TabIndex = 45
 	$textbox57.Text = '-'
 	$textbox57.TextAlign = 'Right'
@@ -2458,12 +2470,12 @@ OC = Object Container
 	$textbox56.BorderStyle = 'None'
 	$textbox56.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox56.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
-	$textbox56.Location = New-Object System.Drawing.Point(237, 40)
+	$textbox56.Location = New-Object System.Drawing.Point(220, 40)
 	$textbox56.Margin = '0, 0, 0, 0'
 	$textbox56.Name = 'textbox56'
 	$textbox56.ReadOnly = $True
 	$textbox56.RightToLeft = 'No'
-	$textbox56.Size = New-Object System.Drawing.Size(39, 16)
+	$textbox56.Size = New-Object System.Drawing.Size(56, 16)
 	$textbox56.TabIndex = 42
 	$textbox56.Text = '-'
 	$textbox56.TextAlign = 'Right'
@@ -2472,7 +2484,7 @@ OC = Object Container
 	#
 	$label69.Font = [System.Drawing.Font]::new('Arial Narrow', '15.75')
 	$label69.ForeColor = [System.Drawing.Color]::Gray 
-	$label69.Location = New-Object System.Drawing.Point(211, 70)
+	$label69.Location = New-Object System.Drawing.Point(194, 70)
 	$label69.Margin = '0, 0, 0, 0'
 	$label69.Name = 'label69'
 	$label69.RightToLeft = 'No'
@@ -2499,12 +2511,12 @@ OC = Object Container
 	$textbox55.BorderStyle = 'None'
 	$textbox55.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox55.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
-	$textbox55.Location = New-Object System.Drawing.Point(237, 22)
+	$textbox55.Location = New-Object System.Drawing.Point(220, 22)
 	$textbox55.Margin = '0, 0, 0, 0'
 	$textbox55.Name = 'textbox55'
 	$textbox55.ReadOnly = $True
 	$textbox55.RightToLeft = 'No'
-	$textbox55.Size = New-Object System.Drawing.Size(39, 16)
+	$textbox55.Size = New-Object System.Drawing.Size(56, 16)
 	$textbox55.TabIndex = 39
 	$textbox55.Text = '-'
 	$textbox55.TextAlign = 'Right'
@@ -2554,12 +2566,12 @@ OC = Object Container
 	$textbox21.BorderStyle = 'None'
 	$textbox21.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox21.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
-	$textbox21.Location = New-Object System.Drawing.Point(47, 22)
+	$textbox21.Location = New-Object System.Drawing.Point(44, 22)
 	$textbox21.Margin = '0, 0, 0, 0'
 	$textbox21.Name = 'textbox21'
 	$textbox21.ReadOnly = $True
 	$textbox21.RightToLeft = 'No'
-	$textbox21.Size = New-Object System.Drawing.Size(161, 16)
+	$textbox21.Size = New-Object System.Drawing.Size(147, 16)
 	$textbox21.TabIndex = 24
 	$textbox21.Text = '-'
 	$textbox21.TextAlign = 'Right'
@@ -2570,12 +2582,12 @@ OC = Object Container
 	$textbox20.BorderStyle = 'None'
 	$textbox20.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox20.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
-	$textbox20.Location = New-Object System.Drawing.Point(47, 78)
+	$textbox20.Location = New-Object System.Drawing.Point(44, 78)
 	$textbox20.Margin = '0, 0, 0, 0'
 	$textbox20.Name = 'textbox20'
 	$textbox20.ReadOnly = $True
 	$textbox20.RightToLeft = 'No'
-	$textbox20.Size = New-Object System.Drawing.Size(161, 16)
+	$textbox20.Size = New-Object System.Drawing.Size(147, 16)
 	$textbox20.TabIndex = 26
 	$textbox20.Text = '-'
 	$textbox20.TextAlign = 'Right'
@@ -2586,12 +2598,12 @@ OC = Object Container
 	$textbox19.BorderStyle = 'None'
 	$textbox19.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
 	$textbox19.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
-	$textbox19.Location = New-Object System.Drawing.Point(47, 40)
+	$textbox19.Location = New-Object System.Drawing.Point(44, 40)
 	$textbox19.Margin = '0, 0, 0, 0'
 	$textbox19.Name = 'textbox19'
 	$textbox19.ReadOnly = $True
 	$textbox19.RightToLeft = 'No'
-	$textbox19.Size = New-Object System.Drawing.Size(161, 16)
+	$textbox19.Size = New-Object System.Drawing.Size(147, 16)
 	$textbox19.TabIndex = 25
 	$textbox19.Text = '-'
 	$textbox19.TextAlign = 'Right'
@@ -2867,7 +2879,7 @@ OC = Object Container
 	#
 	$labelDestDayCondition.AutoSize = $True
 	$labelDestDayCondition.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
-	$labelDestDayCondition.ForeColor = [System.Drawing.Color]::Gray 
+	$labelDestDayCondition.ForeColor = [System.Drawing.Color]::Brown 
 	$labelDestDayCondition.Location = New-Object System.Drawing.Point(15, 80)
 	$labelDestDayCondition.Margin = '4, 0, 4, 0'
 	$labelDestDayCondition.Name = 'labelDestDayCondition'
@@ -3813,7 +3825,7 @@ Values are given in degrees decimal.')
 	$groupbox26.BackColor = [System.Drawing.Color]::Black 
 	$groupbox26.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox26.ForeColor = [System.Drawing.Color]::DarkOrange 
-	$groupbox26.Location = New-Object System.Drawing.Point(940, 24)
+	$groupbox26.Location = New-Object System.Drawing.Point(1011, 24)
 	$groupbox26.Margin = '4, 3, 4, 3'
 	$groupbox26.Name = 'groupbox26'
 	$groupbox26.Padding = '4, 3, 4, 3'
@@ -3954,7 +3966,7 @@ Values are given in degrees decimal.')
 	$groupbox42.BackColor = [System.Drawing.Color]::Black 
 	$groupbox42.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox42.ForeColor = [System.Drawing.Color]::DarkOrange 
-	$groupbox42.Location = New-Object System.Drawing.Point(282, 141)
+	$groupbox42.Location = New-Object System.Drawing.Point(282, 156)
 	$groupbox42.Margin = '4, 3, 4, 3'
 	$groupbox42.Name = 'groupbox42'
 	$groupbox42.Padding = '4, 3, 4, 3'
@@ -4119,7 +4131,7 @@ Values are given in degrees decimal.')
 	$groupbox41.BackColor = [System.Drawing.Color]::Black 
 	$groupbox41.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox41.ForeColor = [System.Drawing.Color]::DarkOrange 
-	$groupbox41.Location = New-Object System.Drawing.Point(282, 236)
+	$groupbox41.Location = New-Object System.Drawing.Point(282, 249)
 	$groupbox41.Margin = '4, 3, 4, 3'
 	$groupbox41.Name = 'groupbox41'
 	$groupbox41.Padding = '4, 3, 4, 3'
@@ -4382,8 +4394,8 @@ Values are given in degrees decimal.')
 	$groupbox32.Controls.Add($labelQuantumMarker)
 	$groupbox32.BackColor = [System.Drawing.Color]::Black 
 	$groupbox32.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
-	$groupbox32.ForeColor = [System.Drawing.Color]::Brown 
-	$groupbox32.Location = New-Object System.Drawing.Point(597, 319)
+	$groupbox32.ForeColor = [System.Drawing.Color]::DarkOrange 
+	$groupbox32.Location = New-Object System.Drawing.Point(668, 156)
 	$groupbox32.Margin = '4, 3, 4, 3'
 	$groupbox32.Name = 'groupbox32'
 	$groupbox32.Padding = '4, 3, 4, 3'
@@ -4830,7 +4842,7 @@ Values are given in degrees decimal.')
 	$groupbox40.BackColor = [System.Drawing.Color]::Black 
 	$groupbox40.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox40.ForeColor = [System.Drawing.Color]::DarkOrange 
-	$groupbox40.Location = New-Object System.Drawing.Point(36, 141)
+	$groupbox40.Location = New-Object System.Drawing.Point(36, 156)
 	$groupbox40.Margin = '4, 3, 4, 3'
 	$groupbox40.Name = 'groupbox40'
 	$groupbox40.Padding = '4, 3, 4, 3'
@@ -5112,6 +5124,9 @@ Values are given in degrees decimal.')
 	#
 	# groupbox30
 	#
+	$groupbox30.Controls.Add($labelM7s)
+	$groupbox30.Controls.Add($textbox249)
+	$groupbox30.Controls.Add($labelSPEED)
 	$groupbox30.Controls.Add($label1013088)
 	$groupbox30.Controls.Add($label1013089)
 	$groupbox30.Controls.Add($textbox243)
@@ -5139,6 +5154,49 @@ Values are given in degrees decimal.')
 	$groupbox30.TabIndex = 50
 	$groupbox30.TabStop = $False
 	$groupbox30.Text = 'DISTANCE'
+	#
+	# labelM7s
+	#
+	$labelM7s.AutoSize = $True
+	$labelM7s.BackColor = [System.Drawing.Color]::Black 
+	$labelM7s.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
+	$labelM7s.ForeColor = [System.Drawing.Color]::DarkGray 
+	$labelM7s.Location = New-Object System.Drawing.Point(181, 81)
+	$labelM7s.Margin = '4, 0, 4, 0'
+	$labelM7s.Name = 'labelM7s'
+	$labelM7s.RightToLeft = 'No'
+	$labelM7s.Size = New-Object System.Drawing.Size(30, 16)
+	$labelM7s.TabIndex = 82
+	$labelM7s.Text = 'M/S'
+	#
+	# textbox249
+	#
+	$textbox249.BackColor = [System.Drawing.Color]::Black 
+	$textbox249.BorderStyle = 'None'
+	$textbox249.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
+	$textbox249.ForeColor = [System.Drawing.Color]::FromArgb(255, 230, 230, 230)
+	$textbox249.Location = New-Object System.Drawing.Point(78, 81)
+	$textbox249.Margin = '0, 0, 0, 0'
+	$textbox249.Name = 'textbox249'
+	$textbox249.ReadOnly = $True
+	$textbox249.RightToLeft = 'No'
+	$textbox249.Size = New-Object System.Drawing.Size(99, 16)
+	$textbox249.TabIndex = 81
+	$textbox249.Text = '-'
+	$textbox249.TextAlign = 'Right'
+	#
+	# labelSPEED
+	#
+	$labelSPEED.AutoSize = $True
+	$labelSPEED.Font = [System.Drawing.Font]::new('Jericho-Digital', '12')
+	$labelSPEED.ForeColor = [System.Drawing.Color]::DarkGray 
+	$labelSPEED.Location = New-Object System.Drawing.Point(15, 81)
+	$labelSPEED.Margin = '4, 0, 4, 0'
+	$labelSPEED.Name = 'labelSPEED'
+	$labelSPEED.RightToLeft = 'No'
+	$labelSPEED.Size = New-Object System.Drawing.Size(47, 16)
+	$labelSPEED.TabIndex = 80
+	$labelSPEED.Text = 'SPEED'
 	#
 	# label1013088
 	#
@@ -5394,7 +5452,7 @@ Values are given in degrees decimal.')
 	$groupbox33.BackColor = [System.Drawing.Color]::Black 
 	$groupbox33.Font = [System.Drawing.Font]::new('Dungeon', '9.75')
 	$groupbox33.ForeColor = [System.Drawing.Color]::DarkOrange 
-	$groupbox33.Location = New-Object System.Drawing.Point(36, 344)
+	$groupbox33.Location = New-Object System.Drawing.Point(36, 361)
 	$groupbox33.Margin = '4, 3, 4, 3'
 	$groupbox33.Name = 'groupbox33'
 	$groupbox33.Padding = '4, 3, 4, 3'
@@ -7084,6 +7142,7 @@ Values are given in degrees decimal.')
 	#
 	# tabpage8
 	#
+	$tabpage8.Controls.Add($buttonClearJerichoProcesse)
 	$tabpage8.Controls.Add($buttonDebugMode)
 	$tabpage8.Controls.Add($textbox242)
 	$tabpage8.Controls.Add($labelLimits)
@@ -7107,6 +7166,19 @@ Values are given in degrees decimal.')
 	$tabpage8.Size = New-Object System.Drawing.Size(1247, 577)
 	$tabpage8.TabIndex = 7
 	$tabpage8.Text = 'Settings'
+	#
+	# buttonClearJerichoProcesse
+	#
+	$buttonClearJerichoProcesse.BackColor = [System.Drawing.Color]::Black 
+	$buttonClearJerichoProcesse.ForeColor = [System.Drawing.SystemColors]::ButtonFace 
+	$buttonClearJerichoProcesse.Location = New-Object System.Drawing.Point(25, 470)
+	$buttonClearJerichoProcesse.Margin = '4, 3, 4, 3'
+	$buttonClearJerichoProcesse.Name = 'buttonClearJerichoProcesse'
+	$buttonClearJerichoProcesse.Size = New-Object System.Drawing.Size(140, 44)
+	$buttonClearJerichoProcesse.TabIndex = 43
+	$buttonClearJerichoProcesse.Text = 'Clear Jericho Processes'
+	$buttonClearJerichoProcesse.UseVisualStyleBackColor = $False
+	$buttonClearJerichoProcesse.add_Click($buttonClearJerichoProcesse_Click)
 	#
 	# buttonDebugMode
 	#

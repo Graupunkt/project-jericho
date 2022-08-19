@@ -1,0 +1,38 @@
+Stanton2c.pla (Yela)
+"fPlanetTerrainRadius": 313000.0, = BodyRadius
+"fInteriorGridRadius": 1016600.0 = GRIDRadius
+
+"fGravity": -3.5,
+"fGravitySphereExtraRadiusRatio": 0.1,
+"fInteriorGridRadius": 1016600.0
+
+"fRotationSpeed": 1.82000005 = RotationSpeed
+"uniqueEcoSystemsGUIDs": [
+"2eeac426-6fb3-90f0-7ea1-f4ed7d8e99cf",
+"b6143547-2647-9de9-7167-6801d25f7eeb",
+"b8ef9861-0de1-adda-7d81-1b3a2bd86c06",
+"0180638c-8262-583e-1312-a9e87e322452",
+"1c2dff7e-91ba-676f-134c-5a9d145da723",
+"24ba18f1-4c5d-2d6d-bc77-5d9e73de722d",
+"6e08ece8-7fb1-27a9-3b33-b55d5fe9d463",
+"df0dae8c-04c1-1660-a18e-05038ed65a48",
+"6aaa426a-f9cd-e74d-a4b5-d8f0bb8c1c4a",
+"b6fa9c77-ade6-7a7f-311d-97138f84b18c",
+"66b2b4ce-0c9a-df3b-70dd-c59b0a644767",
+"20ddc20f-4ffa-6a46-63bc-b7fd064ff3e1",
+"ab02e326-e016-163d-2806-5a6e32850d30",
+"2e46ffa5-3abb-8adc-5dcf-ffac88f1ad0b",
+"7a391596-39c1-59a7-5102-d74bdabb00e3",
+"ba7c01a4-45cc-5168-757a-30c7f293e8a2"
+]
+
+"name": "white_area_01", 		"tMin": 0,
+					"tMax": 80,
+					"hMin": 0,
+					"hMax": 127
+
+"name": "grey_area_01",
+					"tMin": 3,
+					"tMax": 127,
+					"hMin": 0,
+					"hMax": 127

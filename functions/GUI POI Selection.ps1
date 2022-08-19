@@ -187,7 +187,7 @@ $global:ComboboxDistanceGM.Add_TextChanged({
 $Systemlabel = New-Object System.Windows.Forms.Label 
 $Systemlabel.Location = new-object System.Drawing.Point(20,60) 
 $Systemlabel.size = New-Object System.Drawing.Size(60,20) 
-$Systemlabel.Font= [System.Drawing.Font]::new('Dungeon', '12.75')
+#$Systemlabel.Font= [System.Drawing.Font]::new('Dungeon', '12.75')
 #$Systemlabel.Font = [System.Drawing.Font]::new($privateFonts.Families[0],12)
 $Systemlabel.ForeColor = [System.Drawing.Color]::Gray
 
@@ -317,20 +317,20 @@ function Update-Datagrid{
     $dataGridView.Rows.Clear()
     
     if($ChechboxDistances.Checked -eq $true){
-        $ElapsedUTCTimeSinceSimulationStart = New-Timespan -End ($global:DateTime.ToUniversalTime()) -Start ([DateTime]"01.01.2020 00:00:00")     # GET ELPASED TIME BETWEEN SIMULATION TIME AND CURRENT TIME
+        $ElapsedUTCTimeSinceSimulationStart_PS = New-Timespan -End ($global:DateTime.ToUniversalTime()) -Start ([DateTime]"01.01.2020 00:00:00")     # GET ELPASED TIME BETWEEN SIMULATION TIME AND CURRENT TIME
         #
-        $ClipboardContentRAW = (Get-Clipboard) -replace '(^\s+|\s+$)','' -replace '\s+',' '
+        $ClipboardContentRAW_PS = (Get-Clipboard) -replace '(^\s+|\s+$)','' -replace '\s+',' '
         #CHECK IF CLIPBOARD CONTAINS COORDINATES
-        if($ClipboardContentRAW -like '*Coordinates: x:*'){
-                $ClipboardContainsCoordinates = $true 
-                $ClipboardContentSplit = $ClipboardContentRAW.split("x:").split("y:").split("z:")
-                [decimal]$CurrentXPosition = $ClipboardContentSplit[3]
-                [decimal]$CurrentYPosition = $ClipboardContentSplit[5]
-                [decimal]$CurrentZPosition = $ClipboardContentSplit[7]
-                if(!$CurrentZPosition){
-                    [decimal]$CurrentXPosition = $ClipboardContentSplit[1]
-                    [decimal]$CurrentYPosition = $ClipboardContentSplit[2]
-                    [decimal]$CurrentZPosition = $ClipboardContentSplit[3]
+        if($ClipboardContentRAW_PS -like '*Coordinates: x:*'){
+                #$ClipboardContainsCoordinates_PS = $true 
+                $ClipboardContentSplit_PS = $ClipboardContentRAW_PS.split("x:").split("y:").split("z:")
+                [decimal]$CurrentXPosition_PS = $ClipboardContentSplit_PS[3]
+                [decimal]$CurrentYPosition_PS = $ClipboardContentSplit_PS[5]
+                [decimal]$CurrentZPosition_PS = $ClipboardContentSplit_PS[7]
+                if(!$CurrentZPosition_PS){
+                    [decimal]$CurrentXPosition_PS = $ClipboardContentSplit_PS[1]
+                    [decimal]$CurrentYPosition_PS = $ClipboardContentSplit_PS[2]
+                    [decimal]$CurrentZPosition_PS = $ClipboardContentSplit_PS[3]
                 }
         }
     }
@@ -346,29 +346,31 @@ function Update-Datagrid{
         $OptionCounter = 0
         foreach ($Option in $Group.Options){
             #################### PRE CALCULATIONS FOR PLAYER TO POI DISTANCE
-            if($ChechboxDistances.Checked -eq $true -AND $CurrentXPosition -ne ""){
-                $PoiCoordDataPlanet = $Group.ObjectContainer[$OptionCounter]
-                $SelectedPlanet = $ObjectContainerData.GetEnumerator() | Where-Object { $_.Name -eq $PoiCoordDataPlanet}
-                [decimal]$PlanetCoordDataX = $SelectedPlanet.'X-Coord'/1000
-                [decimal]$PlanetCoordDataY = $SelectedPlanet.'Y-Coord'/1000
-                [decimal]$PlanetCoordDataZ = $SelectedPlanet.'Z-Coord'/1000
-                [decimal]$PlanetRotationSpeed = $SelectedPlanet.RotationSpeedX
-                [decimal]$PlanetRotationStart = $SelectedPlanet.RotationAdjustmentX
-                [decimal]$LengthOfDayDecimal = [decimal]$PlanetRotationSpeed * 3600 / 86400  
-                [decimal]$JulianDate = $ElapsedUTCTimeSinceSimulationStart.TotalDays        
-                [decimal]$TotalCycles = $JulianDate / $LengthOfDayDecimal                   
-                [decimal]$CurrentCycleDez = $TotalCycles%1
-                [decimal]$CurrentCycleDeg = $CurrentCycleDez * 360
-                if (($CurrentCycleDeg + $PlanetRotationStart) -lt 360){[decimal]$CurrentCycleAngle = $PlanetRotationStart + $CurrentCycleDeg}else{[decimal]$CurrentCycleAngle = [decimal]$CurrentCycleDeg}
-                [decimal]$PoiRotationValueX = [decimal]$Group.XCoord[$OptionCounter] * ([math]::Cos($CurrentCycleAngle/180*[System.Math]::PI)) - [decimal]$Group.YCoord[$OptionCounter] * ([math]::Sin($CurrentCycleAngle/180*[System.Math]::PI))
-                [decimal]$PoiRotationValueY = [decimal]$Group.XCoord[$OptionCounter] * ([math]::Sin($CurrentCycleAngle/180*[System.Math]::PI)) + [decimal]$Group.YCoord[$OptionCounter] * ([math]::Cos($CurrentCycleAngle/180*[System.Math]::PI))
-                [decimal]$DestCoordDataX = ($PlanetCoordDataX + $PoiRotationValueX) * 1000
-                [decimal]$DestCoordDataY = ($PlanetCoordDataY + $PoiRotationValueY) * 1000
-                [decimal]$DestCoordDataZ = ($PlanetCoordDataZ + $PoiCoordDataZ) * 1000
+            if($ChechboxDistances.Checked -eq $true -AND $CurrentXPosition_PS -ne $null){
+                $PoiCoordDataPlanet_PS = $Group.ObjectContainer[$OptionCounter]
+                if($PoiCoordDataPlanet_PS -ne ""){
+                    $SelectedPlanet_PS = $ObjectContainerData.GetEnumerator() | Where-Object { $_.Name -eq $PoiCoordDataPlanet_PS}
+                    [decimal]$PlanetCoordDataX_PS = $SelectedPlanet_PS.'X-Coord'/1000
+                    [decimal]$PlanetCoordDataY_PS = $SelectedPlanet_PS.'Y-Coord'/1000
+                    [decimal]$PlanetCoordDataZ_PS = $SelectedPlanet_PS.'Z-Coord'/1000
+                    [decimal]$PlanetRotationSpeed_PS = $SelectedPlanet_PS.RotationSpeedX
+                    [decimal]$PlanetRotationStart_PS = $SelectedPlanet_PS.RotationAdjustmentX
+                    [decimal]$LengthOfDayDecimal_PS = [decimal]$PlanetRotationSpeed_PS * 3600 / 86400  
+                    [decimal]$JulianDate_PS = $ElapsedUTCTimeSinceSimulationStart_PS.TotalDays       
+                    if($LengthOfDayDecimal_PS -gt 0){
+                        [decimal]$TotalCycles_PS = $JulianDate_PS / $LengthOfDayDecimal_PS
+                        [decimal]$CurrentCycleDez_PS = $TotalCycles_PS%1
+                        [decimal]$CurrentCycleDeg_PS = $CurrentCycleDez_PS * 360
+                        if (($CurrentCycleDeg_PS + $PlanetRotationStart_PS) -lt 360){[decimal]$CurrentCycleAngle_PS = $PlanetRotationStart_PS + $CurrentCycleDeg_PS}else{[decimal]$CurrentCycleAngle_PS = [decimal]$CurrentCycleDeg_PS}
+                        [decimal]$PoiRotationValueX_PS = [decimal]$Group.XCoord[$OptionCounter] * ([math]::Cos($CurrentCycleAngle/180*[System.Math]::PI)) - [decimal]$Group.YCoord[$OptionCounter] * ([math]::Sin($CurrentCycleAngle/180*[System.Math]::PI))
+                        [decimal]$PoiRotationValueY_PS = [decimal]$Group.XCoord[$OptionCounter] * ([math]::Sin($CurrentCycleAngle/180*[System.Math]::PI)) + [decimal]$Group.YCoord[$OptionCounter] * ([math]::Cos($CurrentCycleAngle/180*[System.Math]::PI))
+                        [decimal]$DestCoordDataX_PS = ($PlanetCoordDataX_PS + $PoiRotationValueX_PS) * 1000
+                        [decimal]$DestCoordDataY_PS = ($PlanetCoordDataY_PS + $PoiRotationValueY_PS) * 1000
+                        [decimal]$DestCoordDataZ_PS = ($PlanetCoordDataZ_PS + [decimal]$Group.ZCoord[$OptionCounter]) * 1000
 
-
-
-                $DGDistance =  [math]::Round([math]::Sqrt([math]::pow(($CurrentXPosition - $DestCoordDataX),2) + [math]::pow(($CurrentYPosition - $DestCoordDataY),2) + [math]::pow(($CurrentZPosition - $DestCoordDataZ),2))/$DistancScale,$PrecisionCount)
+                        $DGDistance = [math]::Round([math]::Sqrt([math]::pow(($CurrentXPosition_PS - $DestCoordDataX_PS),2) + [math]::pow(($CurrentYPosition_PS - $DestCoordDataY_PS),2) + [math]::pow(($CurrentZPosition_PS - $DestCoordDataZ_PS),2))/$DistancScale,$PrecisionCount)
+                    }
+                }
             }else{
                 $DGDistance = "no Player coordinates"
             }
@@ -376,15 +378,15 @@ function Update-Datagrid{
             #################### PRE CALCULATIONS FOR NEXT POIS
             $DGNextPOI  = "enable Checkbox"
             if($ChechboxNextPOI.Checked -eq $true){
-                $PoisOnSamePlanet = @()
-                $PoisOnSamePlanet = $DBPOI | Where-Object {$_.Container -contains $Group.ObjectContainer[$OptionCounter]}
-                $PoisOnSamePlanet | Add-Member -MemberType NoteProperty "DistanceNextPOI" -Value "" -Force
-                foreach($PoiEntry in $PoisOnSamePlanet){
-                    $DistanceNextPOI = [math]::Sqrt([math]::pow([double]$PoiEntry.XPos - [decimal]$Group.XCoord[$OptionCounter],2) + [math]::pow([double]$PoiEntry.YPos - [decimal]$Group.YCoord[$OptionCounter],2) + [math]::pow([double]$PoiEntry.ZPos - [decimal]$Group.ZCoord[$OptionCounter],2))
-                    $PoiEntry.DistanceNextPOI = [math]::Round($DistanceNextPOI,3)
+                $PoisOnSamePlanet_PS = @()
+                $PoisOnSamePlanet_PS = $DBPOI | Where-Object {$_.Container -contains $Group.ObjectContainer[$OptionCounter]}
+                $PoisOnSamePlanet_PS | Add-Member -MemberType NoteProperty "DistanceNextPOI" -Value "" -Force
+                foreach($PoiEntry_PS in $PoisOnSamePlanet_PS){
+                    $DistanceNextPOI_PS = [math]::Sqrt([math]::pow([double]$PoiEntry_PS.XPos - [decimal]$Group.XCoord[$OptionCounter],2) + [math]::pow([double]$PoiEntry_PS.YPos - [decimal]$Group.YCoord[$OptionCounter],2) + [math]::pow([double]$PoiEntry_PS.ZPos - [decimal]$Group.ZCoord[$OptionCounter],2))
+                    $PoiEntry_PS.DistanceNextPOI = [math]::Round($DistanceNextPOI_PS,3)
                 } 
-                $NextPOI = $PoisOnSamePlanet | Sort-Object DistanceNextPOI | Where-Object {$_.DistanceNextPOI -gt 0.010} | Where-Object {$_.Name -Notlike "OM-*"} | Where-Object {$_.QTMarker -eq "TRUE"} | Select-Object -First 1
-                $DGNextPOI = if($NextPOI){"$($NextPOI.Name) @ $([math]::Round($NextPOI.DistanceNextPOI,1)) km"}
+                $NextPOI_PS = $PoisOnSamePlanet_PS | Sort-Object DistanceNextPOI | Where-Object {$_.DistanceNextPOI -gt 0.010} | Where-Object {$_.Name -Notlike "OM-*"} | Where-Object {$_.QTMarker -eq "TRUE"} | Select-Object -First 1
+                $DGNextPOI = if($NextPOI_PS){"$($NextPOI_PS.Name) @ $([math]::Round($NextPOI_PS.DistanceNextPOI,1)) km"}
             }else{
                 $DGNextPOI  = "no POI in DB found"
             }
@@ -466,7 +468,11 @@ $TextBoxSearch.Add_TextChanged({
         Update-Datagrid
     }
 })
-
+$TextBoxSearch.Add_KeyDown({
+    if ($_.KeyCode -eq "Enter") {
+        $RunButton.PerformClick()
+    }
+})
 
 
 
@@ -598,6 +604,12 @@ $TextBoxZ.size = New-Object System.Drawing.Size(170,20)
 $CustomCoordsTextbox.Controls.Add($TextBoxZ) 
 
 $global:PoiSelectionForm.Controls.Add($CustomCoordsTextbox) 
+
+#Select Default Textbox that has focus of the keyboard
+$global:PoiSelectionForm.Add_Shown({
+    $TextBoxSearch.Select() 
+    $global:PoiSelectionForm.Activate()
+})
 
 #Preset Checkboxes
 $ChechboxDistances.Checked = $true
