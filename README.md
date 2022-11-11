@@ -34,7 +34,7 @@ than open powershell and drop the scriptfile into the window and unblock the scr
 | Unblock-File
 
 ## Download
-The screenshots you see here are from the currrent alpha build that is in development. Its not considered stable or bugfree, that's the reason why its not pushed to github in the past months. If you want to test the actual version of jericho, you can grab it from here:
+The screenshots you see here are from the currrent alpha build that is in development. Its not considered stable or bugfree, that's the reason why its not pushed to github in the past months. If you want to test the actual version of jericho, you can grab V7.4.0 (11.11.2022) from this link:
 https://1drv.ms/u/s!Ai18tE7YmtDfohEnM4Vp4mdOHzdD?e=dAsIXE
 
 ## Screenshots
