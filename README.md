@@ -33,6 +33,10 @@ If it is still not working we might have to unblock each PS1 File:
 than open powershell and drop the scriptfile into the window and unblock the script with adding this after the file
 | Unblock-File
 
+## Download
+The screenshots you see here are from the currrent alpha build that is in development. Its not considered stable or bugfree, that's the reason why its not pushed to github in the past months. If you want to test the actual version of jericho, you can grab it from here:
+https://1drv.ms/u/s!Ai18tE7YmtDfohEnM4Vp4mdOHzdD?e=dAsIXE
+
 ## Screenshots
 ![main application and ingame hud](screenshots/Generic_Overview_V7.3.0.jpg)
 
