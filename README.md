@@ -34,8 +34,8 @@ than open powershell and drop the scriptfile into the window and unblock the scr
 | Unblock-File
 
 ## Download
-The screenshots you see here are from the currrent alpha build that is in development. Its not considered stable or bugfree, that's the reason why its not pushed to github in the past months. If you want to test the actual version of jericho, you can grab V7.4.0 (11.11.2022) from this link:
-https://1drv.ms/u/s!Ai18tE7YmtDfohEnM4Vp4mdOHzdD?e=dAsIXE
+The screenshots you see here are from the currrent alpha build that is in development. Its not considered stable or bugfree, that's the reason why its not pushed to github in the past months. If you want to test the actual version of jericho, you can grab V7.4.7 (30.03.2023) from this link:
+https://1drv.ms/u/s!Ai18tE7YmtDfoiNjpd_ohqVLiMqb?e=E0ciu9
 
 ## Screenshots
 ![main application and ingame hud](screenshots/Generic_Overview_V7.3.0.jpg)
