@@ -27,7 +27,7 @@
 ### Windows 11 
 does not allow remote powershell scripts to be executed by default, you need to run the following line to change this behavior:
 Set-ExecutionPolicy Unrestricted -Scope LocalMachine -Force
-After that you need to open the properties of each *.ps1 File (Project Jericho ps1 and all files in the FUNCTIONS folder as well)and click on ALLOW.
+After that you need to open the properties of each *.ps1 File (Project Jericho ps1 and all files in the FUNCTIONS subfolder as well) and click on ALLOW.
 
 If it is still not working we might have to unblock each PS1 File:
 than open powershell and drop the scriptfile into the window and unblock the script with adding this after the file
