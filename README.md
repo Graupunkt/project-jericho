@@ -1,7 +1,7 @@
 #Project Jericho - a live navigation tool for Star Citizen
 
 ## Table of Contents
-0. [ACTUAL STATE / DOWNLOADS / SUPPORT]()
+0. [ACTUAL STATE / DOWNLOADS / SUPPORT](#actual-state--downloads--support)
 1. [General Info](#general-info)
 2. [Screenshots](#screenshots)
 3. [Prerequests](#prerequest)
