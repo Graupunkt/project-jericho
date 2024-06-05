@@ -1,3 +1,13 @@
+## ACTUAL STATE / DOWNLOADS / SUPPORT
+- the whole github repo is outdated, downloads have moved to https://starmap.space/downloads
+- support is available on the Meridian Discord server at https://discord.gg/WMh5YCeQVS
+- Please check out my other project, which will be a big addition towards Jericho and provides the whole data and other stuff at
+- https://starmap.space/maps/index.php?planet=Daymar
+- https://starmap.space/biomes.php
+- https://starmap.space/api/v2/oc/index.php
+- https://starmap.space/api/v2/pois/index.php
+
+
 #Project Jericho - a live navigation tool for Star Citizen
 
 ## Table of Contents
@@ -16,14 +26,7 @@
 12. [LICENSE](#license)
 
 
-## ACTUAL STATE / DOWNLOADS / SUPPORT
-- the whole github repo is outdated, downloads have moved to https://starmap.tk/downloads
-- support is available on the Meridian Discord server at https://discord.gg/WMh5YCeQVS
-- Please check out my other project, which will be a big addition towards Jericho and provides the whole data and other stuff at
-- https://starmap.tk/maps/index.php?planet=Daymar
-- https://starmap.tk/biomes.php
-- https://starmap.tk/api/v2/oc/index.php
-- https://starmap.tk/api/v2/pois/index.php
+
 
 ## General Info
 - Work in Progress, the rework is currently in process, there is no public build planned in the upcoming weeks. For alpha builds and please support visit our discord server https://discord.gg/WMh5YCeQVS
